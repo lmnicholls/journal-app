@@ -1,0 +1,63 @@
+.menu-container {
+  position: relative;
+}
+
+.menu {
+  background: #ffffff;
+  position: absolute;
+  top: 55spx;
+  width: 150px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li a {
+  text-decoration: none;
+  font-family: Patrick Hand SC;
+  font-size: 18px;
+  color: white;
+  background-color: rgba(95, 158, 189, 0.8);
+  padding: 15px 20px;
+  display: block;
+}
+
+.menu li a .icon {
+  padding-right: 5px;
+}
+
+.menu li a:hover {
+  background-color: gray;
+}
+
+.menu-trigger {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  vertical-align: middle;
+  transition: box-shadow 0.4s ease;
+}
+
+.menu-trigger img {
+  width: 70%;
+  height: 70%;
+  padding: 3px;
+}
+
+.menu-trigger:hover {
+  box-shadow: 0 1px 8px rgba(245, 243, 243, 0.3);
+}
