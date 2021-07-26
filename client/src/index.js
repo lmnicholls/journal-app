@@ -12,6 +12,8 @@ import StartPage from "./components/StartPage";
 import Signup from "./components/auth/Signup";
 import Signin from "./components/auth/Signin";
 import Home from "./components/Home";
+import MyCalendar from "./components/Calendar";
+import JournalEntry from "./components/JournalEntry";
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
@@ -27,8 +29,8 @@ render(
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/home" component={Home} />
-            <Route exact path="/new-entry" />
-            <Route exact path="/calendar" />
+            <Route exact path="/new-entry" component={JournalEntry} />
+            <Route exact path="/calendar" component={MyCalendar} />
             <Route exact path="/stats" />
           </Switch>
         </App>

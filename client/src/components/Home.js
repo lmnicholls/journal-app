@@ -23,8 +23,13 @@ const Home = (props) => {
           style={{ textDecoration: "none" }}
           className="links"
         >
-          <h2>New Entry</h2>
-          <FontAwesomeIcon icon={faPen} className="icon" />
+          <div>
+            <h2>New Entry</h2>
+          </div>
+
+          <div className="icon-border">
+            <FontAwesomeIcon icon={faPen} className="icon" />
+          </div>
         </Link>
 
         <Link
@@ -33,7 +38,9 @@ const Home = (props) => {
           className="links"
         >
           <h2>Calendar</h2>
-          <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
+          <div className="icon-border">
+            <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
+          </div>
         </Link>
         <Link to="/stats" style={{ textDecoration: "none" }} className="links">
           <h2>Stats</h2>

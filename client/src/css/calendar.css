@@ -1,0 +1,42 @@
+.react-calendar__navigation .react-calendar__navigation__arrow {
+  font-family: "Patrick Hand SC";
+  background-color: rgba(98, 169, 207, 0.8);
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.react-calendar__navigation .react-calendar__navigation__label {
+  font-size: 32px;
+  font-family: "Patrick Hand SC";
+  background-color: rgba(98, 169, 207, 0.8);
+  color: white;
+  border: none;
+}
+
+.react-calendar__tile {
+  height: 70px;
+  font-family: "Patrick Hand SC";
+  background-color: rgba(98, 169, 207, 0.8);
+  color: rgb(241, 236, 236);
+  border: none;
+  cursor: pointer;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  font-family: "Patrick Hand SC";
+  background-color: rgba(98, 169, 207, 0.8);
+}
+
+.react-calendar__tile:hover {
+  background: rgba(168, 164, 167, 0.904);
+}
+
+.react-calendar__tile,
+.react-calendar__month-view__days__day {
+  font-size: 24px;
+}

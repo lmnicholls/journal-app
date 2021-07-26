@@ -10,7 +10,10 @@ import {
 const DropdownMenu = () => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
+  const onClick = (e) => {
+    e.stopPropagation();
+    setIsActive(!isActive);
+  };
 
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -21,11 +24,9 @@ const DropdownMenu = () => {
         setIsActive(!isActive);
       }
     };
-
     if (isActive) {
       window.addEventListener("click", pageClickEvent);
     }
-
     return () => {
       window.removeEventListener("click", pageClickEvent);
     };

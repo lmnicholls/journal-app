@@ -7,16 +7,22 @@
     "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
+    "@draft-js-plugins/image": "^4.1.2",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dompurify": "^2.3.0",
+    "draft-convert": "^2.1.11",
+    "draft-js": "^0.11.7",
     "express": "^4.17.1",
     "jwt-simple": "^0.5.6",
     "mongoose": "^5.13.3",
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react-calendar": "^3.4.0",
+    "react-draft-wysiwyg": "^1.14.7"
   },
   "devDependencies": {
     "concurrently": "^5.3.0"

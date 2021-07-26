@@ -1,0 +1,48 @@
+.journal {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+}
+
+.journal label {
+  padding-right: 10px;
+  width: 60px;
+}
+
+.journal input {
+  width: 100%;
+}
+
+.journal h4 {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.journal button label {
+  margin-left: 5px;
+}
+
+.journal button {
+  background-color: transparent;
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  border: none;
+  color: rgb(240, 242, 243);
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.journal button label {
+  cursor: pointer;
+}
+
+.journal button:hover {
+  color: rgb(8, 64, 92);
+}
+
+.buttons {
+  margin-left: 60px;
+  text-align: center;
+}

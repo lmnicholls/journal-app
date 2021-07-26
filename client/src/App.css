@@ -97,6 +97,10 @@ body {
   margin-top: 20px;
   padding-top: 10px;
   padding-bottom: 80px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .links:hover {
@@ -109,16 +113,15 @@ body {
 
 .links .icon {
   color: white;
-  /* width: 50%;
-  height: 50%; */
+  width: 50%;
+  height: 50%;
 }
 
 .links .icon-border {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   border: 3px solid #fff;
-  display: inline-block;
   border-radius: 100px;
   width: 100px;
   height: 100px;
