@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import ParticlesBg from "particles-bg";
 import Nav from "./nav/Nav";

@@ -5,6 +5,7 @@ import {
   faCalendarAlt,
   faChartBar,
   faPen,
+  faBookOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
 const DropdownMenu = () => {
@@ -49,6 +50,12 @@ const DropdownMenu = () => {
             <a href="/new-entry">
               <FontAwesomeIcon icon={faPen} className="icon" />
               New Entry
+            </a>
+          </li>
+          <li>
+            <a href="/journal">
+              <FontAwesomeIcon icon={faBookOpen} className="icon" />
+              Journal
             </a>
           </li>
           <li>

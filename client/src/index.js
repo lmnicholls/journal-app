@@ -7,13 +7,13 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers/index";
 import App from "./components/App";
-import Nav from "./components/nav/NavHome";
 import StartPage from "./components/StartPage";
 import Signup from "./components/auth/Signup";
 import Signin from "./components/auth/Signin";
 import Home from "./components/Home";
 import MyCalendar from "./components/Calendar";
 import JournalEntry from "./components/JournalEntry";
+import Journal from "./components/Journal";
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
@@ -30,6 +30,7 @@ render(
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/new-entry" component={JournalEntry} />
+            <Route exact path="/journal" component={Journal} />
             <Route exact path="/calendar" component={MyCalendar} />
             <Route exact path="/stats" />
           </Switch>

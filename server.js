@@ -1,19 +1,40 @@
 const express = require("express");
+const http = require("http");
 const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 5000;
+const router = require("./router");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const keys = require("./config/keys");
 
+// DB Setup
+mongoose.connect(keys.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTypology: true,
+});
+
+app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("/api/hello", (req, res) => {
-  res.send({ express: "Hello From Express" });
-});
+router(app);
 
-app.post("/api/data", (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`
-  );
-});
+if (process.env.NODE_ENV === "production") {
+  // Express will serve up production assets
+  // like our main.js file, or main.css file!
+  app.use(express.static("client/build"));
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+  // Express will serve up the index.html file
+  // if it doesn't recognize the route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
+// Server Setup
+const port = process.env.PORT || 5000;
+const server = http.createServer(app);
+server.listen(port);
+console.log("Server listening on: ", port);
