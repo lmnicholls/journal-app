@@ -1,13 +1,27 @@
 import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import ParticlesBg from "particles-bg";
 import Nav from "./nav/Nav";
+import { addEntry } from "../actions";
+import { useDispatch } from "react-redux";
 import "../css/journalentry.css";
 import RichTextEditor from "./RichTextEditor";
 
 const JournalEntry = (props) => {
   let currentDate = new Date();
   let formattedDate = currentDate.toDateString();
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleFormSubmit = (data) => {
+    dispatch(
+      addEntry(data, () => {
+        history.push("/journal");
+      })
+    );
+  };
 
   return (
     <Fragment>
@@ -18,7 +32,7 @@ const JournalEntry = (props) => {
       <Journal>
         <form
           className="sign-in-form"
-          //  onSubmit={handleSubmit(handleFormSubmit)}
+          onSubmit={(e) => dispatch(handleFormSubmit(e))}
         >
           <h3>New Journal Entry</h3>
           <div className="form-group journal">

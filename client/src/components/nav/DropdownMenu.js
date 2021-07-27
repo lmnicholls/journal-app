@@ -6,6 +6,7 @@ import {
   faChartBar,
   faPen,
   faBookOpen,
+  faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
 const DropdownMenu = () => {
@@ -46,6 +47,12 @@ const DropdownMenu = () => {
         className={`menu ${isActive ? "active" : "inactive"}`}
       >
         <ul>
+          <li>
+            <a href="/home">
+              <FontAwesomeIcon icon={faHome} className="icon" />
+              Home
+            </a>
+          </li>
           <li>
             <a href="/new-entry">
               <FontAwesomeIcon icon={faPen} className="icon" />

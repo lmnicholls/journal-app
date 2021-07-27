@@ -8,6 +8,7 @@ import {
   faCalendarAlt,
   faChartBar,
   faPen,
+  faBookOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = (props) => {
@@ -33,6 +34,20 @@ const Home = (props) => {
         </Link>
 
         <Link
+          to="/journal"
+          style={{ textDecoration: "none" }}
+          className="links"
+        >
+          <div>
+            <h2>Journal</h2>
+          </div>
+
+          <div className="icon-border">
+            <FontAwesomeIcon icon={faBookOpen} className="icon" />
+          </div>
+        </Link>
+
+        <Link
           to="/calendar"
           style={{ textDecoration: "none" }}
           className="links"
@@ -42,6 +57,7 @@ const Home = (props) => {
             <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
           </div>
         </Link>
+
         <Link to="/stats" style={{ textDecoration: "none" }} className="links">
           <h2>Stats</h2>
           <div className="icon-border">
@@ -57,10 +73,10 @@ export default Home;
 
 const Start = styled.div`
   text-align: center;
-  padding-top: 100px;
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding-bottom: 100px;
+  padding: 100px 50px;
 `;
