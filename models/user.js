@@ -5,10 +5,12 @@ var crypto = require("crypto");
 
 // Define our model
 const UserSchema = new Schema({
+  firstName: String,
+  lastName: String,
   email: { type: String, unique: true, lowercase: true },
   hash: String,
   salt: String,
-  entries: [{ type: Movie.MovieSchema }],
+  entries: [{ type: Journal.JournalEntrySchema }],
 });
 
 UserSchema.methods.setPassword = function (password) {

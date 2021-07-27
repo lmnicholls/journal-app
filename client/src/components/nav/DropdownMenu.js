@@ -65,7 +65,7 @@ const DropdownMenu = () => {
             </a>
           </li>
           <li>
-            <a href="/new-entry">
+            <a href="/stats">
               <FontAwesomeIcon icon={faChartBar} className="icon" />
               Stats
             </a>

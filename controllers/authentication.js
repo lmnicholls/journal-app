@@ -34,13 +34,16 @@ exports.currentUser = function (req, res) {
 exports.signup = function (req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
 
   console.log(email);
+  console.log(firstName);
 
-  if (!email || !password) {
-    return res
-      .status(422)
-      .send({ error: "You must provide email and password" });
+  if (!email || !password || !lastName || !firstName) {
+    return res.status(422).send({
+      error: "You must provide email, password, first and last name.",
+    });
   }
 
   // See if a user with the given email exists
@@ -58,7 +61,8 @@ exports.signup = function (req, res, next) {
     const user = new User();
 
     user.email = email;
-
+    user.firstName = firstName;
+    user.lastName = lastName;
     user.setPassword(password);
 
     user.save(function (err, user) {

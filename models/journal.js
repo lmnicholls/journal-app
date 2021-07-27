@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Define our model
-const journalSchema = new Schema({
+const journalEntrySchema = new Schema({
   id: Number,
   title: String,
   // what type is the text rich editor?

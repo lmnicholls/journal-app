@@ -12,6 +12,8 @@ const AuthReducer = function (state = INITIAL_STATE, action) {
         ...state,
         authenticated: action.payload.token,
         email: action.payload.email || null,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
       };
     case AUTH_ERROR:
       return { ...state, errorMessage: action.payload };

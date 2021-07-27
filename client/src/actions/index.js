@@ -4,12 +4,12 @@ import {
   AUTH_ERROR,
   ADD_ENTRY,
   FETCH_ENTRY,
-  FETCH_JOURNAL_ENTRIES,
+  FETCH_ENTRIES,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
   axios
-    .post("/signup")
+    .post("http://localhost:5000/signup", formProps)
     .then(function (response) {
       dispatch({ type: AUTH_USER, payload: response.data });
       localStorage.setItem("token", response.data.token);
@@ -22,7 +22,7 @@ export const signup = (formProps, callback) => (dispatch) => {
 
 export const signin = (formProps, callback) => (dispatch) => {
   axios
-    .post("/signin", formProps)
+    .post("http://localhost:5000/signin", formProps)
     .then(function (response) {
       debugger;
       dispatch({ type: AUTH_USER, payload: response.data });
@@ -44,7 +44,7 @@ export const fetchUser = () => (dispatch) => {
   axios
     .get(
       // added proxy
-      "/current_user",
+      "http://localhost:5000/current_user",
       config
     )
     .then(function (response) {
@@ -73,7 +73,7 @@ export const addEntry = (entry) => (dispatch) => {
   };
 
   axios
-    .post("/entries", { entry }, config)
+    .post("http://localhost:5000/entries", { entry }, config)
     .then(function (response) {
       dispatch({ type: ADD_ENTRY, payload: response.data });
     })
@@ -101,9 +101,9 @@ export const fetchEntries = () => (dispatch) => {
   };
 
   axios
-    .get("/entries", config)
+    .get("http://localhost:5000/entries", config)
     .then(function (response) {
-      dispatch({ type: FETCH_JOURNAL_ENTRIES, payload: response.data });
+      dispatch({ type: FETCH_ENTRIES, payload: response.data });
     })
     .catch(function (error) {
       console.log(error);

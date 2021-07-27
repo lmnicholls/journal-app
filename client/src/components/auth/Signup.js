@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
-// import { useForm } from "react-hook-form";
-// import { useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import styled from "styled-components";
-// import { signin } from "../../actions";
+import { signup } from "../../actions";
 import ParticlesBg from "particles-bg";
 import NavAuth from "../nav/NavAuth";
 
@@ -15,45 +15,46 @@ const userSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-  // const { register, handleSubmit, errors } = useForm({
-  //   resolver: yupResolver(userSchema),
-  // });
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(userSchema),
+  });
 
-  // const dispatch = useDispatch();
-  // const history = useHistory();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  // const handleFormSubmit = (data) => {
-  //   dispatch(
-  //     signin(data, () => {
-  //       history.push("/home");
-  //     })
-  //   );
-  // };
+  const handleFormSubmit = (data) => {
+    dispatch(
+      signup(data, () => {
+        history.push("/home");
+      })
+    );
+  };
 
   return (
     <Fragment>
+      <div className="background">
+        <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
+      </div>
       <NavAuth />
       <SignInStyles>
-        <ParticlesBg type="circle" bg={true} />
-
         <div className="sign-in-container">
           <form
             className="sign-in-form"
-            //  onSubmit={handleSubmit(handleFormSubmit)}
+            onSubmit={handleSubmit(handleFormSubmit)}
           >
             <h3 className="signup-header">Welcome to Moments in Time!</h3>
             <h3>Let's create your account.</h3>
             <div className="form-group name">
               <input
                 className="form-control"
-                name="first-name"
-                // ref={register({ required: true })}
+                name="firstName"
+                {...register("firstName", { required: "Required" })}
               ></input>
               <label>First Name</label>
               <input
                 className="form-control"
-                name="last-name"
-                // ref={register({ required: true })}
+                name="lastName"
+                {...register("lastName", { required: "Required" })}
               ></input>
               <label>Last Name</label>
             </div>
@@ -61,7 +62,7 @@ const Signup = () => {
               <input
                 className="form-control"
                 name="email"
-                // ref={register({ required: true })}
+                {...register("email", { required: "Required" })}
               ></input>
               <label>Email</label>
               {/* {errors.email?.message} */}
@@ -72,7 +73,7 @@ const Signup = () => {
                 className="form-control"
                 name="password"
                 type="password"
-                // ref={register({ required: true })}
+                {...register("password", { required: "Required" })}
               ></input>
               <label>Password</label>
               {/* {errors.password?.message} */}
@@ -94,4 +95,5 @@ export default Signup;
 const SignInStyles = styled.div`
   margin-top: 0px;
   padding-top: 200px;
+  padding-bottom: 100px;
 `;
