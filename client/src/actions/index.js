@@ -42,11 +42,7 @@ export const fetchUser = () => (dispatch) => {
   };
 
   axios
-    .get(
-      // added proxy
-      "http://localhost:5000/current_user",
-      config
-    )
+    .get("http://localhost:5000/current_user", config)
     .then(function (response) {
       dispatch({ type: AUTH_USER, payload: response.data });
       localStorage.setItem("token", response.data.token);
