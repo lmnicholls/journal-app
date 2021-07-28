@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const journalEntrySchema = new Schema({
   id: Number,
   title: String,
-  // what type is the text rich editor?
-  entry: String,
+  date: String,
+  entry: Object,
 });
 
 const JournalEntryModel = mongoose.model("journal", journalEntrySchema);

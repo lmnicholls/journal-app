@@ -25,7 +25,6 @@ exports.currentUser = function (req, res) {
   const user = {
     email: req.user.email,
     token: tokenForUser(req.user),
-    watchListCount: req.user.watchList.length,
   };
 
   res.send(user);
@@ -36,9 +35,6 @@ exports.signup = function (req, res, next) {
   const password = req.body.password;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
-
-  console.log(email);
-  console.log(firstName);
 
   if (!email || !password || !lastName || !firstName) {
     return res.status(422).send({

@@ -11,7 +11,14 @@ const journalEntriesReducer = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case ADD_ENTRY:
       return {
-        entries: [...state, action.payload.data],
+        entries: [
+          ...state.entries,
+          {
+            title: action.payload.title,
+            date: action.payload.date,
+            entry: action.payload.entry,
+          },
+        ],
       };
     case FETCH_ENTRIES:
       const normalizedEntries = normalize(action.payload.results, [

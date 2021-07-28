@@ -6,7 +6,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../css/richTextEditor.css";
 import DOMPurify from "dompurify";
 
-const RichTextEditor = () => {
+const RichTextEditor = (props) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -15,6 +15,7 @@ const RichTextEditor = () => {
   const handleEditorChange = (state) => {
     setEditorState(state);
     convertContentToHTML();
+    props.setEntry(state);
   };
 
   const convertContentToHTML = () => {
@@ -36,6 +37,7 @@ const RichTextEditor = () => {
         wrapperClassName="wrapper-class"
         editorClassName="editor-class"
         toolbarClassName="toolbar-class"
+        required
       />
       {/* preview */}
       <div
