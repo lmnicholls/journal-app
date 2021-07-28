@@ -8,11 +8,10 @@ import { useDispatch } from "react-redux";
 import "../css/journalentry.css";
 import RichTextEditor from "./RichTextEditor";
 
-const JournalEntry = (props) => {
-  let currentDate = new Date();
-  let formattedDate = currentDate.toDateString();
+const JournalEntry = () => {
   const [title, setTitle] = useState("");
   const [entry, setEntry] = useState("");
+  const date = new Date();
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,7 +19,7 @@ const JournalEntry = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      addEntry(title, formattedDate, entry, () => {
+      addEntry(title, date, entry, () => {
         history.push("/home");
       })
     );
@@ -49,7 +48,7 @@ const JournalEntry = (props) => {
           </div>
           <div className="form-group journal">
             <label>Date</label>
-            <h4>{formattedDate}</h4>
+            <h4>{date.toDateString()}</h4>
           </div>
           <RichTextEditor setEntry={setEntry} />
           <div className="submit-button">
