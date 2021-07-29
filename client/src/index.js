@@ -31,7 +31,7 @@ render(
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/new-entry" component={JournalEntry} />
-            <Route exact path="/journal" component={Journal} />
+            <Route exact path="/journal" component={Journal}></Route>
             <Route exact path="/calendar" component={MyCalendar} />
             <Route exact path="/stats" component={Stats} />
           </Switch>

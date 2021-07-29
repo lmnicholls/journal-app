@@ -8,7 +8,9 @@ const StartPage = (props) => {
     <Fragment>
       <NavHome />
       <Start>
-        <ParticlesBg type="circle" bg={true} />
+        <div className="background">
+          <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
+        </div>
         <h1 className="title">Moments in Time</h1>
         <h4 className="description">
           Your personal journal to use anywhere in the world.

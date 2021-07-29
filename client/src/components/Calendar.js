@@ -8,6 +8,10 @@ import "../css/calendar.css";
 const MyCalendar = (props) => {
   const [value, onChange] = useState(new Date());
 
+  const LogDay = (e) => {
+    console.log("e", e);
+  };
+
   return (
     <Fragment>
       <Nav />
@@ -19,6 +23,7 @@ const MyCalendar = (props) => {
           onChange={onChange}
           value={value}
           className="react-calendar"
+          onClickDay={(e) => LogDay(e)}
         />
       </CalendarDiv>
     </Fragment>

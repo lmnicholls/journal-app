@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { fetchUser } from "../actions";
+import { fetchUser, fetchEntries } from "../actions";
 import "../App.css";
 
 const App = (props) => {
@@ -11,8 +11,9 @@ const App = (props) => {
   useEffect(() => {
     if (authenticated) {
       dispatch(fetchUser());
+      dispatch(fetchEntries());
     }
-  }, [authenticated]);
+  }, [dispatch, authenticated]);
 
   return <AppContainer>{props.children}</AppContainer>;
 };

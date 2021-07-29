@@ -1,32 +1,28 @@
 import { ADD_ENTRY, FETCH_ENTRIES } from "../actions/types";
-import { normalize, schema } from "normalizr";
+// import { normalize, schema } from "normalizr";
 
 const DEFAULT_STATE = {
+  entry: {},
   entries: [],
 };
 
-const journalEntriesSchema = new schema.Entity("entry", undefined);
+// const journalEntriesSchema = new schema.Entity("entry", undefined);
 
 const journalEntriesReducer = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case ADD_ENTRY:
       return {
-        entries: [
-          ...state.entries,
-          {
-            title: action.payload.title,
-            date: action.payload.date,
-            entry: action.payload.entry,
-          },
-        ],
+        entry: {
+          title: action.payload.title,
+          date: action.payload.date,
+          entry: action.payload.entry,
+        },
+        entries: [...state.entries],
       };
     case FETCH_ENTRIES:
-      const normalizedEntries = normalize(action.payload.results, [
-        journalEntriesSchema,
-      ]);
-
       return {
-        entries: [...normalizedEntries],
+        entry: { ...state.entry },
+        entries: [action.payload.entries],
       };
     default:
       return state;

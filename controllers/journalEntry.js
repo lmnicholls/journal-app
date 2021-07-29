@@ -5,7 +5,6 @@ exports.addEntryToJournal = function (req, res) {
   console.log(req.body);
   User.findOne({ _id: req.user._id }, function (err, user) {
     const entry = new JournalEntry.JournalEntryModel(req.body);
-    console.log(entry);
 
     entry.save(function (err, entry) {
       user.entries.push(entry);
