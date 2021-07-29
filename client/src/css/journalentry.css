@@ -46,3 +46,18 @@
   margin-left: 60px;
   text-align: center;
 }
+
+#toolbar {
+  background-color: white;
+}
+
+.text-editor {
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+.ql-editor {
+  min-height: 200px;
+  background-color: white;
+  color: black;
+}

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../../css/dropdown.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -48,34 +49,34 @@ const DropdownMenu = () => {
       >
         <ul>
           <li>
-            <a href="/home">
+            <Link to="/home">
               <FontAwesomeIcon icon={faHome} className="icon" />
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/new-entry">
+            <Link to="/new-entry">
               <FontAwesomeIcon icon={faPen} className="icon" />
               New Entry
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/journal">
+            <Link to="/journal">
               <FontAwesomeIcon icon={faBookOpen} className="icon" />
               Journal
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/calendar">
+            <Link to="/calendar">
               <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
               Calendar
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/stats">
+            <Link to="/stats">
               <FontAwesomeIcon icon={faChartBar} className="icon" />
               Stats
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

@@ -1,49 +1,28 @@
-import React, { useState } from "react";
-import { EditorState } from "draft-js";
-import { convertToHTML } from "draft-convert";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "../css/richTextEditor.css";
-import DOMPurify from "dompurify";
+import React from "react";
+import RichTextEditorToolbar, {
+  modules,
+  formats,
+} from "./RichTextEditorToolbar";
+import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
 
 const RichTextEditor = (props) => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-  const [convertedContent, setConvertedContent] = useState("");
-
   const handleEditorChange = (state) => {
-    setEditorState(state);
-    convertContentToHTML();
     props.setEntry(state);
-  };
-
-  const convertContentToHTML = () => {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    setConvertedContent(currentContentAsHTML);
-  };
-
-  const createMarkup = (html) => {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
   };
 
   return (
     <div>
-      <Editor
-        editorState={editorState}
-        onEditorStateChange={handleEditorChange}
-        wrapperClassName="wrapper-class"
-        editorClassName="editor-class"
-        toolbarClassName="toolbar-class"
-        required
+      <RichTextEditorToolbar />
+      <ReactQuill
+        theme="snow"
+        className="entry-form"
+        value={props.entry}
+        onChange={handleEditorChange}
+        placeholder={"Write something awesome..."}
+        modules={modules}
+        formats={formats}
       />
-      {/* preview */}
-      <div
-        className="preview"
-        dangerouslySetInnerHTML={createMarkup(convertedContent)}
-      ></div>
     </div>
   );
 };

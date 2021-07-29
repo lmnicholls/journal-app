@@ -1,0 +1,12 @@
+.stf__block {
+  background-color: whitesmoke;
+}
+
+.journal-title {
+  padding-bottom: 15px;
+  margin: 0;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+  font-family: "Patrick Hand SC";
+  font-size: 64px;
+  color: white;
+}

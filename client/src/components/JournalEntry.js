@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { EditorState } from "draft-js";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import ParticlesBg from "particles-bg";
@@ -10,7 +11,7 @@ import RichTextEditor from "./RichTextEditor";
 
 const JournalEntry = () => {
   const [title, setTitle] = useState("");
-  const [entry, setEntry] = useState("");
+  const [entry, setEntry] = useState(EditorState.createEmpty());
   const date = new Date();
 
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const JournalEntry = () => {
             <label>Date</label>
             <h4>{date.toDateString()}</h4>
           </div>
-          <RichTextEditor setEntry={setEntry} />
+          <RichTextEditor entry={entry} setEntry={setEntry} />
           <div className="submit-button">
             <button className="btn btn-primary submit" type="submit">
               Submit
