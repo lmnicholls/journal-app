@@ -24,6 +24,11 @@
   width: 100%;
 }
 
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value]::before {
+  content: attr(data-value) !important;
+}
+
 /* Set droplist names - -item is the currently selected font, -label is the font's appearance in the droplist*/
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=""]::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=""]::before {
