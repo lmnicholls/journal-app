@@ -61,3 +61,14 @@
   background-color: white;
   color: black;
 }
+
+.submit-button {
+  padding-top: 15px;
+}
+
+/* Set default font-family */
+#editor-container {
+  font-family: "Rochester";
+  font-size: 18px;
+  height: 375px;
+}

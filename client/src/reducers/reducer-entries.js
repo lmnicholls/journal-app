@@ -4,6 +4,7 @@ import { ADD_ENTRY, FETCH_ENTRIES } from "../actions/types";
 const DEFAULT_STATE = {
   entry: {},
   entries: [],
+  numEntries: 0,
 };
 
 // const journalEntriesSchema = new schema.Entity("entry", undefined);
@@ -17,12 +18,13 @@ const journalEntriesReducer = (state = DEFAULT_STATE, action) => {
           date: action.payload.date,
           entry: action.payload.entry,
         },
-        entries: [...state.entries],
+        ...state,
       };
     case FETCH_ENTRIES:
       return {
         entry: { ...state.entry },
         entries: [action.payload.entries],
+        numEntries: action.payload.entries.length,
       };
     default:
       return state;

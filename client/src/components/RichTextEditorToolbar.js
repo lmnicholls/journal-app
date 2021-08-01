@@ -1,5 +1,6 @@
 import React from "react";
 import { Quill } from "react-quill";
+import "../css/richTextEditor.css";
 
 // Custom Undo button icon component for Quill editor. You can import it directly
 // from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
@@ -35,19 +36,12 @@ function redoChange() {
 
 // Add sizes to whitelist and register them
 const Size = Quill.import("formats/size");
-Size.whitelist = ["extra-small", "small", "medium", "large"];
+Size.whitelist = ["small", "normal", "large", "huge"];
 Quill.register(Size, true);
 
 // Add fonts to whitelist and register them
 const Font = Quill.import("formats/font");
-Font.whitelist = [
-  "arial",
-  "comic-sans",
-  "courier-new",
-  "georgia",
-  "helvetica",
-  "lucida",
-];
+Font.whitelist = ["", "patrick-hand", "amatic-sc", "caveat", "rochester"];
 Quill.register(Font, true);
 
 // Modules object for setting up the Quill editor
@@ -92,19 +86,18 @@ export const formats = [
 export const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
-      <select className="ql-font" defaultValue="arial">
-        <option value="arial">Arial</option>
-        <option value="comic-sans">Comic Sans</option>
-        <option value="courier-new">Courier New</option>
-        <option value="georgia">Georgia</option>
-        <option value="helvetica">Helvetica</option>
-        <option value="lucida">Lucida</option>
+      <select className="ql-font" defaultValue="">
+        <option value=""></option>
+        <option value="patrick-hand">Patrick Hand</option>
+        <option value="amatic-sc">Amatic SC</option>
+        <option value="caveat">Caveat</option>
+        <option value="rochester">Rochester</option>
       </select>
-      <select className="ql-size" defaultValue="medium">
-        <option value="extra-small">Size 1</option>
-        <option value="small">Size 2</option>
-        <option value="medium">Size 3</option>
-        <option value="large">Size 4</option>
+      <select className="ql-size" defaultValue="large">
+        <option value="small">Size 1</option>
+        <option value="normal">Size 2</option>
+        <option value="large">Size 3</option>
+        <option value="huge">Size 4</option>
       </select>
       <select className="ql-header" defaultValue="3">
         <option value="1">Heading</option>

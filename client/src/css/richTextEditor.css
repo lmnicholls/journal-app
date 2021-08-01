@@ -1,3 +1,7 @@
+@import url(https://fonts.googleapis.com/css2?family=Amatic+SC&family=Rochester&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Caveat&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Caveat&family=Patrick+Hand&display=swap);
+
 .wrapper-class {
   padding: 10px;
 }
@@ -18,4 +22,53 @@
   color: black;
   border-radius: 5px;
   width: 100%;
+}
+
+/* Set droplist names - -item is the currently selected font, -label is the font's appearance in the droplist*/
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=""]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=""]::before {
+  content: "Default";
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="patrick-hand"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="patrick-hand"]::before {
+  content: "Patrick Hand";
+  font-family: "Patrick Hand";
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="amatic-sc"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="amatic-sc"]::before {
+  content: "Amatic SC";
+  font-family: "Amatic SC";
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="caveat"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="caveat"]::before {
+  content: "Caveat";
+  font-family: "Caveat";
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="rochester"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="rochester"]::before {
+  content: "Rochester";
+  font-family: "Rochester";
+}
+
+/****************************************************
+Set the font-family content used for the HTML content.
+*****************************************************/
+.ql-font-patrick-hand {
+  font-family: "Patrick Hand";
+}
+
+.ql-font-caveat {
+  font-family: "Caveat";
+}
+
+.ql-font-amatic-sc {
+  font-family: "Amatic SC";
+}
+
+.ql-font-rochester {
+  font-family: "Rochester";
 }

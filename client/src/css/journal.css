@@ -10,3 +10,13 @@
   font-size: 64px;
   color: white;
 }
+
+.--left {
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+.--right {
+  padding-right: 20px;
+  box-sizing: border-box;
+}

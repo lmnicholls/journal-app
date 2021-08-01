@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import ParticlesBg from "particles-bg";
@@ -7,19 +7,43 @@ import HTMLFlipBook from "react-pageflip";
 import { fetchEntries } from "../actions";
 import "../css/journal.css";
 
-const Page = React.forwardRef((props, ref) => {
+const PageCover = React.forwardRef((props, ref) => {
+  return (
+    <div className="page page-cover" ref={ref} data-density="hard">
+      <div className="page-content">
+        <h2>{props.children}</h2>
+      </div>
+    </div>
+  );
+});
+
+let Page = React.forwardRef((props, ref) => {
   return (
     <div className="page" ref={ref}>
       <div className="page-content">
-        <div className="page-footer">{props.number + 1}</div>
+        <h1 className="page-header">{props.title}</h1>
+        <div
+          className="page-text"
+          dangerouslySetInnerHTML={{ __html: props.entry }}
+        ></div>
+        <div className="page-footer">Page {props.number + 1}</div>
       </div>
     </div>
   );
 });
 
 const Journal = () => {
+  const book = useRef();
   const dispatch = useDispatch();
-  const authenticated = useSelector((state) => state.auth.authenticated);
+  const { authenticated, firstName } = useSelector((state) => state.auth);
+  const entries = useSelector((state) => {
+    return state.journalEntries.entries[0];
+  });
+  const numEntries = useSelector((state) => {
+    return state.journalEntries.numEntries;
+  });
+  const [page, setPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     if (authenticated) {
@@ -27,11 +51,15 @@ const Journal = () => {
     }
   }, [dispatch, authenticated]);
 
-  const entries = useSelector((state) => {
-    return state.journalEntries.entries[0];
-  });
+  useEffect(() => {
+    if (numEntries > 0) {
+      setTimeout(() => book.current.pageFlip().turnToPage(numEntries), 0);
+    }
+  }, [numEntries]);
 
   if (!entries) return null;
+
+  const onPage = (e) => setPage(e.data);
 
   return (
     <Fragment>
@@ -42,21 +70,41 @@ const Journal = () => {
       <JournalDiv>
         <h3 className="journal-title">My Journal</h3>
         <HTMLFlipBook
-          width={300}
+          width={500}
           height={500}
           drawShadow={true}
+          onFlip={onPage}
           className="journal-pages"
-          startZIndex={3}
-          showCover={true}
+          ref={book}
         >
-          {entries.map((entry) => (
-            <article key={entry._id}>
-              <h1>{entry.title}</h1>
-              <p>{new Date(entry.date).toDateString()}</p>
-              <div dangerouslySetInnerHTML={{ __html: entry.entry }}></div>
-            </article>
+          <PageCover></PageCover>
+          {entries.map((entry, index) => (
+            <Page
+              number={index}
+              title={entry.title}
+              entry={entry.entry}
+              key={entry._id}
+              className="page"
+            />
           ))}
+          <PageCover>THE END</PageCover>
         </HTMLFlipBook>
+        <div className="container">
+          <div>
+            <button
+              type="button"
+              onClick={() => book.current.pageFlip().flipPrev()}
+            >
+              Previous page
+            </button>
+            <button
+              type="button"
+              onClick={() => book.current.pageFlip().flipNext()}
+            >
+              Next page
+            </button>
+          </div>
+        </div>
       </JournalDiv>
     </Fragment>
   );
