@@ -24,7 +24,6 @@ export const signin = (formProps, callback) => (dispatch) => {
   axios
     .post("http://localhost:5000/signin", formProps)
     .then(function (response) {
-      debugger;
       dispatch({ type: AUTH_USER, payload: response.data });
       localStorage.setItem("token", response.data.token);
       callback();

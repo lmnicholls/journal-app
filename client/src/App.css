@@ -136,3 +136,14 @@ body {
   top: 0;
   z-index: -10;
 }
+
+.form-labels {
+  display: flex;
+  flex-flow: row;
+}
+
+.form-labels span {
+  font-size: 18px;
+  padding-top: 4px;
+  padding-left: 10px;
+}

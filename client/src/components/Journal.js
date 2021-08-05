@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import ParticlesBg from "particles-bg";
 import Nav from "./nav/Nav";
 import HTMLFlipBook from "react-pageflip";
 import { fetchEntries } from "../actions";
@@ -9,7 +9,7 @@ import "../css/journal.css";
 
 const PageCover = React.forwardRef((props, ref) => {
   return (
-    <div className="page page-cover" ref={ref} data-density="hard">
+    <div className="page page-cover" ref={ref} data-density="soft">
       <div className="page-content">
         <h2>{props.children}</h2>
       </div>
@@ -22,6 +22,7 @@ let Page = React.forwardRef((props, ref) => {
     <div className="page" ref={ref}>
       <div className="page-content">
         <h1 className="page-header">{props.title}</h1>
+        <h3>{new Date(props.date).toDateString()}</h3>
         <div
           className="page-text"
           dangerouslySetInnerHTML={{ __html: props.entry }}
@@ -35,7 +36,8 @@ let Page = React.forwardRef((props, ref) => {
 const Journal = () => {
   const book = useRef();
   const dispatch = useDispatch();
-  const { authenticated, firstName } = useSelector((state) => state.auth);
+  const history = useHistory();
+  const { authenticated } = useSelector((state) => state.auth);
   const entries = useSelector((state) => {
     return state.journalEntries.entries[0];
   });
@@ -46,6 +48,12 @@ const Journal = () => {
   const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
+    if (!authenticated) {
+      history.push("/");
+    }
+  }, [authenticated, history]);
+
+  useEffect(() => {
     if (authenticated) {
       dispatch(fetchEntries());
     }
@@ -53,7 +61,10 @@ const Journal = () => {
 
   useEffect(() => {
     if (numEntries > 0) {
-      setTimeout(() => book.current.pageFlip().turnToPage(numEntries), 0);
+      setTimeout(() => {
+        book.current.pageFlip().turnToPage(numEntries);
+        setTotalPage(numEntries);
+      }, 500);
     }
   }, [numEntries]);
 
@@ -64,14 +75,12 @@ const Journal = () => {
   return (
     <Fragment>
       <Nav />
-      <div className="background">
-        <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
-      </div>
       <JournalDiv>
         <h3 className="journal-title">My Journal</h3>
+
         <HTMLFlipBook
-          width={500}
-          height={500}
+          width={450}
+          height={540}
           drawShadow={true}
           onFlip={onPage}
           className="journal-pages"
@@ -82,26 +91,42 @@ const Journal = () => {
             <Page
               number={index}
               title={entry.title}
+              date={entry.date}
               entry={entry.entry}
               key={entry._id}
               className="page"
             />
           ))}
-          <PageCover>THE END</PageCover>
         </HTMLFlipBook>
-        <div className="container">
+
+        <div className="journal-button-container">
           <div>
+            <button
+              type="button"
+              onClick={() => book.current.pageFlip().turnToPage(1)}
+            >
+              First
+            </button>
             <button
               type="button"
               onClick={() => book.current.pageFlip().flipPrev()}
             >
-              Previous page
+              Previous
             </button>
+            <span className="current_pages">
+              Pages {page}-{page + 1} of {numEntries}
+            </span>
             <button
               type="button"
               onClick={() => book.current.pageFlip().flipNext()}
             >
-              Next page
+              Next
+            </button>
+            <button
+              type="button"
+              onClick={() => book.current.pageFlip().turnToPage(numEntries)}
+            >
+              Last
             </button>
           </div>
         </div>
@@ -119,4 +144,11 @@ const JournalDiv = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 150px;
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
 `;

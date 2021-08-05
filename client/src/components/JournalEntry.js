@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { EditorState } from "draft-js";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import ParticlesBg from "particles-bg";
 import Nav from "./nav/Nav";
 import { addEntry } from "../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../css/journalentry.css";
 import RichTextEditor from "./RichTextEditor";
 
@@ -13,15 +12,22 @@ const JournalEntry = () => {
   const [title, setTitle] = useState("");
   const [entry, setEntry] = useState(EditorState.createEmpty());
   const date = new Date();
+  const { authenticated } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    if (!authenticated) {
+      history.push("/");
+    }
+  }, [authenticated, history]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(
       addEntry(title, date, entry, () => {
-        history.push("/home");
+        history.push("/journal");
       })
     );
   };
@@ -29,9 +35,6 @@ const JournalEntry = () => {
   return (
     <Fragment>
       <Nav />
-      <div className="background">
-        <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
-      </div>
       <Journal>
         <form className="sign-in-form" onSubmit={(e) => handleFormSubmit(e)}>
           <h3>New Journal Entry</h3>
@@ -71,4 +74,11 @@ const Journal = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 100px;
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
 `;

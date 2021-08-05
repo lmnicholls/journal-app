@@ -2,13 +2,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DropdownMenu from "./DropdownMenu";
+import { signout } from "../../actions";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const NavAuth = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogOut = () => {
+    dispatch(
+      signout(() => {
+        history.push("/");
+      })
+    );
+  };
+
   const renderLinks = () => {
     return (
       <React.Fragment>
         <li>
-          <Link to="/signin">Logout</Link>
+          <Link to="/signin" onClick={handleLogOut}>
+            Logout
+          </Link>
         </li>
       </React.Fragment>
     );

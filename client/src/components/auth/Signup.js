@@ -6,16 +6,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import styled from "styled-components";
 import { signup } from "../../actions";
-import ParticlesBg from "particles-bg";
 import NavAuth from "../nav/NavAuth";
+import Background from "../Background.js";
 
 const userSchema = Yup.object().shape({
+  firstName: Yup.string().required("First Name is a required field"),
+  lastName: Yup.string().required("Last Name is a required field"),
   email: Yup.string().email().required(),
   password: Yup.string().required(),
 });
 
 const Signup = () => {
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(userSchema),
   });
 
@@ -32,9 +38,7 @@ const Signup = () => {
 
   return (
     <Fragment>
-      <div className="background">
-        <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
-      </div>
+      <Background />
       <NavAuth />
       <SignInStyles>
         <div className="sign-in-container">
@@ -48,15 +52,35 @@ const Signup = () => {
               <input
                 className="form-control"
                 name="firstName"
-                {...register("firstName", { required: "Required" })}
+                {...register("first name", { required: "Required" })}
               ></input>
-              <label>First Name</label>
+              <div className="form-labels">
+                <label>First Name</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.firstName?.message}
+                </span>
+              </div>
               <input
                 className="form-control"
                 name="lastName"
-                {...register("lastName", { required: "Required" })}
+                {...register("last name", { required: "Required" })}
               ></input>
-              <label>Last Name</label>
+              <div className="form-labels">
+                <label>Last Name</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.lastName?.message}
+                </span>
+              </div>
             </div>
             <div className="form-group">
               <input
@@ -64,8 +88,17 @@ const Signup = () => {
                 name="email"
                 {...register("email", { required: "Required" })}
               ></input>
-              <label>Email</label>
-              {/* {errors.email?.message} */}
+              <div className="form-labels">
+                <label>Email</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.email?.message}
+                </span>
+              </div>
             </div>
 
             <div className="form-group">
@@ -75,8 +108,17 @@ const Signup = () => {
                 type="password"
                 {...register("password", { required: "Required" })}
               ></input>
-              <label>Password</label>
-              {/* {errors.password?.message} */}
+              <div className="form-labels">
+                <label>Password</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.password?.message}
+                </span>
+              </div>
             </div>
             <div className="submit-button">
               <button className="btn btn-primary submit" type="submit">
@@ -94,6 +136,6 @@ export default Signup;
 
 const SignInStyles = styled.div`
   margin-top: 0px;
-  padding-top: 200px;
+  padding-top: 100px;
   padding-bottom: 100px;
 `;

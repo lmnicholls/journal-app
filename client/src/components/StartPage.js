@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import ParticlesBg from "particles-bg";
+import Background from "./Background";
 import NavHome from "./nav/NavHome";
 
 const StartPage = (props) => {
@@ -8,9 +8,7 @@ const StartPage = (props) => {
     <Fragment>
       <NavHome />
       <Start>
-        <div className="background">
-          <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
-        </div>
+        <Background />
         <h1 className="title">Moments in Time</h1>
         <h4 className="description">
           Your personal journal to use anywhere in the world.

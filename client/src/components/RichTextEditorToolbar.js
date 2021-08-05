@@ -105,7 +105,7 @@ export const QuillToolbar = () => (
         <option value="caveat">Caveat</option>
         <option value="rochester">Rochester</option>
       </select>
-      <select className="ql-size" defaultValue="large">
+      <select className="ql-size" defaultValue="20px">
         <option value="12px">12</option>
         <option value="14px">14</option>
         <option value="16px">16</option>
@@ -133,6 +133,8 @@ export const QuillToolbar = () => (
     <span className="ql-formats">
       <button className="ql-list" value="ordered" />
       <button className="ql-list" value="bullet" />
+    </span>
+    <span className="ql-formats">
       <button className="ql-indent" value="-1" />
       <button className="ql-indent" value="+1" />
     </span>
@@ -150,14 +152,11 @@ export const QuillToolbar = () => (
     <span className="ql-formats">
       <button className="ql-link" />
       <button className="ql-image" />
-      <button className="ql-video" />
     </span>
     <span className="ql-formats">
       <button className="ql-formula" />
       <button className="ql-code-block" />
       <button className="ql-clean" />
-    </span>
-    <span className="ql-formats">
       <button className="ql-undo">
         <CustomUndo />
       </button>

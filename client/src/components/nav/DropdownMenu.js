@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../css/dropdown.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBars,
   faCalendarAlt,
   faChartBar,
   faPen,
@@ -38,10 +39,7 @@ const DropdownMenu = () => {
   return (
     <div className="menu-container">
       <button onClick={onClick} className="menu-trigger">
-        <img
-          src="https://img.icons8.com/color/50/000000/menu--v1.png"
-          alt="menu-bars"
-        />
+        <FontAwesomeIcon icon={faBars} className="icon bars fa-2x" />
       </button>
       <nav
         ref={dropdownRef}

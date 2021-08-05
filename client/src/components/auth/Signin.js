@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import styled from "styled-components";
 import { signin } from "../../actions";
-import ParticlesBg from "particles-bg";
+import Background from "../Background";
 import NavAuth from "../nav/NavAuth";
 
 const userSchema = Yup.object().shape({
@@ -15,7 +15,11 @@ const userSchema = Yup.object().shape({
 });
 
 const Signin = () => {
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(userSchema),
   });
 
@@ -34,8 +38,7 @@ const Signin = () => {
     <Fragment>
       <NavAuth />
       <SignInStyles>
-        <ParticlesBg type="circle" bg={true} />
-
+        <Background />
         <div className="sign-in-container">
           <form
             className="sign-in-form"
@@ -48,8 +51,17 @@ const Signin = () => {
                 name="email"
                 {...register("email", { required: "Required" })}
               ></input>
-              <label>Email</label>
-              {/* {errors.email?.message} */}
+              <div className="form-labels">
+                <label>Email</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.email?.message}
+                </span>
+              </div>
             </div>
 
             <div className="form-group">
@@ -59,8 +71,17 @@ const Signin = () => {
                 type="password"
                 {...register("password", { required: "Required" })}
               ></input>
-              <label>Password</label>
-              {/* {errors.password?.message} */}
+              <div className="form-labels">
+                <label>Password</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.password?.message}
+                </span>
+              </div>
             </div>
             <div className="submit-button">
               <button className="btn btn-primary submit" type="submit">
@@ -78,5 +99,6 @@ export default Signin;
 
 const SignInStyles = styled.div`
   margin-top: 0px;
-  padding-top: 250px;
+  padding-top: 200px;
+  padding-bottom: 100px;
 `;

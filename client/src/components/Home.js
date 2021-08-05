@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import ParticlesBg from "particles-bg";
+import Background from "./Background";
 import Nav from "./nav/Nav";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,13 +13,20 @@ import {
   faBookOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Home = (props) => {
+const Home = () => {
+  const { authenticated } = useSelector((state) => state.auth);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!authenticated) {
+      history.push("/");
+    }
+  }, [authenticated, history]);
+
   return (
     <Fragment>
       <Nav />
-      <div className="background">
-        <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
-      </div>
+      <Background />
       <Start>
         <Link
           to="/new-entry"

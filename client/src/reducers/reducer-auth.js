@@ -1,7 +1,7 @@
 import { AUTH_USER, AUTH_ERROR } from "../actions/types";
 
 const INITIAL_STATE = {
-  authenticated: localStorage.getItem("token") || "",
+  authenticated: localStorage.getItem("token"),
   errorMessage: "",
   email: null,
 };
