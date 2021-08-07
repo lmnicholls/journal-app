@@ -13,7 +13,7 @@ import Signin from "./components/auth/Signin";
 import Home from "./components/Home";
 import MyCalendar from "./components/Calendar";
 import JournalEntry from "./components/JournalEntry";
-import Journal from "./components/Journal";
+import Journal1 from "./components/Journal1";
 import Stats from "./components/Stats";
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
@@ -31,7 +31,7 @@ render(
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/new-entry" component={JournalEntry} />
-            <Route exact path="/journal" component={Journal}></Route>
+            <Route exact path="/journal" component={Journal1}></Route>
             <Route exact path="/calendar" component={MyCalendar} />
             <Route exact path="/stats" component={Stats} />
           </Switch>

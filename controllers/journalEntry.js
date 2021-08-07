@@ -2,7 +2,6 @@ const JournalEntry = require("../models/journal");
 const User = require("../models/user");
 
 exports.addEntryToJournal = function (req, res) {
-  console.log(req.body);
   User.findOne({ _id: req.user._id }, function (err, user) {
     const entry = new JournalEntry.JournalEntryModel(req.body);
 
