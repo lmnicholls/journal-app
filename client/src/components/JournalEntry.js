@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { EditorState } from "draft-js";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -33,7 +33,7 @@ const JournalEntry = () => {
   };
 
   return (
-    <Fragment>
+    <div className="background">
       <Nav />
       <Journal>
         <form className="sign-in-form" onSubmit={(e) => handleFormSubmit(e)}>
@@ -62,7 +62,7 @@ const JournalEntry = () => {
           </div>
         </form>
       </Journal>
-    </Fragment>
+    </div>
   );
 };
 
@@ -74,11 +74,4 @@ const Journal = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 100px;
-  background-color: #5de4d2;
-  background-image: linear-gradient(
-    315deg,
-    #5de4d2 25%,
-    #6cdcbf 52%,
-    #49a7da 90%
-  );
 `;

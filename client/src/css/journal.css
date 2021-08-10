@@ -7,17 +7,6 @@
   color: white;
 }
 
-.--left {
-  box-sizing: border-box;
-  border-right: 1px solid rgb(112, 110, 110);
-}
-
-.--right {
-  padding-left: 20px;
-  padding-right: 20px;
-  box-sizing: border-box;
-}
-
 .journal-button-container button {
   margin-top: 10px;
   margin-right: 2px;
@@ -36,50 +25,6 @@
   color: rgb(112, 110, 110);
 }
 
-.stf__block {
-  background-color: whitesmoke;
-  border: 15px solid rgb(170, 169, 169);
-  border-radius: 5px;
-  box-sizing: content-box;
-}
-
-.page h1 {
-  font-family: "Patrick Hand SC";
-  font-size: 24px;
-}
-
-.page h3 {
-  font-family: "Patrick Hand SC";
-  font-size: 18px;
-}
-
-.stf__item {
-  top: 0 !important;
-}
-
-.page-footer {
-  width: 100%;
-  height: 10%;
-  position: absolute;
-  text-align: center;
-  bottom: 0;
-}
-
-.page img {
-  max-width: 300px;
-  align-self: center;
-}
-
-.current_pages {
-  padding: 0px 10px;
-  font-family: "Patrick Hand SC";
-  font-size: 24px;
-}
-
-.page-content {
-  object-fit: contain;
-}
-
 .journal-book-div {
   display: flex;
   flex-flow: row;
@@ -87,6 +32,7 @@
   border-radius: 5px;
   background-color: white;
   width: 70%;
+  height: 500px;
 }
 
 .left-page {
@@ -95,6 +41,8 @@
   padding: 5px;
   display: flex;
   flex-flow: column;
+  max-height: 100%;
+  overflow-y: scroll;
   justify-content: space-between;
 }
 
@@ -103,6 +51,8 @@
   padding: 5px;
   display: flex;
   flex-flow: column;
+  max-height: 100%;
+  overflow-y: scroll;
   justify-content: space-between;
 }
 
@@ -112,7 +62,6 @@
 }
 
 .page-number {
-  /* width: 100%; */
   height: 25px;
   text-align: center;
   bottom: 0;
@@ -131,4 +80,15 @@
 .page-number {
   font-family: "Patrick Hand SC";
   font-size: 18px;
+}
+
+.background {
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
+  height: 100vh;
 }

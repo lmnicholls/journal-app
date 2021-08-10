@@ -19,16 +19,13 @@ const Journal = () => {
   const [leftPageIndex, setLeftPageIndex] = useState(null);
   const [rightPageIndex, setRightPageIndex] = useState(null);
 
-  console.log(
-    "left",
-    leftPageIndex,
-    "right",
-    rightPageIndex,
-    "numEntries",
-    numEntries,
-    "entries",
-    entries
-  );
+  console.log(authenticated);
+
+  useEffect(() => {
+    if (!authenticated) {
+      history.push("/");
+    }
+  }, [authenticated, history]);
 
   const handleFirstPageClick = () => {
     setLeftPageIndex(-1);
@@ -72,12 +69,6 @@ const Journal = () => {
   };
 
   useEffect(() => {
-    if (!authenticated) {
-      history.push("/");
-    }
-  }, [authenticated, history]);
-
-  useEffect(() => {
     if (authenticated) {
       dispatch(fetchEntries());
     }
@@ -111,7 +102,7 @@ const Journal = () => {
   }
 
   return (
-    <Fragment>
+    <div className="background">
       <Nav />
       <JournalDiv>
         <h3 className="journal-title">My Journal</h3>
@@ -178,7 +169,7 @@ const Journal = () => {
           </div>
         </div>
       </JournalDiv>
-    </Fragment>
+    </div>
   );
 };
 
@@ -191,11 +182,4 @@ const JournalDiv = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 150px;
-  background-color: #5de4d2;
-  background-image: linear-gradient(
-    315deg,
-    #5de4d2 25%,
-    #6cdcbf 52%,
-    #49a7da 90%
-  );
 `;

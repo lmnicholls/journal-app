@@ -1,15 +1,21 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 import Calendar from "react-calendar";
+import { fetchEntries } from "../actions";
+// import "react-calendar/dist/Calendar.css";
 import "../css/calendar.css";
 
 const MyCalendar = (props) => {
-  const [value, onChange] = useState(new Date());
+  const [value, setValue] = useState(new Date());
   const { authenticated } = useSelector((state) => state.auth);
+  const entries = useSelector((state) => {
+    return state.journalEntries.entries[0];
+  });
 
+  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
@@ -18,24 +24,76 @@ const MyCalendar = (props) => {
     }
   }, [authenticated, history]);
 
-  const LogDay = (e) => {
-    console.log("e", e);
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(fetchEntries());
+    }
+  }, [dispatch, authenticated]);
+
+  const onChange = (date) => {
+    setValue(date);
   };
 
-  return (
-    <Fragment>
-      <Nav />
-      <CalendarBackground>
+  const handleDayClick = (date) => {
+    alert(date);
+  };
+
+  const handleLoadCalendarEntries = (date, view) => {
+    if (view === "month" && date.getDay() === 0) {
+      return <p>It's Sunday!</p>;
+    }
+  };
+
+  if (entries) {
+    console.log(entries.map((entry) => entry.date));
+
+    let dailyEntriesDates = entries.map((entry) => {
+      let date = new Date(entry.date);
+      let entryYear = date.getFullYear();
+      let entryMonth = (1 + date.getMonth()).toString().padStart(2, "0");
+      let entryDay = date.getDate().toString().padStart(2, "0");
+
+      return entryMonth + "/" + entryDay + "/" + entryYear;
+    });
+
+    console.log(dailyEntriesDates);
+
+    return (
+      <div className="background">
+        <Nav />
         <CalendarDiv>
           <Calendar
             onChange={onChange}
+            onClickDay={(value) => handleDayClick(value)}
             value={value}
-            className="react-calendar"
-            onClickDay={(e) => LogDay(e)}
+            tileClassName={({ date, view }) => {
+              if (
+                dailyEntriesDates.find(
+                  (entryDate) =>
+                    entryDate ===
+                    (1 + date.getMonth()).toString().padStart(2, "0") +
+                      "/" +
+                      date.getDate().toString().padStart(2, "0") +
+                      "/" +
+                      date.getFullYear()
+                )
+              ) {
+                return "highlight";
+              }
+            }}
           />
         </CalendarDiv>
-      </CalendarBackground>
-    </Fragment>
+      </div>
+    );
+  }
+
+  return (
+    <div className="background">
+      <Nav />
+      <CalendarDiv>
+        <Calendar onChange={onChange} value={value} />
+      </CalendarDiv>
+    </div>
   );
 };
 
@@ -46,14 +104,4 @@ const CalendarDiv = styled.div`
   width: 50%;
   margin: auto;
   padding-bottom: 100px;
-`;
-
-const CalendarBackground = styled.div`
-  background-color: #5de4d2;
-  background-image: linear-gradient(
-    315deg,
-    #5de4d2 25%,
-    #6cdcbf 52%,
-    #49a7da 90%
-  );
 `;
