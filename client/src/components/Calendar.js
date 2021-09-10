@@ -38,12 +38,6 @@ const MyCalendar = (props) => {
     alert(date);
   };
 
-  const handleLoadCalendarEntries = (date, view) => {
-    if (view === "month" && date.getDay() === 0) {
-      return <p>It's Sunday!</p>;
-    }
-  };
-
   if (entries) {
     console.log(entries.map((entry) => entry.date));
 

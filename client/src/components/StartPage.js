@@ -9,10 +9,8 @@ const StartPage = (props) => {
       <NavHome />
       <Start>
         <Background />
-        <h1 className="title">Moments in Time</h1>
-        <h4 className="description">
-          Your personal journal to use anywhere in the world.
-        </h4>
+        <h1 className="title">Therapy & Me</h1>
+        <h4 className="description">Therapy when and where you need it.</h4>
       </Start>
     </Fragment>
   );

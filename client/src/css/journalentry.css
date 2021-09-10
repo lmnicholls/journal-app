@@ -81,5 +81,7 @@
     #6cdcbf 52%,
     #49a7da 90%
   );
-  height: 100vh;
+  max-height: 100%;
+  overflow-y: scroll;
+  min-height: 100vh;
 }

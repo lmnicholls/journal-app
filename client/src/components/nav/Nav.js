@@ -34,7 +34,7 @@ const NavAuth = () => {
     <NavContainer>
       <NavLeft>
         <DropdownMenu />
-        <NavTitle>Moments in Time</NavTitle>
+        <NavTitle>Therapy & Me</NavTitle>
       </NavLeft>
       <NavUl>{renderLinks()}</NavUl>
     </NavContainer>

@@ -12,6 +12,7 @@ import Background from "../Background.js";
 const userSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is a required field"),
   lastName: Yup.string().required("Last Name is a required field"),
+  therapist: Yup.string().required("Therapist is a required field"),
   email: Yup.string().email().required(),
   password: Yup.string().required(),
 });
@@ -46,7 +47,7 @@ const Signup = () => {
             className="sign-in-form"
             onSubmit={handleSubmit(handleFormSubmit)}
           >
-            <h3 className="signup-header">Welcome to Moments in Time!</h3>
+            <h3 className="signup-header">Welcome to Therapy & Me!</h3>
             <h3>Let's create your account.</h3>
             <div className="form-group name">
               <input
@@ -82,6 +83,31 @@ const Signup = () => {
                 </span>
               </div>
             </div>
+
+            <div className="form-group">
+              <input
+                className="form-control"
+                name="therapist"
+                {...register("therapist", { required: "Required" })}
+              ></input>
+              <select value="">
+                <option value="Orange">Orange</option>
+                <option value="Radish">Radish</option>
+                <option value="Cherry">Cherry</option>
+              </select>
+              <div className="form-labels">
+                <label>Therapist Name</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.therapist?.message}
+                </span>
+              </div>
+            </div>
+
             <div className="form-group">
               <input
                 className="form-control"

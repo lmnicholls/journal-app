@@ -42,7 +42,7 @@
 }
 
 .react-calendar__tile--active {
-  background: #006edc;
+  background: #006edc !important;
   color: white;
 }
 
@@ -54,7 +54,7 @@
     #6cdcbf 52%,
     #49a7da 90%
   );
-  height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .highlight {

@@ -14,7 +14,7 @@ import Home from "./components/Home";
 import MyCalendar from "./components/Calendar";
 import JournalEntry from "./components/JournalEntry";
 import Journal1 from "./components/Journal1";
-import Stats from "./components/Stats";
+import Messenger from "./components/Messenger";
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
@@ -33,7 +33,7 @@ render(
             <Route exact path="/new-entry" component={JournalEntry} />
             <Route exact path="/journal" component={Journal1}></Route>
             <Route exact path="/calendar" component={MyCalendar} />
-            <Route exact path="/stats" component={Stats} />
+            <Route exact path="/messenger" component={Messenger} />
           </Switch>
         </App>
       </Fragment>

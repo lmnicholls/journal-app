@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarAlt,
-  faChartBar,
   faPen,
   faBookOpen,
+  faSms,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
@@ -28,6 +28,17 @@ const Home = () => {
       <Nav />
       <Background />
       <Start>
+        <Link
+          to="/messenger"
+          style={{ textDecoration: "none" }}
+          className="links"
+        >
+          <h2>Messenger</h2>
+          <div className="icon-border">
+            <FontAwesomeIcon icon={faSms} className="icon" />
+          </div>
+        </Link>
+
         <Link
           to="/new-entry"
           style={{ textDecoration: "none" }}
@@ -64,13 +75,6 @@ const Home = () => {
           <h2>Calendar</h2>
           <div className="icon-border">
             <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
-          </div>
-        </Link>
-
-        <Link to="/stats" style={{ textDecoration: "none" }} className="links">
-          <h2>Stats</h2>
-          <div className="icon-border">
-            <FontAwesomeIcon icon={faChartBar} className="icon" />
           </div>
         </Link>
       </Start>
