@@ -10,7 +10,9 @@ import {
   faCalendarAlt,
   faPen,
   faBookOpen,
-  faSms,
+  faComments,
+  faList,
+  faSmile,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
@@ -27,57 +29,78 @@ const Home = () => {
     <Fragment>
       <Nav />
       <Background />
-      <Start>
-        <Link
-          to="/messenger"
-          style={{ textDecoration: "none" }}
-          className="links"
-        >
-          <h2>Messenger</h2>
-          <div className="icon-border">
-            <FontAwesomeIcon icon={faSms} className="icon" />
-          </div>
-        </Link>
+      <LinkDiv>
+        <Start>
+          <Link to="/chat" style={{ textDecoration: "none" }} className="links">
+            <h2>Chat</h2>
+            <div className="icon-border">
+              <FontAwesomeIcon icon={faComments} className="icon" />
+            </div>
+          </Link>
 
-        <Link
-          to="/new-entry"
-          style={{ textDecoration: "none" }}
-          className="links"
-        >
-          <div>
-            <h2>New Entry</h2>
-          </div>
+          <Link
+            to="/notes"
+            style={{ textDecoration: "none" }}
+            className="links"
+          >
+            <h2>Notes</h2>
+            <div className="icon-border">
+              <FontAwesomeIcon icon={faList} className="icon" />
+            </div>
+          </Link>
 
-          <div className="icon-border">
-            <FontAwesomeIcon icon={faPen} className="icon" />
-          </div>
-        </Link>
+          <Link
+            to="/new-entry"
+            style={{ textDecoration: "none" }}
+            className="links"
+          >
+            <div>
+              <h2>New Entry</h2>
+            </div>
 
-        <Link
-          to="/journal"
-          style={{ textDecoration: "none" }}
-          className="links"
-        >
-          <div>
-            <h2>Journal</h2>
-          </div>
+            <div className="icon-border">
+              <FontAwesomeIcon icon={faPen} className="icon" />
+            </div>
+          </Link>
+        </Start>
+        <Start>
+          <Link
+            to="/journal"
+            style={{ textDecoration: "none" }}
+            className="links"
+          >
+            <div>
+              <h2>Journal</h2>
+            </div>
 
-          <div className="icon-border">
-            <FontAwesomeIcon icon={faBookOpen} className="icon" />
-          </div>
-        </Link>
+            <div className="icon-border">
+              <FontAwesomeIcon icon={faBookOpen} className="icon" />
+            </div>
+          </Link>
 
-        <Link
-          to="/calendar"
-          style={{ textDecoration: "none" }}
-          className="links"
-        >
-          <h2>Calendar</h2>
-          <div className="icon-border">
-            <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
-          </div>
-        </Link>
-      </Start>
+          <Link
+            to="/calendar"
+            style={{ textDecoration: "none" }}
+            className="links"
+          >
+            <h2>Calendar</h2>
+            <div className="icon-border">
+              <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
+            </div>
+          </Link>
+
+          <Link
+            to="/feelings"
+            style={{ textDecoration: "none" }}
+            className="links"
+          >
+            <h2>Feelings</h2>
+            <div className="icon-border">
+              <FontAwesomeIcon icon={faSmile} className="icon" />
+            </div>
+          </Link>
+        </Start>
+      </LinkDiv>
     </Fragment>
   );
 };
@@ -91,5 +114,12 @@ const Start = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 100px 50px;
+  padding: 20px 50px;
+  margin: auto;
+  margin-top: ;
+`;
+
+const LinkDiv = styled.div`
+  padding-top: 50px;
+  padding-bottom: 100px;
 `;

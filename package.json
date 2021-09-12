@@ -9,6 +9,7 @@
   "dependencies": {
     "@draft-js-plugins/image": "^4.1.2",
     "@editorjs/editorjs": "^2.22.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

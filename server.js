@@ -6,6 +6,7 @@ const router = require("./router");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const keys = require("./config/keys");
+const path = require("path");
 
 // DB Setup
 mongoose.connect(keys.MONGODB_URI, {

@@ -90,11 +90,6 @@ const Signup = () => {
                 name="therapist"
                 {...register("therapist", { required: "Required" })}
               ></input>
-              <select value="">
-                <option value="Orange">Orange</option>
-                <option value="Radish">Radish</option>
-                <option value="Cherry">Cherry</option>
-              </select>
               <div className="form-labels">
                 <label>Therapist Name</label>
                 <span
