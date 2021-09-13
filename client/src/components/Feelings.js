@@ -13,7 +13,7 @@ const Feelings = (props) => {
   const feelings = useSelector((state) => {
     return state.feelings.feelings;
   });
-  console.log("feelings", feelings);
+
   const history = useHistory();
   const [date, setDate] = useState("");
   const dispatch = useDispatch();
@@ -32,18 +32,18 @@ const Feelings = (props) => {
 
   const handleFeelingClick = (e) => {
     e.preventDefault();
-    // if (date === moment().format("L")) {
-    //   alert("You already logged your feeling for today.");
-    // } else {
-    let feeling = e.target.value;
-    let date = moment().format("L");
-    setDate(Date);
-    dispatch(
-      addFeeling(feeling, date, () => {
-        dispatch(fetchFeelings());
-      })
-    );
-    // }
+    if (date === moment().format("L")) {
+      alert("You already logged your feeling for today.");
+    } else {
+      let feeling = e.target.value;
+      let date = moment().format("L");
+      setDate(date);
+      dispatch(
+        addFeeling(feeling, date, () => {
+          dispatch(fetchFeelings());
+        })
+      );
+    }
   };
 
   return (
