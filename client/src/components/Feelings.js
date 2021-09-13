@@ -7,6 +7,8 @@ import { Form } from "react-bootstrap";
 import moment from "moment";
 import "../css/feelings.css";
 import { addFeeling, fetchFeelings } from "../actions";
+import { Row, Col } from "react-bootstrap";
+import FeelingsPieChart from "./feelings/FeelingsPieChart";
 
 const Feelings = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
@@ -46,12 +48,15 @@ const Feelings = (props) => {
     }
   };
 
+  const currentMonthFeelings = feelings.filter((feeling) =>
+    moment(feeling.date).isSame(moment().format("L"), "month")
+  );
+
   return (
     <div className="background">
       <Nav />
-      <StatsDiv>
+      <FeelingsDiv>
         <h3 className="journal-title">How are you feeling today?</h3>
-
         <Form>
           <div className="feelingsContainer">
             <div className="emoji">
@@ -116,6 +121,14 @@ const Feelings = (props) => {
             </div>
           </div>
         </Form>
+      </FeelingsDiv>
+      <StatsDiv>
+        <Row>
+          <Col xs={5}>
+            <FeelingsPieChart feelings={feelings} />
+          </Col>
+          <Col xs={7}>Chart</Col>
+        </Row>
       </StatsDiv>
     </div>
   );
@@ -123,10 +136,12 @@ const Feelings = (props) => {
 
 export default Feelings;
 
-const StatsDiv = styled.div`
+const FeelingsDiv = styled.div`
   padding-top: 100px;
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
 `;
+
+const StatsDiv = styled.div``;
