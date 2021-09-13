@@ -55,7 +55,7 @@ const DropdownMenu = () => {
             </Link>
           </li>
           <li>
-            <Link to="/notes">
+            <Link to="/chat">
               <FontAwesomeIcon icon={faComments} className="icon" />
               Chat
             </Link>

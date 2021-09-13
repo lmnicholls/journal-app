@@ -1,0 +1,118 @@
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import styled from "styled-components";
+import Nav from "./nav/Nav";
+import { Form } from "react-bootstrap";
+import moment from "moment";
+import "../css/feelings.css";
+import { addFeeling } from "../actions";
+
+const Feelings = (props) => {
+  const { authenticated } = useSelector((state) => state.auth);
+  const history = useHistory();
+  const [date, setDate] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!authenticated) {
+      history.push("/");
+    }
+  }, [authenticated, history]);
+
+  const handleFeelingClick = (e) => {
+    e.preventDefault();
+    // if (date === moment().format("L")) {
+    //   alert("You already logged your feeling for today.");
+    // } else {
+    let feeling = e.target.value;
+    let date = moment().format("L");
+    setDate(Date);
+    dispatch(addFeeling(feeling, date));
+    // }
+  };
+
+  return (
+    <div className="background">
+      <Nav />
+      <StatsDiv>
+        <h3 className="journal-title">How are you feeling today?</h3>
+
+        <Form>
+          <div className="feelingsContainer">
+            <div className="emoji">
+              <button
+                className="feelingButton"
+                value="amazing"
+                onClick={(e) => handleFeelingClick(e)}
+              >
+                😁
+              </button>
+              <div className="feeling">Amazing</div>
+            </div>
+            <div className="emoji" value="happy">
+              <button
+                className="feelingButton"
+                value="happy"
+                onClick={(e) => handleFeelingClick(e)}
+              >
+                🙂
+              </button>
+              <div className="feeling">Happy</div>
+            </div>
+            <div className="emoji" value="meh">
+              <button
+                className="feelingButton"
+                value="meh"
+                onClick={(e) => handleFeelingClick(e)}
+              >
+                😐
+              </button>
+              <div className="feeling">Meh</div>
+            </div>
+            <div className="emoji" value="nervous">
+              <button
+                className="feelingButton"
+                value="nervous"
+                onClick={(e) => handleFeelingClick(e)}
+              >
+                😬
+              </button>
+              <div className="feeling">Nervous</div>
+            </div>
+            <div className="emoji" value="sad">
+              <button
+                className="feelingButton"
+                value="sad"
+                onClick={(e) => handleFeelingClick(e)}
+              >
+                😭
+              </button>
+              <div className="feeling">Sad</div>
+            </div>
+            <div className="emoji" value="angry">
+              <button
+                className="feelingButton"
+                value="angry"
+                onClick={(e) => handleFeelingClick(e)}
+              >
+                😡
+              </button>
+              <div className="feeling">Angry</div>
+            </div>
+          </div>
+        </Form>
+      </StatsDiv>
+    </div>
+  );
+};
+
+export default Feelings;
+
+const StatsDiv = styled.div`
+  padding-top: 100px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+`;

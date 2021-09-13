@@ -1,0 +1,36 @@
+.feelings-title {
+  padding-bottom: 15px;
+  margin: 0;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+  font-family: "Patrick Hand SC";
+  font-size: 64px;
+  color: white;
+}
+
+.feelingsContainer {
+  display: flex;
+  flex-flow: row;
+}
+
+.emoji {
+  font-size: 50px;
+  width: 100px;
+  text-align: center;
+}
+
+.feeling {
+  font-size: 28px;
+  font-family: "Patrick Hand SC";
+  text-align: center;
+  color: white;
+}
+
+.feelingButton {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}

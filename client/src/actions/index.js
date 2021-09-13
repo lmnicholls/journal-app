@@ -5,6 +5,7 @@ import {
   ADD_ENTRY,
   FETCH_ENTRY,
   FETCH_ENTRIES,
+  ADD_FEELING,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
@@ -98,6 +99,23 @@ export const fetchEntries = () => (dispatch) => {
     .get("http://localhost:5000/entries", config)
     .then(function (response) {
       dispatch({ type: FETCH_ENTRIES, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const addFeeling = (feeling, date) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .post("http://localhost:5000/feelings", { feeling, date }, config)
+    .then(function (response) {
+      dispatch({ type: ADD_FEELING, payload: response.data });
     })
     .catch(function (error) {
       console.log(error);

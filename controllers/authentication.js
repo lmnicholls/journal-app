@@ -33,12 +33,14 @@ exports.currentUser = function (req, res) {
 exports.signup = function (req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
+  const therapistId = req.body.therapistId;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
 
-  if (!email || !password || !lastName || !firstName) {
+  if (!email || !password || !therapistId || !lastName || !firstName) {
     return res.status(422).send({
-      error: "You must provide email, password, first and last name.",
+      error:
+        "You must provide email, password, therapist, first and last name.",
     });
   }
 
@@ -57,7 +59,9 @@ exports.signup = function (req, res, next) {
     const user = new User();
 
     user.email = email;
+    user.therapist = therapist;
     user.firstName = firstName;
+    user.type = "client";
     user.lastName = lastName;
     user.setPassword(password);
 

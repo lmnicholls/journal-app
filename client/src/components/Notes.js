@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 
-const Messenger = (props) => {
+const Notes = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
   const history = useHistory();
 
@@ -18,13 +18,13 @@ const Messenger = (props) => {
     <div className="background">
       <Nav />
       <StatsDiv>
-        <h3>Messenger</h3>
+        <h3>Notes</h3>
       </StatsDiv>
     </div>
   );
 };
 
-export default Messenger;
+export default Notes;
 
 const StatsDiv = styled.div`
   padding-top: 100px;

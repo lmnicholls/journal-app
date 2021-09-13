@@ -10,7 +10,9 @@ const StartPage = (props) => {
       <Start>
         <Background />
         <h1 className="title">Therapy & Me</h1>
-        <h4 className="description">Therapy when and where you need it.</h4>
+        <h4 className="description">
+          All your therapy needs when and where you need it.
+        </h4>
       </Start>
     </Fragment>
   );
