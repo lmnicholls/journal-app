@@ -6,6 +6,7 @@ import {
   FETCH_ENTRY,
   FETCH_ENTRIES,
   ADD_FEELING,
+  FETCH_FEELINGS,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
@@ -105,7 +106,7 @@ export const fetchEntries = () => (dispatch) => {
     });
 };
 
-export const addFeeling = (feeling, date) => (dispatch) => {
+export const addFeeling = (feeling, date, callback) => (dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -113,9 +114,27 @@ export const addFeeling = (feeling, date) => (dispatch) => {
   };
 
   axios
-    .post("http://localhost:5000/feelings", { feeling, date }, config)
+    .post("http://localhost:5000/feelings", { feeling, date, callback }, config)
     .then(function (response) {
       dispatch({ type: ADD_FEELING, payload: response.data });
+      callback();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const fetchFeelings = () => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .get("http://localhost:5000/feelings", config)
+    .then(function (response) {
+      dispatch({ type: FETCH_FEELINGS, payload: response.data });
     })
     .catch(function (error) {
       console.log(error);

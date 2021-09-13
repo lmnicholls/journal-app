@@ -19,8 +19,6 @@ const Journal = () => {
   const [leftPageIndex, setLeftPageIndex] = useState(null);
   const [rightPageIndex, setRightPageIndex] = useState(null);
 
-  console.log(authenticated);
-
   useEffect(() => {
     if (!authenticated) {
       history.push("/");

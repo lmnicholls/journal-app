@@ -6,10 +6,14 @@ import Nav from "./nav/Nav";
 import { Form } from "react-bootstrap";
 import moment from "moment";
 import "../css/feelings.css";
-import { addFeeling } from "../actions";
+import { addFeeling, fetchFeelings } from "../actions";
 
 const Feelings = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
+  const feelings = useSelector((state) => {
+    return state.feelings.feelings;
+  });
+  console.log("feelings", feelings);
   const history = useHistory();
   const [date, setDate] = useState("");
   const dispatch = useDispatch();
@@ -20,6 +24,12 @@ const Feelings = (props) => {
     }
   }, [authenticated, history]);
 
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(fetchFeelings());
+    }
+  }, [dispatch, authenticated]);
+
   const handleFeelingClick = (e) => {
     e.preventDefault();
     // if (date === moment().format("L")) {
@@ -28,7 +38,11 @@ const Feelings = (props) => {
     let feeling = e.target.value;
     let date = moment().format("L");
     setDate(Date);
-    dispatch(addFeeling(feeling, date));
+    dispatch(
+      addFeeling(feeling, date, () => {
+        dispatch(fetchFeelings());
+      })
+    );
     // }
   };
 

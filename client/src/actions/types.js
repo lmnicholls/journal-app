@@ -4,3 +4,4 @@ export const ADD_ENTRY = "add_entry";
 export const FETCH_ENTRIES = "fetch_entries";
 export const FETCH_ENTRY = "fetch_entry";
 export const ADD_FEELING = "add_feeling";
+export const FETCH_FEELINGS = "fetch_feelings";
