@@ -10,14 +10,20 @@ export default function MonthlyFeelings({ feelings }) {
   );
   const feelingsArray = feelingsPast30Days.map((day) => {
     let feelings = ["angry", "sad", "nervous", "meh", "happy", "amazing"];
-    let colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+    let colors = [
+      "#ed8787",
+      "#edb458",
+      "#f5f06c",
+      "#78f08c",
+      "#7aa7eb",
+      "#ba82ed",
+    ];
     return {
       name: day.feeling,
       color: colors[feelings.indexOf(day.feeling)],
       y: feelings.indexOf(day.feeling),
     };
   });
-  console.log(feelingsArray);
 
   const chartOptions = {
     chart: {

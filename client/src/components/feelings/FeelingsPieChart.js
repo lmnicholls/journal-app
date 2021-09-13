@@ -9,7 +9,20 @@ export default function FeelingsPieChart({ feelings }) {
   }, {});
 
   let seriesData = Object.entries(sortedFeelings).map((feeling) => {
-    return { name: feeling[0], y: feeling[1] };
+    let feelings = ["angry", "sad", "nervous", "meh", "happy", "amazing"];
+    let colors = [
+      "#ed8787",
+      "#edb458",
+      "#f5f06c",
+      "#78f08c",
+      "#7aa7eb",
+      "#ba82ed",
+    ];
+    return {
+      name: feeling[0],
+      color: colors[feelings.indexOf(feeling[0])],
+      y: feeling[1],
+    };
   });
 
   const chartOptions = {
