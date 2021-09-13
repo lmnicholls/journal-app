@@ -10,6 +10,8 @@
 .feelingsContainer {
   display: flex;
   flex-flow: row;
+  background-color: rgba(148, 147, 147, 0.753);
+  border-radius: 15px;
 }
 
 .emoji {
@@ -33,4 +35,18 @@
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+.container {
+  margin: auto;
+  max-width: 85vw;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.containerRow {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
 }

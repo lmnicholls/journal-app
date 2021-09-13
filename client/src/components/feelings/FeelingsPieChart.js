@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
@@ -12,13 +11,14 @@ export default function FeelingsPieChart({ feelings }) {
   let seriesData = Object.entries(sortedFeelings).map((feeling) => {
     return { name: feeling[0], y: feeling[1] };
   });
-  console.log(seriesData);
 
   const chartOptions = {
     chart: {
       type: "pie",
+      width: 700,
+      backgroundColor: "transparent",
       style: {
-        // fontFamily: "P",
+        fontFamily: "Patrick Hand SC",
         fontWeight: "bold",
       },
       events: {
@@ -29,10 +29,17 @@ export default function FeelingsPieChart({ feelings }) {
     },
     title: {
       verticalAlign: "top",
-      text: "Feelings Breakdown",
+      text: "This Year's Feelings Breakdown",
+      style: {
+        fontSize: 28,
+        color: "white",
+      },
     },
     tooltip: {
-      pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+      pointFormat: "{point.name}: <b>{point.percentage:.0f}%</b>",
+      style: {
+        fontSize: 16,
+      },
     },
     accessibility: {
       point: {
@@ -46,13 +53,20 @@ export default function FeelingsPieChart({ feelings }) {
         dataLabels: {
           enabled: true,
         },
-        showInLegend: true,
+        showInLegend: false,
       },
     },
     series: [
       {
         name: "Feelings",
         colorByPoint: true,
+        dataLabels: {
+          format: "{point.name}: <br/>{point.percentage:.0f}%",
+          style: {
+            fontSize: 24,
+            color: "gray",
+          },
+        },
         data: seriesData,
       },
     ],

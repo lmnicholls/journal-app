@@ -7,8 +7,9 @@ import { Form } from "react-bootstrap";
 import moment from "moment";
 import "../css/feelings.css";
 import { addFeeling, fetchFeelings } from "../actions";
-import { Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import FeelingsPieChart from "./feelings/FeelingsPieChart";
+import MonthlyFeelings from "./feelings/MonthlyFeelings";
 
 const Feelings = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
@@ -47,10 +48,6 @@ const Feelings = (props) => {
       );
     }
   };
-
-  const currentMonthFeelings = feelings.filter((feeling) =>
-    moment(feeling.date).isSame(moment().format("L"), "month")
-  );
 
   return (
     <div className="background">
@@ -122,14 +119,16 @@ const Feelings = (props) => {
           </div>
         </Form>
       </FeelingsDiv>
-      <StatsDiv>
-        <Row>
-          <Col xs={5}>
+      <Container className="container">
+        <Row className="containerRow">
+          <Col sm={{ size: "auto" }} className="graphContainer">
             <FeelingsPieChart feelings={feelings} />
           </Col>
-          <Col xs={7}>Chart</Col>
+          <Col sm={{ size: "auto" }} className="graphContainer">
+            <MonthlyFeelings feelings={feelings} />
+          </Col>
         </Row>
-      </StatsDiv>
+      </Container>
     </div>
   );
 };
@@ -143,5 +142,3 @@ const FeelingsDiv = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-const StatsDiv = styled.div``;
