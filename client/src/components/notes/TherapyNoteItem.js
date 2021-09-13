@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import Nav from "./nav/Nav";
-import "../css/notes.css";
-import TherapyNoteItem from "./notes/TherapyNoteItem";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import "../../css/notes.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Notes = (props) => {
+const TherapyNoteItem = ({ note }) => {
   const { authenticated } = useSelector((state) => state.auth);
   const history = useHistory();
-  const [note, setNote] = useState("");
-  // const [noteItems, setNoteItems] = useState([]);
-  let noteItems = ["hi", "another note", "yet another note"];
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     if (!authenticated) {
@@ -30,24 +28,35 @@ const Notes = (props) => {
   //   setNoteItems(noteItemsCopy);
   // };
 
+  const handleCheckClick = (e) => {
+    e.preventDefault();
+    setClicked(!clicked);
+  };
+
   return (
-    <div className="background">
-      <Nav />
-      <NotesContainer>
-        <h3 className="journal-title">Notes</h3>
-        <NotesDiv>
-          <NotePad>
-            {noteItems.map((note, index) => (
-              <TherapyNoteItem note={note} />
-            ))}
-          </NotePad>
-        </NotesDiv>
-      </NotesContainer>
-    </div>
+    <>
+      <div className="listItem" key={note}>
+        <div className="note">
+          <button className="check" onClick={(e) => handleCheckClick(e)}>
+            {clicked ? "✓" : ""}
+          </button>
+          <div
+            className="noteText"
+            style={clicked ? { textDecoration: "line-through" } : {}}
+            key={note}
+          >
+            {note}
+          </div>
+        </div>
+        <div className="deleteNote">
+          <FontAwesomeIcon icon={faTrashAlt} color="#f59393" className="icon" />
+        </div>
+      </div>
+    </>
   );
 };
 
-export default Notes;
+export default TherapyNoteItem;
 
 const NotesContainer = styled.div`
   padding-top: 100px;
@@ -56,8 +65,6 @@ const NotesContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-const NotesDiv = styled.div``;
 
 const NotePad = styled.div`
   background-color: white;

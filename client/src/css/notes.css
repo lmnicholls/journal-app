@@ -1,0 +1,43 @@
+.feelings-title {
+  padding-bottom: 15px;
+  margin: 0;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+  font-family: "Patrick Hand SC";
+  font-size: 64px;
+  color: white;
+}
+
+.listItem {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.note {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.noteText {
+  margin-left: 10px;
+}
+
+.check {
+  border: 2px solid black;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 0;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.icon {
+  cursor: pointer;
+  height: 20px;
+}
