@@ -18,4 +18,5 @@ module.exports = function (app) {
   app.get("/feelings", requireAuth, Feelings.getFeelings);
   app.post("/notes", requireAuth, Notes.addNote);
   app.get("/notes", requireAuth, Notes.getNotes);
+  app.delete("/notes/:noteID", requireAuth, Notes.deleteNote);
 };

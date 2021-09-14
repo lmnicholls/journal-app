@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Nav from "./nav/Nav";
 import "../css/notes.css";
 import TherapyNoteItem from "./notes/TherapyNoteItem";
-import { addNote, fetchNotes } from "../actions";
+import { addNote, fetchNotes, deleteNote } from "../actions";
 
 const Notes = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
@@ -14,6 +14,7 @@ const Notes = (props) => {
     return state.notes.notes;
   });
   const [note, setNote] = useState("");
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -22,8 +23,6 @@ const Notes = (props) => {
       dispatch(fetchNotes());
     }
   }, [dispatch, authenticated]);
-
-  // const [noteItems, setNotesItems] = useState(notes);
 
   useEffect(() => {
     if (!authenticated) {
@@ -42,6 +41,19 @@ const Notes = (props) => {
     setNote("");
   };
 
+  const handleDeleteClick = (e, id) => {
+    e.preventDefault();
+    dispatch(
+      deleteNote(id, () => {
+        dispatch(fetchNotes());
+      })
+    );
+  };
+
+  if (!notes) {
+    return <div>Notes loading...</div>;
+  }
+
   return (
     <div className="background">
       <Nav />
@@ -53,8 +65,11 @@ const Notes = (props) => {
               {notes.map((note, index) => (
                 <TherapyNoteItem
                   note={note.note}
+                  id={note._id}
                   key={note._id}
+                  checked={note.checked}
                   index={index}
+                  handleDeleteClick={handleDeleteClick}
                 />
               ))}
             </div>

@@ -28,3 +28,14 @@ exports.getNotes = function (req, res) {
     });
   });
 };
+
+exports.deleteNote = function (req, res) {
+  console.log("userID", req.user._id);
+  console.log("noteID", req.params.noteID);
+  User.update(
+    { _id: req.user._id },
+    { $pull: { notes: { _id: req.params.noteID } } }
+  );
+
+  res.end();
+};
