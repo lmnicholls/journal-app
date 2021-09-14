@@ -5,3 +5,5 @@ export const FETCH_ENTRIES = "fetch_entries";
 export const FETCH_ENTRY = "fetch_entry";
 export const ADD_FEELING = "add_feeling";
 export const FETCH_FEELINGS = "fetch_feelings";
+export const ADD_NOTE = "add_note";
+export const FETCH_NOTES = "fetch_notes";

@@ -1,6 +1,7 @@
 const Authentication = require("./controllers/authentication");
 const JournalEntry = require("./controllers/journalEntry");
 const Feelings = require("./controllers/feelings");
+const Notes = require("./controllers/notes");
 const passportService = require("./services/passport");
 const passport = require("passport");
 
@@ -15,4 +16,6 @@ module.exports = function (app) {
   app.get("/entries", requireAuth, JournalEntry.getJournal);
   app.post("/feelings", requireAuth, Feelings.addFeeling);
   app.get("/feelings", requireAuth, Feelings.getFeelings);
+  app.post("/notes", requireAuth, Notes.addNote);
+  app.get("/notes", requireAuth, Notes.getNotes);
 };
