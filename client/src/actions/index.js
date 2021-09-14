@@ -7,6 +7,8 @@ import {
   FETCH_ENTRIES,
   ADD_FEELING,
   FETCH_FEELINGS,
+  ADD_NOTE,
+  FETCH_NOTES,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
@@ -135,6 +137,43 @@ export const fetchFeelings = () => (dispatch) => {
     .get("http://localhost:5000/feelings", config)
     .then(function (response) {
       dispatch({ type: FETCH_FEELINGS, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const addNote = (note, checked, callback) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  console.log("note-checked", note, checked);
+
+  axios
+    .post("http://localhost:5000/notes", { note, checked, callback }, config)
+    .then(function (response) {
+      dispatch({ type: ADD_NOTE, payload: response.data });
+      callback();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const fetchNotes = () => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .get("http://localhost:5000/notes", config)
+    .then(function (response) {
+      dispatch({ type: FETCH_NOTES, payload: response.data });
     })
     .catch(function (error) {
       console.log(error);

@@ -9,6 +9,7 @@ const UserSchema = new Schema({
   lastName: String,
   userType: String,
   feelings: [{ type: Object }],
+  notes: [{ type: Object }],
   email: { type: String, unique: true, lowercase: true },
   hash: String,
   salt: String,

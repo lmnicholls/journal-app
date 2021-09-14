@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 import "../css/notes.css";
 import TherapyNoteItem from "./notes/TherapyNoteItem";
+import { addNote, fetchNotes } from "../actions";
 
 const Notes = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
-  const history = useHistory();
+  const notes = useSelector((state) => {
+    return state.notes.notes;
+  });
   const [note, setNote] = useState("");
-  const [notesItems, setNotesItems] = useState([]);
-  let noteItems = [
-    "hi",
-    "another note",
-    "yet another note",
-    "never ending COVID",
-    "unrealistic expectations of myself",
-  ];
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(fetchNotes());
+    }
+  }, [dispatch, authenticated]);
+
+  // const [noteItems, setNotesItems] = useState(notes);
 
   useEffect(() => {
     if (!authenticated) {
@@ -26,23 +31,15 @@ const Notes = (props) => {
     }
   }, [authenticated, history]);
 
-  // const handleAddNote = () => {
-  //   setNoteItems([...noteItems, note]);
-  //   setNote("");
-  // };
-
-  // const handleDeleteNote = (index: number) => {
-  //   let noteItemsCopy = [...noteItems];
-  //   noteItemsCopy.splice(index, 1);
-  //   setNoteItems(noteItemsCopy);
-  // };
-
-  const handleDeleteClick = (e, index) => {
+  const handleAddNoteClick = (e) => {
     e.preventDefault();
-    let noteItemsCopy = [...noteItems];
-    noteItemsCopy.splice(index, 1);
-    console.log(noteItemsCopy);
-    setNotesItems(notesItems);
+    let checked = false;
+    dispatch(
+      addNote(note, checked, () => {
+        dispatch(fetchNotes());
+      })
+    );
+    setNote("");
   };
 
   return (
@@ -53,12 +50,11 @@ const Notes = (props) => {
         <NotesDiv>
           <NotePad>
             <div>
-              {noteItems.map((note, index) => (
+              {notes.map((note, index) => (
                 <TherapyNoteItem
-                  note={note}
-                  key={note}
+                  note={note.note}
+                  key={note._id}
                   index={index}
-                  handleDeleteClick={handleDeleteClick}
                 />
               ))}
             </div>
@@ -67,16 +63,21 @@ const Notes = (props) => {
                 <Form.Group className="mb-3" controlId="formLogo">
                   <Form.Control
                     type="text"
-                    // value={logo}
+                    value={note}
                     placeholder="Enter note"
                     className="addNoteForm"
-                    // onChange={(e) => {
-                    //   setLogo(e.target.value);
-                    // }}
+                    onChange={(e) => {
+                      setNote(e.target.value);
+                    }}
                   />
                 </Form.Group>
 
-                <Button variant="primary" className="addButton" type="submit">
+                <Button
+                  variant="primary"
+                  className="addButton"
+                  type="submit"
+                  onClick={(e) => handleAddNoteClick(e)}
+                >
                   +
                 </Button>
               </AddNote>

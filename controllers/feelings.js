@@ -1,4 +1,3 @@
-const JournalEntry = require("../models/journal");
 const User = require("../models/user");
 const Feeling = require("../models/feelings");
 
