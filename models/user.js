@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Journal = require("../models/journal");
+const Feelings = require("../models/feelings");
+const Notes = require("../models/notes");
 var crypto = require("crypto");
 
 // Define our model
@@ -8,8 +10,8 @@ const UserSchema = new Schema({
   firstName: String,
   lastName: String,
   userType: String,
-  feelings: [{ type: Object }],
-  notes: [{ type: Object }],
+  feelings: [{ type: Feelings.FeelingSchema }],
+  notes: [{ type: Notes.NoteSchema }],
   email: { type: String, unique: true, lowercase: true },
   hash: String,
   salt: String,
