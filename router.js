@@ -14,4 +14,5 @@ module.exports = function (app) {
   app.post("/entries", requireAuth, JournalEntry.addEntryToJournal);
   app.get("/entries", requireAuth, JournalEntry.getJournal);
   app.post("/feelings", requireAuth, Feelings.addFeeling);
+  app.get("/feelings", requireAuth, Feelings.getFeelings);
 };

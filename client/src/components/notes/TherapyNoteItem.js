@@ -6,7 +6,7 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import "../../css/notes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const TherapyNoteItem = ({ note }) => {
+const TherapyNoteItem = ({ note, handleDeleteClick, index }) => {
   const { authenticated } = useSelector((state) => state.auth);
   const history = useHistory();
   const [clicked, setClicked] = useState(false);
@@ -22,12 +22,6 @@ const TherapyNoteItem = ({ note }) => {
   //   setNote("");
   // };
 
-  // const handleDeleteNote = (index: number) => {
-  //   let noteItemsCopy = [...noteItems];
-  //   noteItemsCopy.splice(index, 1);
-  //   setNoteItems(noteItemsCopy);
-  // };
-
   const handleCheckClick = (e) => {
     e.preventDefault();
     setClicked(!clicked);
@@ -35,7 +29,7 @@ const TherapyNoteItem = ({ note }) => {
 
   return (
     <>
-      <div className="listItem" key={note}>
+      <div className="listItem" key={note} index={index}>
         <div className="note">
           <button className="check" onClick={(e) => handleCheckClick(e)}>
             {clicked ? "✓" : ""}
@@ -49,7 +43,16 @@ const TherapyNoteItem = ({ note }) => {
           </div>
         </div>
         <div className="deleteNote">
-          <FontAwesomeIcon icon={faTrashAlt} color="#f59393" className="icon" />
+          <button
+            className="delete"
+            onClick={(e) => handleDeleteClick(e, index)}
+          >
+            <FontAwesomeIcon
+              icon={faTrashAlt}
+              color="#f59393"
+              className="deleteIcon"
+            />
+          </button>
         </div>
       </div>
     </>

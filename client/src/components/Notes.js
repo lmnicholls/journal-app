@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 import "../css/notes.css";
@@ -10,8 +11,14 @@ const Notes = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
   const history = useHistory();
   const [note, setNote] = useState("");
-  // const [noteItems, setNoteItems] = useState([]);
-  let noteItems = ["hi", "another note", "yet another note"];
+  const [notesItems, setNotesItems] = useState([]);
+  let noteItems = [
+    "hi",
+    "another note",
+    "yet another note",
+    "never ending COVID",
+    "unrealistic expectations of myself",
+  ];
 
   useEffect(() => {
     if (!authenticated) {
@@ -30,6 +37,14 @@ const Notes = (props) => {
   //   setNoteItems(noteItemsCopy);
   // };
 
+  const handleDeleteClick = (e, index) => {
+    e.preventDefault();
+    let noteItemsCopy = [...noteItems];
+    noteItemsCopy.splice(index, 1);
+    console.log(noteItemsCopy);
+    setNotesItems(notesItems);
+  };
+
   return (
     <div className="background">
       <Nav />
@@ -37,9 +52,35 @@ const Notes = (props) => {
         <h3 className="journal-title">Notes</h3>
         <NotesDiv>
           <NotePad>
-            {noteItems.map((note, index) => (
-              <TherapyNoteItem note={note} />
-            ))}
+            <div>
+              {noteItems.map((note, index) => (
+                <TherapyNoteItem
+                  note={note}
+                  key={note}
+                  index={index}
+                  handleDeleteClick={handleDeleteClick}
+                />
+              ))}
+            </div>
+            <Form>
+              <AddNote>
+                <Form.Group className="mb-3" controlId="formLogo">
+                  <Form.Control
+                    type="text"
+                    // value={logo}
+                    placeholder="Enter note"
+                    className="addNoteForm"
+                    // onChange={(e) => {
+                    //   setLogo(e.target.value);
+                    // }}
+                  />
+                </Form.Group>
+
+                <Button variant="primary" className="addButton" type="submit">
+                  +
+                </Button>
+              </AddNote>
+            </Form>
           </NotePad>
         </NotesDiv>
       </NotesContainer>
@@ -59,6 +100,13 @@ const NotesContainer = styled.div`
 
 const NotesDiv = styled.div``;
 
+const AddNote = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const NotePad = styled.div`
   background-color: white;
   font-family: "Patrick Hand SC";
@@ -67,4 +115,7 @@ const NotePad = styled.div`
   min-width: 30vw;
   min-height: 400px;
   border-radius: 20px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
 `;

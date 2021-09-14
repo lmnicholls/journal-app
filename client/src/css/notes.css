@@ -19,6 +19,7 @@
   display: flex;
   flex-flow: row;
   align-items: center;
+  margin-right: 10px;
 }
 
 .noteText {
@@ -37,7 +38,37 @@
   vertical-align: middle;
 }
 
-.icon {
+.delete {
+  margin: 0 auto;
+  padding: 0;
+  display: table-cell;
+  vertical-align: middle;
+  border: none;
+  background: transparent;
   cursor: pointer;
-  height: 20px;
+}
+
+.addButton {
+  padding: 0px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid rgb(51, 167, 151);
+  width: 25px;
+  height: 25px;
+  font-size: 24px;
+  border-radius: 12px;
+  background: rgb(113, 224, 210);
+  cursor: pointer;
+}
+
+.addNoteForm {
+  width: 525px;
+  font-family: "Patrick Hand SC" !important;
+  font-size: 24px !important;
+  background-color: rgb(194, 189, 189);
+}
+
+.btn {
+  color: rgb(51, 167, 151);
 }
