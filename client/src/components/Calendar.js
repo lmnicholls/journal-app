@@ -10,7 +10,7 @@ import moment from "moment";
 import "../css/calendar.css";
 
 const MyCalendar = (props) => {
-  const [value, setValue] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const { authenticated } = useSelector((state) => state.auth);
   const entries = useSelector((state) => {
     return state.journalEntries.entries[0];
@@ -36,12 +36,12 @@ const MyCalendar = (props) => {
   }, [dispatch, authenticated]);
 
   const onChange = (date) => {
-    setValue(date);
+    setDate(date);
   };
 
   const handleDayClick = (date) => {
+    setDate(date);
     handleShow();
-    alert(moment(date).format("MM/DD/YYYY"));
   };
 
   if (entries) {
@@ -50,16 +50,14 @@ const MyCalendar = (props) => {
       return date;
     });
 
-    console.log(dailyEntriesDates);
-
     return (
       <div className="background">
         <Nav />
         <CalendarDiv>
           <Calendar
             onChange={onChange}
-            onClickDay={(value) => handleDayClick(value)}
-            value={value}
+            onClickDay={(date) => handleDayClick(date)}
+            value={date}
             tileClassName={({ date, view }) => {
               if (
                 dailyEntriesDates.find(
@@ -74,6 +72,8 @@ const MyCalendar = (props) => {
         <CalendarDayListView
           setShow={setShow}
           show={show}
+          date={date}
+          entries={entries}
           handleClose={handleClose}
           handleShow={handleShow}
         />
@@ -85,7 +85,7 @@ const MyCalendar = (props) => {
     <div className="background">
       <Nav />
       <CalendarDiv>
-        <Calendar onChange={onChange} value={value} />
+        <Calendar onChange={onChange} value={date} />
       </CalendarDiv>
     </div>
   );

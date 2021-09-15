@@ -1,10 +1,18 @@
 import { Button, Modal, Container, Row, Col } from "react-bootstrap";
 import React from "react";
 import { useDispatch } from "react-redux";
-import "../../css/calendar.css";
+// import "../../css/calendar.css";
+import moment from "moment";
 
 export default function CalendarDayListView(props) {
   const dispatch = useDispatch();
+  const entries = props.entries.filter(
+    (entry) =>
+      moment(entry.date).format("MM/DD/YYYY") ===
+      moment(props.date).format("MM/DD/YYYY")
+  );
+
+  console.log("entries", entries);
 
   return (
     <>
@@ -16,9 +24,12 @@ export default function CalendarDayListView(props) {
         animation={false}
         className="modal"
       >
-        <Modal.Header>
-          <Modal.Title style={{ flex: "1 90%" }}>Journal Entries</Modal.Title>
+        <Modal.Header className="modalHeader">
+          <Modal.Title style={{ flex: "1 90%" }} className="modalTitle">
+            Journal Entries
+          </Modal.Title>
           <button
+            className="closeBtn"
             onClick={() => {
               props.handleClose();
             }}
@@ -28,10 +39,22 @@ export default function CalendarDayListView(props) {
         </Modal.Header>
         <Modal.Body>
           <Container>
-            <Row>
-              <Col xs={6} md={6}>
-                Title
+            <Row className="dateRow">
+              <Col>Date:</Col>
+              <Col className="date">
+                {moment(props.date).format("MM/DD/YYYY")}
               </Col>
+            </Row>
+            <Row>
+              {entries.map((entry) => {
+                return (
+                  <Col>
+                    <button className="journalEntryButton">
+                      {entry.title}
+                    </button>
+                  </Col>
+                );
+              })}
             </Row>
           </Container>
         </Modal.Body>

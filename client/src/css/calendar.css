@@ -54,7 +54,6 @@
     #6cdcbf 52%,
     #49a7da 90%
   );
-  /* min-height: 100vh; */
 }
 
 .highlight {
@@ -62,5 +61,62 @@
 }
 
 .modal {
-  background-color: red;
+  background-color: rgb(206, 195, 195);
+  width: 40%;
+  display: flex;
+}
+
+.modal-header {
+  background-color: rgba(98, 169, 207, 0.8);
+  color: white;
+  display: flex;
+  flex-flow: row;
+  font-family: "Patrick Hand SC";
+  font-size: 28px;
+}
+
+.modalTitle {
+  padding-left: 10px;
+}
+.modal-content {
+  border: none !important;
+}
+
+.closeBtn {
+  font-size: "20px";
+  color: white;
+  border: none;
+  background-color: transparent;
+  padding-right: 10px;
+  font-weight: 900;
+}
+
+.closeBtn:hover {
+  color: red;
+}
+
+.dateRow {
+  display: flex;
+  flex-flow: row;
+  font-family: "Patrick Hand SC";
+}
+
+.date {
+  padding-left: 5px;
+}
+
+.journalEntryButton {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-family: "Patrick Hand SC";
+  font-size: 20px;
+}
+
+.journalEntryButton:hover {
+  color: red;
 }
