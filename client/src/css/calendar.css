@@ -46,7 +46,7 @@
   color: white;
 }
 
-.background {
+.calendarBackground {
   background-color: #5de4d2;
   background-image: linear-gradient(
     315deg,
@@ -54,6 +54,8 @@
     #6cdcbf 52%,
     #49a7da 90%
   );
+  width: 100vw;
+  height: 100vh;
 }
 
 .highlight {
@@ -61,62 +63,54 @@
 }
 
 .modal {
-  background-color: rgb(206, 195, 195);
-  width: 40%;
-  display: flex;
+  background-color: rgba(62, 164, 219, 0.4);
 }
 
 .modal-header {
-  background-color: rgba(98, 169, 207, 0.8);
+  background-color: rgba(55, 121, 156, 0.8);
   color: white;
-  display: flex;
-  flex-flow: row;
   font-family: "Patrick Hand SC";
-  font-size: 28px;
 }
 
-.modalTitle {
-  padding-left: 10px;
-}
 .modal-content {
   border: none !important;
 }
 
-.closeBtn {
-  font-size: "20px";
+.modal-body {
+  padding: 0;
   color: white;
-  border: none;
-  background-color: transparent;
-  padding-right: 10px;
-  font-weight: 900;
-}
-
-.closeBtn:hover {
-  color: red;
-}
-
-.dateRow {
-  display: flex;
-  flex-flow: row;
   font-family: "Patrick Hand SC";
 }
 
-.date {
-  padding-left: 5px;
+.closeBtn {
+  font-size: 20px;
+  color: white;
+  border: none;
+  background-color: transparent;
+}
+
+.closeBtn:hover {
+  color: rgb(139, 37, 207);
+}
+
+.dateRow {
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  color: rgba(55, 121, 156, 0.8);
 }
 
 .journalEntryButton {
   background: none;
-  color: inherit;
+  color: rgb(11, 2, 15);
   border: none;
-  padding: 0;
   font: inherit;
   cursor: pointer;
   outline: inherit;
   font-family: "Patrick Hand SC";
-  font-size: 20px;
+  font-size: 24px;
+  padding: 0;
 }
 
 .journalEntryButton:hover {
-  color: red;
+  color: rgb(139, 37, 207);
 }

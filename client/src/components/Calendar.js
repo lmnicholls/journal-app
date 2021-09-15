@@ -51,7 +51,7 @@ const MyCalendar = (props) => {
     });
 
     return (
-      <div className="background">
+      <div className="calendarBackground">
         <Nav />
         <CalendarDiv>
           <Calendar

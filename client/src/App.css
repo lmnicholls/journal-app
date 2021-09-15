@@ -129,7 +129,7 @@ body {
   height: 100px;
 }
 
-.background {
+.animatedBackground {
   width: 100vw;
   height: 100vh;
   position: fixed;
