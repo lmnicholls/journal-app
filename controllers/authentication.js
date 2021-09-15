@@ -59,9 +59,7 @@ exports.signup = function (req, res, next) {
     const user = new User();
 
     user.email = email;
-    user.therapist = therapist;
     user.firstName = firstName;
-    user.type = "client";
     user.lastName = lastName;
     user.setPassword(password);
 

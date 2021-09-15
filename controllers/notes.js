@@ -30,14 +30,18 @@ exports.getNotes = function (req, res) {
 };
 
 exports.deleteNote = function (req, res) {
-  const noteID = req.params.noteID;
+  User.findOne({ _id: req.user._id }, function (err, user) {
+    console.log("user", user);
+    res.send({});
+  });
+  // const noteID = req.params.noteID;
 
-  const user = User.findById(req.user._id);
-  const note = Note.NoteModel.findById(noteID);
+  // const user = User.findById(req.user._id);
+  // const note = Note.NoteModel.findById(noteID);
 
-  const update = { $pull: { notes: { _id: noteID } } };
+  // const update = { $pull: { notes: { _id: noteID } } };
 
-  Note.NoteModel.deleteOne({ _id: noteID });
+  // Note.NoteModel.deleteOne({ _id: noteID });
 
   // const updatedUser = User.findByIdAndUpdate(user._id, update, (err, note) => {
   //   if (err) {
