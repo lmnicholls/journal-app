@@ -78,8 +78,9 @@
 
 .modal-body {
   padding: 0;
-  color: white;
+  color: rgb(84, 82, 85);
   font-family: "Patrick Hand SC";
+  font-size: 24px;
 }
 
 .closeBtn {
@@ -101,13 +102,12 @@
 
 .journalEntryButton {
   background: none;
-  color: rgb(11, 2, 15);
+  color: rgb(84, 82, 85);
   border: none;
   font: inherit;
   cursor: pointer;
   outline: inherit;
   font-family: "Patrick Hand SC";
-  font-size: 24px;
   padding: 0;
 }
 
