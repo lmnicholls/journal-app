@@ -34,9 +34,11 @@ const Feelings = (props) => {
 
   const handleFeelingClick = (e) => {
     e.preventDefault();
-    if (feelings.length === 0 || feelings[0].date !== moment().format("L")) {
+    if (feelings[0].date === moment().format("MM/DD/YYYY")) {
+      alert("You already logged your feeling for today.");
+    } else {
       let feeling = e.target.value;
-      let date = moment().format("L");
+      let date = moment().format("MM/DD/YYYY");
       dispatch(
         addFeeling(feeling, date, () => {
           dispatch(fetchFeelings());

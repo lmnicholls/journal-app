@@ -114,12 +114,10 @@ const Start = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 20px 50px;
   margin: auto;
-  margin-top: ;
 `;
 
 const LinkDiv = styled.div`
-  padding-top: 50px;
+  padding-top: 100px;
   padding-bottom: 100px;
 `;
