@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Journal = require("../models/journal");
-const Feelings = require("../models/feelings");
-const Notes = require("../models/notes");
+const Feelings = require("./feeling");
+const Notes = require("./note");
 var crypto = require("crypto");
 
 // Define our model

@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const Note = require("../models/notes");
+const Note = require("../models/note");
 
 exports.addNote = function (req, res) {
   User.findOne({ _id: req.user._id }, function (err, user) {
@@ -30,12 +30,22 @@ exports.getNotes = function (req, res) {
 };
 
 exports.deleteNote = function (req, res) {
-  console.log("userID", req.user._id);
-  console.log("noteID", req.params.noteID);
-  User.update(
-    { _id: req.user._id },
-    { $pull: { notes: { _id: req.params.noteID } } }
-  );
+  const noteID = req.params.noteID;
+
+  const user = User.findById(req.user._id);
+  const note = Note.NoteModel.findById(noteID);
+
+  const update = { $pull: { notes: { _id: noteID } } };
+
+  Note.NoteModel.deleteOne({ _id: noteID });
+
+  // const updatedUser = User.findByIdAndUpdate(user._id, update, (err, note) => {
+  //   if (err) {
+  //     return err;
+  //   }
+  // }).populate("notes");
+
+  // res.json({ deletedNote: note, updatedUser });
 
   res.end();
 };
