@@ -4,16 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 import Calendar from "react-calendar";
+import CalendarDayListView from "../components/calendar/CalendarDayListView";
 import { fetchEntries } from "../actions";
-// import "react-calendar/dist/Calendar.css";
+import moment from "moment";
 import "../css/calendar.css";
 
 const MyCalendar = (props) => {
-  const [value, setValue] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const { authenticated } = useSelector((state) => state.auth);
   const entries = useSelector((state) => {
     return state.journalEntries.entries[0];
   });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -31,45 +36,32 @@ const MyCalendar = (props) => {
   }, [dispatch, authenticated]);
 
   const onChange = (date) => {
-    setValue(date);
+    setDate(date);
   };
 
   const handleDayClick = (date) => {
-    alert(date);
+    setDate(date);
+    handleShow();
   };
 
   if (entries) {
-    console.log(entries.map((entry) => entry.date));
-
     let dailyEntriesDates = entries.map((entry) => {
-      let date = new Date(entry.date);
-      let entryYear = date.getFullYear();
-      let entryMonth = (1 + date.getMonth()).toString().padStart(2, "0");
-      let entryDay = date.getDate().toString().padStart(2, "0");
-
-      return entryMonth + "/" + entryDay + "/" + entryYear;
+      let date = moment(new Date(entry.date)).format("MM/DD/YYYY");
+      return date;
     });
 
-    console.log(dailyEntriesDates);
-
     return (
-      <div className="background">
+      <div className="calendarBackground">
         <Nav />
         <CalendarDiv>
           <Calendar
             onChange={onChange}
-            onClickDay={(value) => handleDayClick(value)}
-            value={value}
+            onClickDay={(date) => handleDayClick(date)}
+            value={date}
             tileClassName={({ date, view }) => {
               if (
                 dailyEntriesDates.find(
-                  (entryDate) =>
-                    entryDate ===
-                    (1 + date.getMonth()).toString().padStart(2, "0") +
-                      "/" +
-                      date.getDate().toString().padStart(2, "0") +
-                      "/" +
-                      date.getFullYear()
+                  (entryDate) => entryDate === moment(date).format("MM/DD/YYYY")
                 )
               ) {
                 return "highlight";
@@ -77,6 +69,14 @@ const MyCalendar = (props) => {
             }}
           />
         </CalendarDiv>
+        <CalendarDayListView
+          setShow={setShow}
+          show={show}
+          date={date}
+          entries={entries}
+          handleClose={handleClose}
+          handleShow={handleShow}
+        />
       </div>
     );
   }
@@ -85,7 +85,7 @@ const MyCalendar = (props) => {
     <div className="background">
       <Nav />
       <CalendarDiv>
-        <Calendar onChange={onChange} value={value} />
+        <Calendar onChange={onChange} value={date} />
       </CalendarDiv>
     </div>
   );
