@@ -2,11 +2,12 @@
   display: flex;
   flex-flow: row;
   width: 100%;
+  align-items: center;
 }
 
 .journal label {
-  padding-right: 10px;
   width: 60px;
+  padding-bottom: 0px;
 }
 
 .journal input {
@@ -84,4 +85,8 @@
   max-height: 100%;
   overflow-y: scroll;
   min-height: 100vh;
+}
+
+.textEditor {
+  margin-top: 10px;
 }
