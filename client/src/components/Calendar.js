@@ -39,8 +39,6 @@ const MyCalendar = (props) => {
   };
 
   if (entries) {
-    console.log(entries.map((entry) => entry.date));
-
     let dailyEntriesDates = entries.map((entry) => {
       let date = new Date(entry.date);
       let entryYear = date.getFullYear();

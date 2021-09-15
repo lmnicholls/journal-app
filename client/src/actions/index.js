@@ -179,7 +179,7 @@ export const fetchNotes = () => (dispatch) => {
     });
 };
 
-export const deleteNote = (noteID, callback) => (dispatch) => {
+export const deleteNote = (noteID) => (dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -187,14 +187,9 @@ export const deleteNote = (noteID, callback) => (dispatch) => {
   };
 
   axios
-    .delete(
-      `http://localhost:5000/notes/${noteID}`,
-      { noteID, callback },
-      config
-    )
+    .delete(`http://localhost:5000/notes/${noteID}`, config)
     .then(function (response) {
       dispatch({ type: DELETE_NOTE, payload: response.data });
-      callback();
     })
     .catch(function (error) {
       console.log(error);

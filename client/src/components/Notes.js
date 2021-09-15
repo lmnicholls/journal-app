@@ -13,6 +13,8 @@ const Notes = (props) => {
   const notes = useSelector((state) => {
     return state.notes.notes;
   });
+
+  console.log(notes);
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
@@ -41,13 +43,10 @@ const Notes = (props) => {
     setNote("");
   };
 
-  const handleDeleteClick = (e, id) => {
+  const handleDeleteClick = (e, noteID) => {
     e.preventDefault();
-    dispatch(
-      deleteNote(id, () => {
-        dispatch(fetchNotes());
-      })
-    );
+    dispatch(deleteNote(noteID));
+    dispatch(fetchNotes());
   };
 
   if (!notes) {
@@ -65,11 +64,11 @@ const Notes = (props) => {
               {notes.map((note, index) => (
                 <TherapyNoteItem
                   note={note.note}
-                  id={note._id}
+                  value={note._id}
                   key={note._id}
                   checked={note.checked}
                   index={index}
-                  handleDeleteClick={handleDeleteClick}
+                  handleDeleteClick={(e) => handleDeleteClick(e, note._id)}
                 />
               ))}
             </div>
