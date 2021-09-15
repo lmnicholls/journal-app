@@ -60,3 +60,7 @@
 .highlight {
   background-color: rgb(176, 101, 226);
 }
+
+.modal {
+  background-color: red;
+}
