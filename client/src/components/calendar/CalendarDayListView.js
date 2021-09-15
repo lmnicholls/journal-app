@@ -54,7 +54,7 @@ export default function CalendarDayListView(props) {
               ) : (
                 entries.map((entry) => {
                   return (
-                    <Col key={entry._id}>
+                    <Col key={entry._id} className="entryBtnContainer">
                       <button
                         className="journalEntryButton"
                         value={entry._id}

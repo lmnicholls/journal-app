@@ -114,3 +114,8 @@
 .journalEntryButton:hover {
   color: rgb(139, 37, 207);
 }
+
+.entriesRow {
+  display: flex;
+  flex-flow: column;
+}

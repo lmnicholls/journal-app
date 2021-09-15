@@ -18,9 +18,12 @@ export default function CalendarDayJournalView(props) {
             props.handleClose();
           }}
           className="modal"
+          size="lg"
         >
           <Modal.Header className="modalHeader">
-            <Modal.Title style={{ flex: "1 90%" }}>Journal Entries</Modal.Title>
+            <Modal.Title style={{ flex: "1 90%" }}>
+              {journalEntry[0].title}
+            </Modal.Title>
             <button
               className="closeBtn"
               onClick={() => {
@@ -32,8 +35,12 @@ export default function CalendarDayJournalView(props) {
           </Modal.Header>
           <Modal.Body>
             <Container className="journalEntryContainer">
-              <Row className="entryTitle">{journalEntry[0].title}</Row>
-              <Row className="entryDate">
+              <Row
+                style={{
+                  color: "rgba(55, 121, 156, 0.8)",
+                  paddingLeft: "10px",
+                }}
+              >
                 {moment(journalEntry[0].date).format("dddd, MMMM D, YYYY")}
               </Row>
               <Row className="entryContent">
