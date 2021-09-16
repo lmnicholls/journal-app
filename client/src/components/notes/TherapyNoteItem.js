@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import "../../css/notes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const TherapyNoteItem = ({ note, handleDeleteClick, index }) => {
+const TherapyNoteItem = ({ note, checked, id, handleDeleteClick, index }) => {
   const { authenticated } = useSelector((state) => state.auth);
   const history = useHistory();
-  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     if (!authenticated) {
@@ -16,36 +15,27 @@ const TherapyNoteItem = ({ note, handleDeleteClick, index }) => {
     }
   }, [authenticated, history]);
 
-  // const handleAddNote = () => {
-  //   setNoteItems([...noteItems, note]);
-  //   setNote("");
-  // };
-
   const handleCheckClick = (e) => {
     e.preventDefault();
-    setClicked(!clicked);
+    // setClicked(!checked);
   };
 
   return (
     <>
-      <div className="listItem" key={note} index={index}>
+      <div className="listItem" key={id} index={index}>
         <div className="note">
           <button className="check" onClick={(e) => handleCheckClick(e)}>
-            {clicked ? "✓" : ""}
+            {checked ? "✓" : ""}
           </button>
           <div
             className="noteText"
-            style={clicked ? { textDecoration: "line-through" } : {}}
-            key={note}
+            style={checked ? { textDecoration: "line-through" } : {}}
           >
             {note}
           </div>
         </div>
         <div className="deleteNote">
-          <button
-            className="delete"
-            // onClick={(e) => handleDeleteClick(e, index)}
-          >
+          <button className="delete" onClick={(e) => handleDeleteClick(e, id)}>
             <FontAwesomeIcon
               icon={faTrashAlt}
               color="#f59393"

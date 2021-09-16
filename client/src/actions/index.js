@@ -9,6 +9,7 @@ import {
   FETCH_FEELINGS,
   ADD_NOTE,
   FETCH_NOTES,
+  DELETE_NOTE,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
@@ -150,8 +151,6 @@ export const addNote = (note, checked, callback) => (dispatch) => {
     },
   };
 
-  console.log("note-checked", note, checked);
-
   axios
     .post("http://localhost:5000/notes", { note, checked, callback }, config)
     .then(function (response) {
@@ -174,6 +173,23 @@ export const fetchNotes = () => (dispatch) => {
     .get("http://localhost:5000/notes", config)
     .then(function (response) {
       dispatch({ type: FETCH_NOTES, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const deleteNote = (noteID) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .delete(`http://localhost:5000/notes/${noteID}`, config)
+    .then(function (response) {
+      dispatch({ type: DELETE_NOTE, payload: response.data });
     })
     .catch(function (error) {
       console.log(error);

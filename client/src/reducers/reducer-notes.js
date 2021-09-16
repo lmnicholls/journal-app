@@ -1,4 +1,4 @@
-import { ADD_NOTE, FETCH_NOTES } from "../actions/types";
+import { ADD_NOTE, FETCH_NOTES, DELETE_NOTE } from "../actions/types";
 
 const DEFAULT_STATE = {
   note: {},
@@ -16,6 +16,11 @@ const notesReducer = (state = DEFAULT_STATE, action) => {
         ...state,
       };
     case FETCH_NOTES:
+      return {
+        note: { ...state.note },
+        notes: action.payload.notes,
+      };
+    case DELETE_NOTE:
       return {
         note: { ...state.note },
         notes: action.payload.notes,

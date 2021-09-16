@@ -11,7 +11,7 @@ const path = require("path");
 // DB Setup
 mongoose.connect(keys.MONGODB_URI, {
   useNewUrlParser: true,
-  useUnifiedTypology: true,
+  useUnifiedTopology: true,
 });
 
 app.use(cors());

@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const Feeling = require("../models/feelings");
+const Feeling = require("../models/feeling");
 
 exports.addFeeling = function (req, res) {
   User.findOne({ _id: req.user._id }, function (err, user) {

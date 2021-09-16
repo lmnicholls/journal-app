@@ -7,7 +7,7 @@ const feelingSchema = new Schema({
   date: String,
 });
 
-const FeelingModel = mongoose.model("feelings", feelingSchema);
+const FeelingModel = mongoose.model("feeling", feelingSchema);
 
 module.exports = {
   FeelingModel,
