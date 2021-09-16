@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const Note = require("../models/note");
+const mongo = require("mongodb");
 
 exports.addNote = function (req, res) {
   User.findOne({ _id: req.user._id }, function (err, user) {
@@ -30,17 +31,22 @@ exports.getNotes = function (req, res) {
 };
 
 exports.deleteNote = function (req, res) {
-  const noteID = req.params.noteID;
+  var ObjectID = require("mongodb").ObjectID;
+  const id = req.params.noteID;
+  const userID = new ObjectID(req.user._id);
 
-  const user = User.findById(req.user._id);
-  const note = Note.NoteModel.findById(noteID);
+  Note.NoteModel.deleteOne({ _id: new mongo.ObjectId(id) });
 
-  const update = { $pull: { notes: { _id: noteID } } };
-  const noteUpdate = { $pull: { note: { _id: noteID } } };
-
-  Note.NoteModel.findOneAndUpdate({ _id: noteID }, noteUpdate, { new: true });
-
-  const updatedUser = User.updateOne({ _id: user._id }, update, { new: true });
-
-  res.json("note deleted");
+  User.findByIdAndUpdate(
+    { _id: userID },
+    { $pull: { notes: { _id: new mongo.ObjectId(id) } } },
+    { new: true },
+    function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
 };
