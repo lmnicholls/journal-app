@@ -5,7 +5,14 @@ import styled from "styled-components";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const TherapyNoteItem = ({ note, checked, id, handleDeleteClick, index }) => {
+const TherapyNoteItem = ({
+  note,
+  checked,
+  id,
+  handleDeleteClick,
+  handleCheckClick,
+  index,
+}) => {
   const { authenticated } = useSelector((state) => state.auth);
   const history = useHistory();
 
@@ -14,11 +21,6 @@ const TherapyNoteItem = ({ note, checked, id, handleDeleteClick, index }) => {
       history.push("/");
     }
   }, [authenticated, history]);
-
-  const handleCheckClick = (e) => {
-    e.preventDefault();
-    // setClicked(!checked);
-  };
 
   return (
     <>

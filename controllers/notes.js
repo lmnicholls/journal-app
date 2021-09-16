@@ -35,7 +35,12 @@ exports.deleteNote = function (req, res) {
   const id = req.params.noteID;
   const userID = new ObjectID(req.user._id);
 
-  Note.NoteModel.deleteOne({ _id: new mongo.ObjectId(id) });
+  Note.NoteModel.findByIdAndRemove(id, function (err, note) {
+    console.log("findByIdAndRemove note: ", note);
+    Note.NoteModel.find({}, function (err, notes) {
+      console.log("Finding all: ", notes);
+    });
+  });
 
   User.findByIdAndUpdate(
     { _id: userID },
@@ -49,4 +54,30 @@ exports.deleteNote = function (req, res) {
       }
     }
   );
+};
+
+exports.editNoteCheck = function (req, res) {
+  var ObjectID = require("mongodb").ObjectID;
+  const id = req.params.noteID;
+  const checked = req.body.checkStatus;
+  const userID = new ObjectID(req.user._id);
+
+  Note.NoteModel.updateOne(
+    { _id: new mongo.ObjectId(id) },
+    { $set: { checked: !checked } }
+  );
+
+  // User.findByIdAndUpdate(
+  //   { _id: userID },
+  //   { $set: { notes: { _id: new mongo.ObjectId(id) } } },
+  //   { new: true },
+  //   function (err, result) {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   }
+  // );
+  res.send("done");
 };

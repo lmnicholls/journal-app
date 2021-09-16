@@ -19,4 +19,5 @@ module.exports = function (app) {
   app.post("/notes", requireAuth, Notes.addNote);
   app.get("/notes", requireAuth, Notes.getNotes);
   app.delete("/notes/:noteID", requireAuth, Notes.deleteNote);
+  app.put("/notes/:noteID", requireAuth, Notes.editNoteCheck);
 };

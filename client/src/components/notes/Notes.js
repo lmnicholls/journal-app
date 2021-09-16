@@ -5,7 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import Nav from "../nav/Nav";
 import TherapyNoteItem from "./TherapyNoteItem";
-import { addNote, fetchNotes, deleteNote } from "../../actions";
+import { addNote, fetchNotes, deleteNote, editNoteCheck } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,8 +14,6 @@ const Notes = (props) => {
   const notes = useSelector((state) => {
     return state.notes.notes;
   });
-
-  console.log(notes);
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
@@ -50,6 +48,12 @@ const Notes = (props) => {
     dispatch(fetchNotes());
   };
 
+  const handleCheckClick = (e, noteID, checkStatus) => {
+    e.preventDefault();
+    dispatch(editNoteCheck(noteID, checkStatus));
+    dispatch(fetchNotes());
+  };
+
   if (!notes) {
     return <div>Notes loading...</div>;
   }
@@ -70,6 +74,9 @@ const Notes = (props) => {
                   checked={note.checked}
                   index={index}
                   handleDeleteClick={(e) => handleDeleteClick(e, note._id)}
+                  handleCheckClick={(e) =>
+                    handleCheckClick(e, note._id, note.checked)
+                  }
                 />
               ))}
             </div>

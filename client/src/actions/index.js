@@ -10,6 +10,7 @@ import {
   ADD_NOTE,
   FETCH_NOTES,
   DELETE_NOTE,
+  EDIT_NOTE_CHECK,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
@@ -190,6 +191,27 @@ export const deleteNote = (noteID) => (dispatch) => {
     .delete(`http://localhost:5000/notes/${noteID}`, config)
     .then(function (response) {
       dispatch({ type: DELETE_NOTE, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const editNoteCheck = (noteID, checkStatus) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .put(
+      `http://localhost:5000/notes/${noteID}`,
+      { noteID, checkStatus },
+      config
+    )
+    .then(function (response) {
+      dispatch({ type: EDIT_NOTE_CHECK, payload: response.data });
     })
     .catch(function (error) {
       console.log(error);
