@@ -15,12 +15,12 @@ const Chat = (props) => {
   }, [authenticated, history]);
 
   return (
-    <div className="background">
+    <ChatBackground>
       <Nav />
       <StatsDiv>
         <h3>Chat</h3>
       </StatsDiv>
-    </div>
+    </ChatBackground>
   );
 };
 
@@ -31,4 +31,16 @@ const StatsDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const ChatBackground = styled.div`
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
+  width: 100vw;
+  height: 100vh;
 `;

@@ -48,7 +48,7 @@ const Feelings = (props) => {
   };
 
   return (
-    <div className="background">
+    <div className="feelingsBackground">
       <Nav />
       <FeelingsDiv>
         <h3 className="journal-title">How are you feeling today?</h3>
