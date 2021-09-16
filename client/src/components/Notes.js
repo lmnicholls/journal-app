@@ -7,6 +7,8 @@ import Nav from "./nav/Nav";
 import "../css/notes.css";
 import TherapyNoteItem from "./notes/TherapyNoteItem";
 import { addNote, fetchNotes, deleteNote } from "../actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Notes = (props) => {
   const { authenticated } = useSelector((state) => state.auth);
@@ -74,26 +76,30 @@ const Notes = (props) => {
             </div>
             <Form>
               <AddNote>
-                <Form.Group className="mb-3" controlId="formLogo">
-                  <Form.Control
-                    type="text"
-                    value={note}
-                    placeholder="Enter note"
-                    className="addNoteForm"
-                    onChange={(e) => {
-                      setNote(e.target.value);
-                    }}
-                  />
-                </Form.Group>
-
-                <Button
-                  variant="primary"
-                  className="addButton"
-                  type="submit"
-                  onClick={(e) => handleAddNoteClick(e)}
-                >
-                  +
-                </Button>
+                <div>
+                  <Form.Group controlId="formLogo">
+                    <Form.Control
+                      type="text"
+                      value={note}
+                      size="lg"
+                      placeholder="Enter note"
+                      className="addNoteForm"
+                      onChange={(e) => {
+                        setNote(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+                </div>
+                <div>
+                  <Button
+                    className="addButton"
+                    type="submit"
+                    // size="lg"
+                    onClick={(e) => handleAddNoteClick(e)}
+                  >
+                    <FontAwesomeIcon icon={faPlus} className="icon" />
+                  </Button>
+                </div>
               </AddNote>
             </Form>
           </NotePad>
@@ -113,7 +119,9 @@ const NotesContainer = styled.div`
   justify-content: center;
 `;
 
-const NotesDiv = styled.div``;
+const NotesDiv = styled.div`
+  min-width: 500px;
+`;
 
 const AddNote = styled.div`
   display: flex;
@@ -126,7 +134,7 @@ const NotePad = styled.div`
   background-color: white;
   font-family: "Patrick Hand SC";
   font-size: 28px;
-  padding: 30px 50px;
+  padding: 10px 20px;
   min-width: 30vw;
   min-height: 400px;
   border-radius: 20px;
