@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 import "../../css/notes.css";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TherapyNoteItem = ({ note, checked, id, handleDeleteClick, index }) => {
@@ -22,30 +23,68 @@ const TherapyNoteItem = ({ note, checked, id, handleDeleteClick, index }) => {
 
   return (
     <>
-      <div className="listItem" key={id} index={index}>
-        <div className="note">
-          <button className="check" onClick={(e) => handleCheckClick(e)}>
+      <NoteItem key={id} index={index}>
+        <Note>
+          <NoteCheck onClick={(e) => handleCheckClick(e)}>
             {checked ? "✓" : ""}
-          </button>
-          <div
-            className="noteText"
-            style={checked ? { textDecoration: "line-through" } : {}}
-          >
+          </NoteCheck>
+          <NoteText style={checked ? { textDecoration: "line-through" } : {}}>
             {note}
-          </div>
-        </div>
-        <div className="deleteNote">
-          <button className="delete" onClick={(e) => handleDeleteClick(e, id)}>
+          </NoteText>
+        </Note>
+        <DeleteNoteDiv>
+          <DeleteButton onClick={(e) => handleDeleteClick(e, id)}>
             <FontAwesomeIcon
               icon={faTrashAlt}
               color="#f59393"
-              className="deleteIcon"
+              style={{ height: "20px" }}
             />
-          </button>
-        </div>
-      </div>
+          </DeleteButton>
+        </DeleteNoteDiv>
+      </NoteItem>
     </>
   );
 };
 
 export default TherapyNoteItem;
+
+const NoteItem = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Note = styled.div`
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-right: 10px;
+`;
+
+const NoteCheck = styled.button`
+  border: 2px solid black;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 0;
+  display: table-cell;
+  vertical-align: middle;
+`;
+
+const NoteText = styled.div`
+  margin-left: 10px;
+`;
+
+const DeleteNoteDiv = styled.div``;
+
+const DeleteButton = styled.div`
+  padding: 0;
+  display: table-cell;
+  vertical-align: middle;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+`;

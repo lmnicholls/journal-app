@@ -7,26 +7,26 @@
   color: white;
 }
 
-.listItem {
+/* .listItem {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   /* margin-top: 10px; */
-  align-items: center;
-}
+/* align-items: center; */
+/* } */
 
-.note {
+/* .note {
   display: flex;
   flex-flow: row;
   align-items: center;
   margin-right: 10px;
-}
+} */
 
-.noteText {
+/* .noteText {
   margin-left: 10px;
-}
+} */
 
-.check {
+/* .check {
   border: 2px solid black;
   border-radius: 20px;
   width: 20px;
@@ -36,16 +36,16 @@
   padding: 0;
   display: table-cell;
   vertical-align: middle;
-}
+} */
 
-.delete {
+/* .delete {
   padding: 0;
   display: table-cell;
   vertical-align: middle;
   border: none;
   background: transparent;
   cursor: pointer;
-}
+} */
 
 .deleteIcon {
   height: 20px;

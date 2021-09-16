@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { Form, Button } from "react-bootstrap";
 import styled from "styled-components";
-import Nav from "./nav/Nav";
-import "../css/notes.css";
-import TherapyNoteItem from "./notes/TherapyNoteItem";
-import { addNote, fetchNotes, deleteNote } from "../actions";
+import Nav from "../nav/Nav";
+import "../../css/notes.css";
+import TherapyNoteItem from "./TherapyNoteItem";
+import { addNote, fetchNotes, deleteNote } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
