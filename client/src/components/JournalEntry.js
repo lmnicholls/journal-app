@@ -54,7 +54,9 @@ const JournalEntry = () => {
             <label>Date</label>
             <h4>{date.toDateString()}</h4>
           </div>
-          <RichTextEditor entry={entry} setEntry={setEntry} />
+          <div className="textEditor">
+            <RichTextEditor entry={entry} setEntry={setEntry} />
+          </div>
           <div className="submit-button">
             <button className="btn btn-primary submit" type="submit">
               Submit
