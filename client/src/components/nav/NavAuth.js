@@ -56,7 +56,6 @@ const NavUl = styled.ul`
   li {
     margin-left: 0.8em;
     height: 30px;
-    padding: 10px;
   }
   li a {
     color: white;

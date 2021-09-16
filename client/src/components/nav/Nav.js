@@ -47,6 +47,7 @@ const NavContainer = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  align-items: center;
   position: fixed;
   z-index: 150;
   background-color: rgba(98, 169, 207, 0.8);
@@ -73,7 +74,6 @@ const NavUl = styled.ul`
   li {
     margin-left: 0.8em;
     height: 30px;
-    padding: 10px;
   }
   li a {
     color: white;
