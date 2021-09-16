@@ -44,8 +44,6 @@ const Feelings = (props) => {
           dispatch(fetchFeelings());
         })
       );
-    } else {
-      alert("You already logged your feeling for today.");
     }
   };
 
