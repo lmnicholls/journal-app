@@ -4,7 +4,6 @@ import { useHistory } from "react-router";
 import { Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import Nav from "../nav/Nav";
-import "../../css/notes.css";
 import TherapyNoteItem from "./TherapyNoteItem";
 import { addNote, fetchNotes, deleteNote } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -56,10 +55,10 @@ const Notes = (props) => {
   }
 
   return (
-    <div className="background">
+    <NotesBackground>
       <Nav />
       <NotesContainer>
-        <h3 className="journal-title">Notes</h3>
+        <NotesTitle>Notes</NotesTitle>
         <NotesDiv>
           <NotePad>
             <div>
@@ -76,36 +75,28 @@ const Notes = (props) => {
             </div>
             <Form>
               <AddNote>
-                <div>
-                  <Form.Group controlId="formLogo">
-                    <Form.Control
-                      type="text"
-                      value={note}
-                      size="lg"
-                      placeholder="Enter note"
-                      className="addNoteForm"
-                      onChange={(e) => {
-                        setNote(e.target.value);
-                      }}
-                    />
-                  </Form.Group>
-                </div>
-                <div>
-                  <Button
-                    className="addButton"
-                    type="submit"
-                    // size="lg"
-                    onClick={(e) => handleAddNoteClick(e)}
-                  >
-                    <FontAwesomeIcon icon={faPlus} className="icon" />
-                  </Button>
-                </div>
+                <NoteFormInput
+                  type="text"
+                  value={note}
+                  size="lg"
+                  placeholder="Enter note"
+                  onChange={(e) => {
+                    setNote(e.target.value);
+                  }}
+                />
+                <AddButton
+                  className="addButton"
+                  type="submit"
+                  onClick={(e) => handleAddNoteClick(e)}
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                </AddButton>
               </AddNote>
             </Form>
           </NotePad>
         </NotesDiv>
       </NotesContainer>
-    </div>
+    </NotesBackground>
   );
 };
 
@@ -123,7 +114,16 @@ const NotesDiv = styled.div`
   min-width: 500px;
 `;
 
-const AddNote = styled.div`
+const NotesTitle = styled.h3`
+  padding-bottom: 15px;
+  margin: 0;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+  font-family: "Patrick Hand SC";
+  font-size: 64px;
+  color: white;
+`;
+
+const AddNote = styled(Form.Group)`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
@@ -141,4 +141,38 @@ const NotePad = styled.div`
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
+`;
+
+const NotesBackground = styled.div`
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
+  width: 100vw;
+  height: 100vh;
+`;
+
+const NoteFormInput = styled(Form.Control)`
+  flex: 1 1 auto;
+  height: 50px;
+  padding-top: 10px;
+  margin-right: 10px;
+  font-family: "Patrick Hand SC" !important;
+  font-size: 24px !important;
+  background-color: rgb(194, 189, 189);
+`;
+
+const AddButton = styled(Button)`
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border: none;
+  border-radius: 40px;
+  background-color: rgb(113, 224, 210);
+  :hover {
+    background-color: rgb(84, 168, 157);
+  }
 `;
