@@ -18,7 +18,7 @@ const NavAuth = () => {
 
   return (
     <NavContainer>
-      <NavTitle>Moments in Time</NavTitle>
+      <NavTitle>Therapy & Me</NavTitle>
       <NavUl>{renderLinks()}</NavUl>
     </NavContainer>
   );

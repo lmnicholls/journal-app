@@ -42,14 +42,11 @@ const Signup = () => {
       <Background />
       <NavAuth />
       <SignInStyles>
-        <div className="sign-in-container">
-          <form
-            className="sign-in-form"
-            onSubmit={handleSubmit(handleFormSubmit)}
-          >
-            <h3 className="signup-header">Welcome to Therapy & Me!</h3>
+        <SignUpContainer>
+          <SignUpForm onSubmit={handleSubmit(handleFormSubmit)}>
+            <h3 style={{ marginBottom: "0px" }}>Welcome to Therapy & Me!</h3>
             <h3>Let's create your account.</h3>
-            <div className="form-group name">
+            <FormGroup>
               <input
                 className="form-control"
                 name="firstName"
@@ -82,9 +79,9 @@ const Signup = () => {
                   {errors.lastName?.message}
                 </span>
               </div>
-            </div>
+            </FormGroup>
 
-            <div className="form-group">
+            <FormGroup>
               <input
                 className="form-control"
                 name="therapist"
@@ -101,9 +98,9 @@ const Signup = () => {
                   {errors.therapist?.message}
                 </span>
               </div>
-            </div>
+            </FormGroup>
 
-            <div className="form-group">
+            <FormGroup>
               <input
                 className="form-control"
                 name="email"
@@ -120,9 +117,9 @@ const Signup = () => {
                   {errors.email?.message}
                 </span>
               </div>
-            </div>
+            </FormGroup>
 
-            <div className="form-group">
+            <FormGroup>
               <input
                 className="form-control"
                 name="password"
@@ -140,14 +137,14 @@ const Signup = () => {
                   {errors.password?.message}
                 </span>
               </div>
-            </div>
-            <div className="submit-button">
-              <button className="btn btn-primary submit" type="submit">
+            </FormGroup>
+            <div style={{ textAlign: "right" }}>
+              <SubmitButton className="btn btn-primary submit" type="submit">
                 Create Account
-              </button>
+              </SubmitButton>
             </div>
-          </form>
-        </div>
+          </SignUpForm>
+        </SignUpContainer>
       </SignInStyles>
     </Fragment>
   );
@@ -159,4 +156,49 @@ const SignInStyles = styled.div`
   margin-top: 0px;
   padding-top: 100px;
   padding-bottom: 100px;
+`;
+
+const SignUpContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const SignUpForm = styled.form`
+  font-family: "Patrick Hand SC";
+  color: white;
+  text-align: center;
+  border-radius: 25px;
+  width: 40%;
+  padding: 20px;
+  background: rgba(95, 158, 189, 0.8);
+  h3 {
+    font-size: 36px;
+    margin-top: 0px;
+  }
+  label {
+    font-size: 24px;
+    padding-bottom: 15px;
+  }
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-flow: column;
+  text-align: left;
+`;
+
+const SubmitButton = styled.button`
+  background-color: rgb(217, 219, 219);
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  border: none;
+  color: rgb(95, 158, 189);
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  :hover {
+    background-color: rgb(80, 180, 139);
+    color: rgb(112, 110, 110);
+  }
 `;

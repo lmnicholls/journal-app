@@ -27,14 +27,14 @@ body {
   text-align: left;
 } */
 
-.form-group input {
+/* .form-group input {
   border: 2px solid white;
   border-radius: 4px;
   height: 25px;
   font-family: "Comic Neue";
   font-size: 18px;
   color: rgb(8, 64, 92);
-}
+} */
 
 /* .sign-in-container {
   display: flex;
@@ -56,9 +56,9 @@ body {
   margin-top: 0px;
 } */
 
-.sign-in-form .signup-header {
+/* .sign-in-form .signup-header {
   margin-bottom: 0px;
-}
+} */
 
 /* .sign-in-form label {
   font-size: 24px;
