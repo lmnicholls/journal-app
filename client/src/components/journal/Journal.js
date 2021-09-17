@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../nav/Nav";
 import { fetchEntries } from "../../actions";
-import "./css/journal.css";
 
 const Journal = () => {
   const dispatch = useDispatch();

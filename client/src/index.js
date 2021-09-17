@@ -16,7 +16,7 @@ import JournalEntry from "./components/journal/JournalEntry";
 import Journal from "./components/journal/Journal";
 import Chat from "./components/Chat";
 import Notes from "./components/notes/Notes";
-import Feelings from "./components/Feelings";
+import Feelings from "./components/feelings/Feelings";
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 

@@ -28,7 +28,6 @@ export default function MonthlyFeelings({ feelings }) {
   const chartOptions = {
     chart: {
       type: "line",
-      width: 700,
       backgroundColor: "transparent",
       style: {
         fontFamily: "Patrick Hand SC",

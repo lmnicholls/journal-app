@@ -28,7 +28,6 @@ export default function FeelingsPieChart({ feelings }) {
   const chartOptions = {
     chart: {
       type: "pie",
-      width: 700,
       backgroundColor: "transparent",
       style: {
         fontFamily: "Patrick Hand SC",
