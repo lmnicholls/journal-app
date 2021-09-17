@@ -119,14 +119,6 @@ const SignInForm = styled.form`
     font-size: 24px;
     padding-bottom: 15px;
   }
-  input {
-    border: 2px solid white;
-    border-radius: 4px;
-    height: 25px;
-    font-family: "Comic Neue";
-    font-size: 18px;
-    color: rgb(8, 64, 92);
-  }
 `;
 
 const FormGroup = styled.div`

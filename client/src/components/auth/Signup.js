@@ -202,3 +202,12 @@ const SubmitButton = styled.button`
     color: rgb(112, 110, 110);
   }
 `;
+
+// const FormInput = styled.input`
+//   border: 2px solid white;
+//   border-radius: 4px;
+//   height: 25px;
+//   font-family: "Comic Neue";
+//   font-size: 18px;
+//   color: rgb(8, 64, 92);
+// `;
