@@ -11,7 +11,7 @@ import StartPage from "./components/StartPage";
 import Signup from "./components/auth/Signup";
 import Signin from "./components/auth/Signin";
 import Home from "./components/Home";
-import MyCalendar from "./components/Calendar";
+import MyCalendar from "./components/calendar/Calendar";
 import JournalEntry from "./components/JournalEntry";
 import Journal from "./components/Journal";
 import Chat from "./components/Chat";

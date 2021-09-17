@@ -1,12 +1,21 @@
 import React from "react";
 import ParticlesBg from "particles-bg";
+import styled from "styled-components";
 
 const Background = () => {
   return (
-    <div className="animatedBackground">
+    <AnimatedBackground>
       <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
-    </div>
+    </AnimatedBackground>
   );
 };
 
 export default Background;
+
+const AnimatedBackground = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: -10;
+`;

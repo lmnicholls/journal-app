@@ -127,14 +127,14 @@ body {
   width: 100px;
   height: 100px;
 }
-
+/* 
 .animatedBackground {
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   z-index: -10;
-}
+} */
 
 .form-labels {
   display: flex;

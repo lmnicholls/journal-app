@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Nav from "./nav/Nav";
+import Nav from "../nav/Nav";
 import Calendar from "react-calendar";
-import CalendarDayListView from "../components/calendar/CalendarDayListView";
-import { fetchEntries } from "../actions";
+import CalendarDayListView from "./CalendarDayListView";
+import { fetchEntries } from "../../actions";
 import moment from "moment";
-import "../css/calendar.css";
+import "../../css/calendar.css";
 
 const MyCalendar = (props) => {
   const [date, setDate] = useState(new Date());
@@ -51,7 +51,7 @@ const MyCalendar = (props) => {
     });
 
     return (
-      <div className="calendarBackground">
+      <CalendarBackground>
         <Nav />
         <CalendarDiv>
           <Calendar
@@ -77,17 +77,17 @@ const MyCalendar = (props) => {
           handleClose={handleClose}
           handleShow={handleShow}
         />
-      </div>
+      </CalendarBackground>
     );
   }
 
   return (
-    <div className="background">
+    <Background>
       <Nav />
       <CalendarDiv>
         <Calendar onChange={onChange} value={date} />
       </CalendarDiv>
-    </div>
+    </Background>
   );
 };
 
@@ -98,4 +98,26 @@ const CalendarDiv = styled.div`
   width: 50%;
   margin: auto;
   padding-bottom: 100px;
+`;
+
+const CalendarBackground = styled.div`
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
+  width: 100vw;
+  height: 100vh;
+`;
+
+const Background = styled.div`
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
 `;
