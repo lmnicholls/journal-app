@@ -21,11 +21,11 @@ body {
   text-shadow: 0.5px 0.5px rgb(51, 167, 151);
 }
 
-.form-group {
+/* .form-group {
   display: flex;
   flex-flow: column;
   text-align: left;
-}
+} */
 
 .form-group input {
   border: 2px solid white;
@@ -36,12 +36,12 @@ body {
   color: rgb(8, 64, 92);
 }
 
-.sign-in-container {
+/* .sign-in-container {
   display: flex;
   justify-content: center;
-}
+} */
 
-.sign-in-form {
+/* .sign-in-form {
   font-family: "Patrick Hand SC";
   color: white;
   text-align: center;
@@ -49,27 +49,27 @@ body {
   width: 40%;
   padding: 20px;
   background: rgba(95, 158, 189, 0.8);
-}
+} */
 
-.sign-in-form h3 {
+/* .sign-in-form h3 {
   font-size: 36px;
   margin-top: 0px;
-}
+} */
 
 .sign-in-form .signup-header {
   margin-bottom: 0px;
 }
 
-.sign-in-form label {
+/* .sign-in-form label {
   font-size: 24px;
   padding-bottom: 15px;
-}
+} */
 
-.submit-button {
+/* .submit-button {
   text-align: right;
-}
+} */
 
-.submit-button button {
+/* .submit-button button {
   background-color: rgb(217, 219, 219);
   font-family: "Patrick Hand SC";
   font-size: 24px;
@@ -79,12 +79,12 @@ body {
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
-}
+} */
 
-.submit-button button:hover {
+/* .submit-button button:hover {
   background-color: rgb(80, 180, 139);
   color: rgb(112, 110, 110);
-}
+} */
 
 .links {
   font-family: "Patrick Hand SC";
@@ -136,7 +136,7 @@ body {
   z-index: -10;
 } */
 
-.form-labels {
+/* .form-labels {
   display: flex;
   flex-flow: row;
 }
@@ -145,4 +145,4 @@ body {
   font-size: 18px;
   padding-top: 4px;
   padding-left: 10px;
-}
+} */

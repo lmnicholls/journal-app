@@ -39,19 +39,16 @@ const Signin = () => {
       <NavAuth />
       <SignInStyles>
         <Background />
-        <div className="sign-in-container">
-          <form
-            className="sign-in-form"
-            onSubmit={handleSubmit(handleFormSubmit)}
-          >
+        <SignInContainer>
+          <SignInForm onSubmit={handleSubmit(handleFormSubmit)}>
             <h3>Sign In</h3>
-            <div className="form-group">
+            <FormGroup>
               <input
                 className="form-control"
                 name="email"
                 {...register("email", { required: "Required" })}
               ></input>
-              <div className="form-labels">
+              <FormLabels>
                 <label>Email</label>
                 <span
                   style={{
@@ -61,10 +58,10 @@ const Signin = () => {
                 >
                   {errors.email?.message}
                 </span>
-              </div>
-            </div>
+              </FormLabels>
+            </FormGroup>
 
-            <div className="form-group">
+            <FormGroup>
               <input
                 className="form-control"
                 name="password"
@@ -82,14 +79,12 @@ const Signin = () => {
                   {errors.password?.message}
                 </span>
               </div>
+            </FormGroup>
+            <div style={{ textAlign: "right" }}>
+              <SubmitButton type="submit">Submit</SubmitButton>
             </div>
-            <div className="submit-button">
-              <button className="btn btn-primary submit" type="submit">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
+          </SignInForm>
+        </SignInContainer>
       </SignInStyles>
     </Fragment>
   );
@@ -101,4 +96,59 @@ const SignInStyles = styled.div`
   margin-top: 0px;
   padding-top: 200px;
   padding-bottom: 100px;
+`;
+
+const SignInContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const SignInForm = styled.form`
+  font-family: "Patrick Hand SC";
+  color: white;
+  text-align: center;
+  border-radius: 25px;
+  width: 40%;
+  padding: 20px;
+  background: rgba(95, 158, 189, 0.8);
+  h3 {
+    font-size: 36px;
+    margin-top: 0px;
+  }
+  label {
+    font-size: 24px;
+    padding-bottom: 15px;
+  }
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-flow: column;
+  text-align: left;
+`;
+
+const FormLabels = styled.div`
+  display: flex;
+  flex-flow: row;
+  span: {
+    font-size: 18px;
+    padding-top: 4px;
+    padding-left: 10px;
+  }
+`;
+
+const SubmitButton = styled.button`
+  background-color: rgb(217, 219, 219);
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  border: none;
+  color: rgb(95, 158, 189);
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  :hover {
+    background-color: rgb(80, 180, 139);
+    color: rgb(112, 110, 110);
+  }
 `;
