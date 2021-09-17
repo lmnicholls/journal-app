@@ -2,7 +2,8 @@ import { Modal, Container, Row, Col } from "react-bootstrap";
 import React, { useState } from "react";
 import CalendarDayJournalView from "./CalendarDayJournalView";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../css/calendar.css";
+import "./calendar.css";
+import styled from "styled-components";
 import moment from "moment";
 
 export default function CalendarDayListView(props) {
@@ -32,43 +33,41 @@ export default function CalendarDayListView(props) {
         }}
         className="modal"
       >
-        <Modal.Header className="modalHeader">
+        <ModalHeader>
           <Modal.Title style={{ flex: "1 90%" }}>Journal Entries</Modal.Title>
-          <button
-            className="closeBtn"
+          <CloseButton
             onClick={() => {
               props.handleClose();
             }}
           >
             ✕
-          </button>
-        </Modal.Header>
-        <Modal.Body>
-          <Container className="modalEntriesContainer">
-            <Row className="dateRow">
+          </CloseButton>
+        </ModalHeader>
+        <ModalBody>
+          <Container>
+            <DateRow>
               <Col>Date: {moment(props.date).format("dddd, MMMM Do YYYY")}</Col>
-            </Row>
-            <Row className="entriesRow">
+            </DateRow>
+            <EntriesRow>
               {entries.length === 0 ? (
                 <Col>No journal entries for this date.</Col>
               ) : (
                 entries.map((entry) => {
                   return (
-                    <Col key={entry._id} className="entryBtnContainer">
-                      <button
-                        className="journalEntryButton"
+                    <Col key={entry._id}>
+                      <JournalEntryButton
                         value={entry._id}
                         onClick={(e) => handleJournalEntryClick(e)}
                       >
                         {entry.title}
-                      </button>
+                      </JournalEntryButton>
                     </Col>
                   );
                 })
               )}
-            </Row>
+            </EntriesRow>
           </Container>
-        </Modal.Body>
+        </ModalBody>
       </Modal>
       <CalendarDayJournalView
         entries={entries}
@@ -81,3 +80,51 @@ export default function CalendarDayListView(props) {
     </>
   );
 }
+
+const CloseButton = styled.button`
+  font-size: 20px;
+  color: white;
+  border: none;
+  background-color: transparent;
+  :hover {
+    color: rgb(139, 37, 207);
+  }
+`;
+
+const DateRow = styled.div`
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  color: rgba(55, 121, 156, 0.8);
+`;
+
+const EntriesRow = styled(Row)`
+  display: flex;
+  flex-flow: column;
+`;
+
+const JournalEntryButton = styled.button`
+  background: none;
+  color: rgb(84, 82, 85);
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-family: "Patrick Hand SC";
+  padding: 0;
+  :hover {
+    color: rgb(139, 37, 207);
+  }
+`;
+
+const ModalHeader = styled(Modal.Header)`
+  background-color: rgba(55, 121, 156, 0.8);
+  color: white;
+  font-family: "Patrick Hand SC";
+`;
+
+const ModalBody = styled(Modal.Body)`
+  padding: 0;
+  color: rgb(84, 82, 85);
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+`;

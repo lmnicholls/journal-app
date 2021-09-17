@@ -7,7 +7,7 @@ import Calendar from "react-calendar";
 import CalendarDayListView from "./CalendarDayListView";
 import { fetchEntries } from "../../actions";
 import moment from "moment";
-import "../../css/calendar.css";
+import "./calendar.css";
 
 const MyCalendar = (props) => {
   const [date, setDate] = useState(new Date());

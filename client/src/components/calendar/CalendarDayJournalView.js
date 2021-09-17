@@ -1,7 +1,7 @@
 import { Modal, Container, Row } from "react-bootstrap";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../css/calendar.css";
+import "./calendar.css";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -21,7 +21,7 @@ export default function CalendarDayJournalView(props) {
           style={{ "background-color": "rgba(62, 164, 219, 0.4)" }}
           size="lg"
         >
-          <Modal.Header>
+          <ModalHeader>
             <Modal.Title style={{ flex: "1 90%" }}>
               {journalEntry[0].title}
             </Modal.Title>
@@ -32,8 +32,8 @@ export default function CalendarDayJournalView(props) {
             >
               ✕
             </CloseButton>
-          </Modal.Header>
-          <Modal.Body>
+          </ModalHeader>
+          <ModalBody>
             <Container>
               <Row
                 style={{
@@ -52,7 +52,7 @@ export default function CalendarDayJournalView(props) {
                 ></JournalText>
               </Row>
             </Container>
-          </Modal.Body>
+          </ModalBody>
         </Modal>
       </>
     );
@@ -76,4 +76,17 @@ const JournalText = styled.div`
     max-width: 40%;
     max-height: auto;
   }
+`;
+
+const ModalHeader = styled(Modal.Header)`
+  background-color: rgba(55, 121, 156, 0.8);
+  color: white;
+  font-family: "Patrick Hand SC";
+`;
+
+const ModalBody = styled(Modal.Body)`
+  padding: 0;
+  color: rgb(84, 82, 85);
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
 `;
