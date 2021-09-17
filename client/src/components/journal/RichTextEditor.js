@@ -4,7 +4,7 @@ import RichTextEditorToolbar, {
   formats,
 } from "./RichTextEditorToolbar";
 import "react-quill/dist/quill.snow.css";
-import "../css/richTextEditor.css";
+import "./css/richTextEditor.css";
 import ReactQuill from "react-quill";
 
 const RichTextEditor = (props) => {

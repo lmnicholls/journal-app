@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Nav from "./nav/Nav";
-import { fetchEntries } from "../actions";
-import "../css/journal.css";
+import Nav from "../nav/Nav";
+import { fetchEntries } from "../../actions";
+import "./css/journal.css";
 
 const Journal = () => {
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ const Journal = () => {
       <div>
         <Nav />
         <JournalDiv>
-          <h3 className="journal-title">My Journal</h3>
+          <JournalTitle>My Journal</JournalTitle>
           <h5>
             Get journaling. Add an entry to your journal and start recording
             memories!
@@ -100,21 +100,21 @@ const Journal = () => {
   }
 
   return (
-    <div className="background">
+    <JournalBackground>
       <Nav />
       <JournalDiv>
-        <h3 className="journal-title">My Journal</h3>
+        <JournalTitle>My Journal</JournalTitle>
 
-        <div className="journal-book-div">
+        <JournalBookDiv>
           {leftPageIndex < 0 ? (
-            <div className="left-page"></div>
+            <LeftPage></LeftPage>
           ) : (
-            <div className="left-page">
+            <LeftPage>
               <div className="entry">
-                <h1 className="entry-title">{entries[leftPageIndex].title}</h1>
-                <h3 className="date">
+                <EntryTitle>{entries[leftPageIndex].title}</EntryTitle>
+                <JournalDate>
                   {new Date(entries[leftPageIndex].date).toDateString()}
-                </h3>
+                </JournalDate>
                 <div
                   className="page-text"
                   dangerouslySetInnerHTML={{
@@ -123,18 +123,18 @@ const Journal = () => {
                 ></div>
               </div>
 
-              <div className="page-number">Page {leftPageIndex + 1}</div>
-            </div>
+              <PageNumber>Page {leftPageIndex + 1}</PageNumber>
+            </LeftPage>
           )}
           {rightPageIndex > numEntries - 1 ? (
-            <div className="right-page"></div>
+            <RightPage></RightPage>
           ) : (
-            <div className="right-page">
+            <RightPage>
               <div className="entry">
-                <h1 className="entry-title">{entries[rightPageIndex].title}</h1>
-                <h3 className="date">
+                <EntryTitle>{entries[rightPageIndex].title}</EntryTitle>
+                <JournalDate>
                   {new Date(entries[rightPageIndex].date).toDateString()}
-                </h3>
+                </JournalDate>
                 <div
                   className="page-text"
                   dangerouslySetInnerHTML={{
@@ -142,36 +142,44 @@ const Journal = () => {
                   }}
                 ></div>
               </div>
-              <div className="page-number">Page {rightPageIndex + 1}</div>
-            </div>
+              <PageNumber>Page {rightPageIndex + 1}</PageNumber>
+            </RightPage>
           )}
-        </div>
+        </JournalBookDiv>
 
-        <div className="journal-button-container">
-          <div>
-            <button type="button" onClick={() => handleFirstPageClick()}>
-              First
-            </button>
-            <button type="button" onClick={() => handlePreviousPageClick()}>
-              Previous
-            </button>
-            {/* <span className="current_pages">
+        <div>
+          <Button type="button" onClick={() => handleFirstPageClick()}>
+            First
+          </Button>
+          <Button type="button" onClick={() => handlePreviousPageClick()}>
+            Previous
+          </Button>
+          {/* <span className="current_pages">
               Pages {leftPageIndex + 1}-{rightPageIndex + 1} of {numEntries}
             </span> */}
-            <button type="button" onClick={() => handleNextPageClick()}>
-              Next
-            </button>
-            <button type="button" onClick={() => handleLastPageClick()}>
-              Last
-            </button>
-          </div>
+          <Button type="button" onClick={() => handleNextPageClick()}>
+            Next
+          </Button>
+          <Button type="button" onClick={() => handleLastPageClick()}>
+            Last
+          </Button>
         </div>
       </JournalDiv>
-    </div>
+    </JournalBackground>
   );
 };
 
 export default Journal;
+
+const JournalBackground = styled.div`
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
+`;
 
 const JournalDiv = styled.div`
   padding-top: 100px;
@@ -180,4 +188,82 @@ const JournalDiv = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 150px;
+`;
+
+const JournalTitle = styled.h3`
+  padding-bottom: 15px;
+  margin: 0;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+  font-family: "Patrick Hand SC";
+  font-size: 64px;
+  color: white;
+`;
+
+const JournalBookDiv = styled.div`
+  display: flex;
+  flex-flow: row;
+  border: 10px solid rgb(97, 100, 100);
+  border-radius: 5px;
+  background-color: white;
+  width: 70%;
+  height: 500px;
+  .page-text img {
+    width: 200px;
+  }
+`;
+
+const LeftPage = styled.div`
+  width: 50%;
+  border-right: 4px solid rgba(97, 100, 100, 0.3);
+  padding: 5px;
+  display: flex;
+  flex-flow: column;
+  max-height: 100%;
+  overflow-y: scroll;
+  justify-content: space-between;
+`;
+
+const RightPage = styled.div`
+  width: 50%;
+  padding: 5px;
+  display: flex;
+  flex-flow: column;
+  max-height: 100%;
+  overflow-y: scroll;
+  justify-content: space-between;
+`;
+
+const Button = styled.button`
+  margin-top: 10px;
+  margin-right: 2px;
+  background-color: rgb(217, 219, 219);
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  border: none;
+  color: rgb(95, 158, 189);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  :hover {
+    background-color: rgb(80, 180, 139);
+    color: rgb(112, 110, 110);
+  }
+`;
+
+const PageNumber = styled.div`
+  font-family: "Patrick Hand SC";
+  font-size: 18px;
+  height: 25px;
+  text-align: center;
+  bottom: 0;
+`;
+
+const EntryTitle = styled.h1`
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+`;
+
+const JournalDate = styled.h3`
+  font-family: "Patrick Hand SC";
+  font-size: 18px;
 `;

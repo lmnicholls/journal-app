@@ -1,0 +1,42 @@
+#toolbar {
+  background-color: white;
+}
+
+.text-editor {
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+.ql-editor {
+  min-height: 200px;
+  background-color: white;
+  color: black;
+}
+
+.submit-button {
+  padding-top: 15px;
+}
+
+/* Set default font-family */
+#editor-container {
+  font-family: "Rochester";
+  font-size: 18px;
+  height: 375px;
+}
+
+.background {
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
+  max-height: 100%;
+  overflow-y: scroll;
+  min-height: 100vh;
+}
+
+.textEditor {
+  margin-top: 10px;
+}

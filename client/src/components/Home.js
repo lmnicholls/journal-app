@@ -31,25 +31,29 @@ const Home = () => {
       <Background />
       <LinkDiv>
         <Start>
-          <Link to="/chat" style={{ textDecoration: "none" }} className="links">
+          <HomeLink
+            to="/chat"
+            style={{ textDecoration: "none" }}
+            className="links"
+          >
             <h2>Chat</h2>
-            <div className="icon-border">
-              <FontAwesomeIcon icon={faComments} className="icon" />
-            </div>
-          </Link>
+            <IconBorder>
+              <Icon icon={faComments} size="2x" />
+            </IconBorder>
+          </HomeLink>
 
-          <Link
+          <HomeLink
             to="/notes"
             style={{ textDecoration: "none" }}
             className="links"
           >
             <h2>Notes</h2>
-            <div className="icon-border">
-              <FontAwesomeIcon icon={faList} className="icon" />
-            </div>
-          </Link>
+            <IconBorder>
+              <Icon icon={faList} size="2x" />
+            </IconBorder>
+          </HomeLink>
 
-          <Link
+          <HomeLink
             to="/new-entry"
             style={{ textDecoration: "none" }}
             className="links"
@@ -58,13 +62,13 @@ const Home = () => {
               <h2>New Entry</h2>
             </div>
 
-            <div className="icon-border">
-              <FontAwesomeIcon icon={faPen} className="icon" />
-            </div>
-          </Link>
+            <IconBorder>
+              <Icon icon={faPen} size="2x" />
+            </IconBorder>
+          </HomeLink>
         </Start>
         <Start>
-          <Link
+          <HomeLink
             to="/journal"
             style={{ textDecoration: "none" }}
             className="links"
@@ -73,32 +77,28 @@ const Home = () => {
               <h2>Journal</h2>
             </div>
 
-            <div className="icon-border">
-              <FontAwesomeIcon icon={faBookOpen} className="icon" />
-            </div>
-          </Link>
+            <IconBorder>
+              <Icon icon={faBookOpen} size="2x" />
+            </IconBorder>
+          </HomeLink>
 
-          <Link
+          <HomeLink
             to="/calendar"
             style={{ textDecoration: "none" }}
             className="links"
           >
             <h2>Calendar</h2>
-            <div className="icon-border">
-              <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
-            </div>
-          </Link>
+            <IconBorder>
+              <Icon icon={faCalendarAlt} size="2x" />
+            </IconBorder>
+          </HomeLink>
 
-          <Link
-            to="/feelings"
-            style={{ textDecoration: "none" }}
-            className="links"
-          >
+          <HomeLink to="/feelings" style={{ textDecoration: "none" }}>
             <h2>Feelings</h2>
-            <div className="icon-border">
-              <FontAwesomeIcon icon={faSmile} className="icon" />
-            </div>
-          </Link>
+            <IconBorder>
+              <Icon icon={faSmile} size="2x" />
+            </IconBorder>
+          </HomeLink>
         </Start>
       </LinkDiv>
     </Fragment>
@@ -120,4 +120,42 @@ const Start = styled.div`
 const LinkDiv = styled.div`
   padding-top: 100px;
   padding-bottom: 100px;
+`;
+
+const HomeLink = styled(Link)`
+  font-family: "Patrick Hand SC";
+  font-size: 3vmin;
+  margin-top: 0px;
+  text-shadow: 0.5px 0.5px rgb(51, 167, 151);
+  background-color: rgb(98, 169, 207);
+  border-radius: 10px;
+  margin-right: 15px;
+  margin-top: 15px;
+  padding: 30px 50px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  :hover {
+    background-color: rgb(80, 180, 139);
+  }
+  h2 {
+    color: white;
+    margin-top: 0px;
+  }
+`;
+
+const IconBorder = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  color: white;
 `;
