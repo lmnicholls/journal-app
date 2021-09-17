@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../css/dropdown.css";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -39,61 +40,121 @@ const DropdownMenu = () => {
   }, [isActive]);
 
   return (
-    <div className="menu-container">
-      <button onClick={onClick} className="menu-trigger">
+    <MenuContainer>
+      <MenuTrigger onClick={onClick}>
         <FontAwesomeIcon icon={faBars} className="icon bars fa-2x" />
-      </button>
-      <nav
+      </MenuTrigger>
+      <Menu
         ref={dropdownRef}
         className={`menu ${isActive ? "active" : "inactive"}`}
       >
         <ul>
           <li>
             <Link to="/home">
-              <FontAwesomeIcon icon={faHome} className="icon" />
+              <Icon icon={faHome} />
               Home
             </Link>
           </li>
           <li>
             <Link to="/chat">
-              <FontAwesomeIcon icon={faComments} className="icon" />
+              <Icon icon={faComments} />
               Chat
             </Link>
           </li>
           <li>
             <Link to="/notes">
-              <FontAwesomeIcon icon={faList} className="icon" />
+              <Icon icon={faList} />
               Notes
             </Link>
           </li>
           <li>
             <Link to="/new-entry">
-              <FontAwesomeIcon icon={faPen} className="icon" />
+              <Icon icon={faPen} />
               New Entry
             </Link>
           </li>
           <li>
             <Link to="/journal">
-              <FontAwesomeIcon icon={faBookOpen} className="icon" />
+              <Icon icon={faBookOpen} />
               Journal
             </Link>
           </li>
           <li>
             <Link to="/calendar">
-              <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
+              <Icon icon={faCalendarAlt} />
               Calendar
             </Link>
           </li>
           <li>
             <Link to="/feelings">
-              <FontAwesomeIcon icon={faSmile} className="icon" />
+              <Icon icon={faSmile} />
               Feelings
             </Link>
           </li>
         </ul>
-      </nav>
-    </div>
+      </Menu>
+    </MenuContainer>
   );
 };
 
 export default DropdownMenu;
+
+const MenuContainer = styled.div`
+  position: relative;
+`;
+
+const MenuTrigger = styled.button`
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  vertical-align: middle;
+  transition: box-shadow 0.4s ease;
+  padding-top: 14px;
+  padding-left: 10px;
+  padding-bottom: 16px;
+  font-size: 10px;
+  color: white;
+  :hover {
+    box-shadow: 0 1px 8px rgba(245, 243, 243, 0.3);
+  }
+`;
+
+const Menu = styled.nav`
+  background: #ffffff;
+  position: absolute;
+  top: 55spx;
+  width: 150px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    a {
+      text-decoration: none;
+      font-family: Patrick Hand SC;
+      font-size: 18px;
+      color: white;
+      background-color: rgba(95, 158, 189, 0.8);
+      padding: 15px 20px;
+      display: block;
+      :hover {
+        background-color: gray;
+      }
+    }
+  }
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  padding-right: 5px;
+`;
