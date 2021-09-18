@@ -4,19 +4,3 @@
 body {
   margin: 0;
 }
-
-.title {
-  font-family: "Rochester";
-  font-size: 72px;
-  margin: 0px;
-  color: white;
-  text-shadow: 3px 3px rgb(51, 167, 151);
-}
-
-.description {
-  font-family: "Patrick Hand SC";
-  font-size: 32px;
-  margin-top: 0px;
-  color: white;
-  text-shadow: 0.5px 0.5px rgb(51, 167, 151);
-}
