@@ -2,11 +2,14 @@
   "name": "react-express-app",
   "version": "1.0.0",
   "scripts": {
-    "start-client": "react-scripts start",
-    "build": "react-scripts build && (cd client && npm install)",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start": "cd client && npm start"
+    "start": "node backend/server/index.js",
+    "dev": "nodemon backend/server/index.js --ignore client ",
+    "build": "cd client && npm install && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmnicholls/journal-app.git"
   },
   "dependencies": {
     "@draft-js-plugins/image": "^4.1.2",
@@ -28,6 +31,9 @@
     "quill-image-compress": "^1.2.15",
     "react-calendar": "^3.4.0",
     "react-scripts": "^4.0.3"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "devDependencies": {
     "concurrently": "^5.3.0"
