@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node backend/server/index.js",
     "dev": "nodemon backend/server/index.js --ignore client ",
-    "build": "cd client && npm install && npm run build"
+    "build": "cd client/ && npm install && npm run build"
   },
   "repository": {
     "type": "git",
