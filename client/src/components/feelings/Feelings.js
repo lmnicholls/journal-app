@@ -16,6 +16,7 @@ const Feelings = (props) => {
     return state.feelings.feelings;
   });
 
+  console.log("auth", authenticated);
   const history = useHistory();
   const dispatch = useDispatch();
 
