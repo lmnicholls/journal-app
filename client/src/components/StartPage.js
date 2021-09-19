@@ -9,10 +9,10 @@ const StartPage = (props) => {
       <NavHome />
       <Start>
         <Background />
-        <h1 className="title">Therapy & Me</h1>
-        <h4 className="description">
+        <Title>Therapy & Me</Title>
+        <Description>
           All your therapy needs when and where you need it.
-        </h4>
+        </Description>
       </Start>
     </Fragment>
   );
@@ -23,4 +23,20 @@ export default StartPage;
 const Start = styled.div`
   text-align: center;
   padding-top: 300px;
+`;
+
+const Title = styled.h1`
+  font-family: "Rochester";
+  font-size: 72px;
+  margin: 0px;
+  color: white;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+`;
+
+const Description = styled.h4`
+  font-family: "Patrick Hand SC";
+  font-size: 32px;
+  margin-top: 0px;
+  color: white;
+  text-shadow: 0.5px 0.5px rgb(51, 167, 151);
 `;
