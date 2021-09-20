@@ -7,9 +7,4 @@ const NoteSchema = new Schema({
   checked: Boolean,
 });
 
-const NoteModel = mongoose.model("note", NoteSchema);
-
-module.exports = {
-  NoteModel,
-  NoteSchema: NoteSchema,
-};
+module.exports = mongoose.model("note", NoteSchema);

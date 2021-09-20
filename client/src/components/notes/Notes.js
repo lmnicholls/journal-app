@@ -14,6 +14,10 @@ const Notes = (props) => {
   const notes = useSelector((state) => {
     return state.notes.notes;
   });
+  const state = useSelector((state) => state);
+
+  console.log("state", state);
+  console.log("notes", notes);
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
@@ -34,11 +38,8 @@ const Notes = (props) => {
   const handleAddNoteClick = (e) => {
     e.preventDefault();
     let checked = false;
-    dispatch(
-      addNote(note, checked, () => {
-        dispatch(fetchNotes());
-      })
-    );
+    dispatch(addNote(note, checked));
+    dispatch(fetchNotes());
     setNote("");
   };
 

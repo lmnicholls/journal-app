@@ -3,31 +3,42 @@ const Note = require("../models/note");
 const mongo = require("mongodb");
 
 exports.addNote = function (req, res) {
-  User.findOne({ _id: req.user._id }, function (err, user) {
-    if (!req.body.note) {
-      return res.status(400).send("Note is required.");
-    }
+  if (!req.body.note) {
+    return res.status(400).send("Note is required.");
+  }
+  const user = User.findById(req.user._id);
 
-    const note = new Note.NoteModel(req.body);
+  if (!user) {
+    return res.status(404).send("user not found");
+  }
 
-    note.save(function (err, note) {
-      user.notes.push(note);
-
-      user.save(function (err, user) {
-        res.send({
-          note,
-        });
-      });
-    });
+  const newNote = new Note({
+    note: req.body.note,
+    checked: req.body.checked,
   });
+
+  newNote.save();
+
+  const savedNote = Note.findById(newNote._id);
+
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $addToSet: { notes: newNote } },
+    (err, user) => {
+      if (err) {
+        return res.send(err);
+      }
+    }
+  ).populate({ path: "notes" });
 };
 
-exports.getNotes = function (req, res) {
-  User.findOne({ _id: req.user._id }, function (err, user) {
-    res.send({
-      notes: user.notes,
-    });
+exports.getNotes = async (req, res) => {
+  const response = await User.findById(req.user._id).populate({
+    path: "notes",
   });
+  if (response) res.status(200).send(response);
+
+  return response;
 };
 
 exports.deleteNote = function (req, res) {

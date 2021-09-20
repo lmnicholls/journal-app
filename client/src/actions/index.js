@@ -145,7 +145,7 @@ export const fetchFeelings = () => (dispatch) => {
     });
 };
 
-export const addNote = (note, checked, callback) => (dispatch) => {
+export const addNote = (note, checked) => (dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -153,10 +153,9 @@ export const addNote = (note, checked, callback) => (dispatch) => {
   };
 
   axios
-    .post("http://localhost:5000/notes", { note, checked, callback }, config)
+    .post("http://localhost:5000/notes", { note, checked }, config)
     .then(function (response) {
       dispatch({ type: ADD_NOTE, payload: response.data });
-      callback();
     })
     .catch(function (error) {
       console.log(error);

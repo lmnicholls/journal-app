@@ -23,7 +23,7 @@ exports.addFeeling = function (req, res) {
 
   newFeeling.save();
 
-  const savedFeeling = Feeling.findById(newFeeling._id).populate("feeling");
+  const savedFeeling = Feeling.findById(newFeeling._id);
 
   User.findByIdAndUpdate(
     req.user._id,
@@ -33,11 +33,13 @@ exports.addFeeling = function (req, res) {
         return res.send(err);
       }
     }
-  );
+  ).populate({ path: "feelings" });
 };
 
 exports.getFeelings = async (req, res) => {
-  const response = await User.findById(req.user._id).populate("feelings");
+  const response = await User.findById(req.user._id).populate({
+    path: "feelings",
+  });
   if (response) res.status(200).send(response);
 
   return response;
