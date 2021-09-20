@@ -51,12 +51,47 @@ const Notes = (props) => {
 
   const handleCheckClick = (e, noteID, checkStatus) => {
     e.preventDefault();
-    dispatch(editNoteCheck(noteID, checkStatus));
-    dispatch(fetchNotes());
+    dispatch(
+      editNoteCheck(noteID, checkStatus, () => {
+        dispatch(fetchNotes());
+      })
+    );
   };
 
   if (!notes) {
-    return <div>Notes loading...</div>;
+    return (
+      <NotesBackground>
+        <Nav />
+        <NotesContainer>
+          <NotesTitle>Notes</NotesTitle>
+          <NotesDiv>
+            <NotePad>
+              <div>Notes Loading...</div>
+              <Form>
+                <AddNote>
+                  <NoteFormInput
+                    type="text"
+                    value={note}
+                    size="lg"
+                    placeholder="Enter note"
+                    onChange={(e) => {
+                      setNote(e.target.value);
+                    }}
+                  />
+                  <AddButton
+                    className="addButton"
+                    type="submit"
+                    onClick={(e) => handleAddNoteClick(e)}
+                  >
+                    <FontAwesomeIcon icon={faPlus} />
+                  </AddButton>
+                </AddNote>
+              </Form>
+            </NotePad>
+          </NotesDiv>
+        </NotesContainer>
+      </NotesBackground>
+    );
   }
 
   return (

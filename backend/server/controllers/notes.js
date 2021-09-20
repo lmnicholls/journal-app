@@ -61,28 +61,26 @@ exports.deleteNote = async (req, res) => {
   res.json({ deletedNote: note, updatedUser });
 };
 
-exports.editNoteCheck = function (req, res) {
-  var ObjectID = require("mongodb").ObjectID;
-  const id = req.params.noteID;
+exports.editNoteCheck = async (req, res) => {
+  const note = await Note.findById(req.params.noteID);
   const checked = req.body.checkStatus;
-  const userID = new ObjectID(req.user._id);
 
-  Note.NoteModel.updateOne(
-    { _id: new mongo.ObjectId(id) },
-    { $set: { checked: !checked } }
+  let updatedNote = await Note.findByIdAndUpdate(
+    note._id,
+    {
+      $set: { checked: !checked },
+    },
+    { new: true },
+    (err, note) => {
+      if (err) {
+        return res.send(err);
+      }
+    }
   );
 
-  // User.findByIdAndUpdate(
-  //   { _id: userID },
-  //   { $set: { notes: { _id: new mongo.ObjectId(id) } } },
-  //   { new: true },
-  //   function (err, result) {
-  //     if (err) {
-  //       res.send(err);
-  //     } else {
-  //       res.send(result);
-  //     }
-  //   }
-  // );
-  res.send("done");
+  res.status(200).send(updatedNote);
+
+  const response = await User.findById(req.user._id).populate({
+    path: "notes",
+  });
 };

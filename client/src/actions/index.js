@@ -197,7 +197,8 @@ export const deleteNote = (noteID, callback) => (dispatch) => {
     });
 };
 
-export const editNoteCheck = (noteID, checkStatus) => (dispatch) => {
+export const editNoteCheck = (noteID, checkStatus, callback) => (dispatch) => {
+  console.log(noteID, checkStatus);
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -212,6 +213,7 @@ export const editNoteCheck = (noteID, checkStatus) => (dispatch) => {
     )
     .then(function (response) {
       dispatch({ type: EDIT_NOTE_CHECK, payload: response.data });
+      callback();
     })
     .catch(function (error) {
       console.log(error);

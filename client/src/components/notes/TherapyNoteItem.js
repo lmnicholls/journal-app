@@ -68,6 +68,7 @@ const NoteCheck = styled.button`
   border-radius: 20px;
   width: 20px;
   height: 20px;
+  font-size: 12px;
   cursor: pointer;
   margin: 0 auto;
   padding: 0;
