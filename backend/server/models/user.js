@@ -6,12 +6,12 @@ const Notes = require("./note");
 var crypto = require("crypto");
 
 // Define our model
-const UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
-  userType: String,
-  feelings: [{ type: Feelings.FeelingSchema }],
-  notes: [{ type: Notes.NoteSchema }],
+const UserSchema = new mongoose.Schema({
+  firstName: { type: String },
+  lastName: { type: String },
+  userType: { type: String },
+  feelings: [{ type: Schema.Types.ObjectId, ref: "feeling" }],
+  notes: [{ type: Schema.Types.ObjectId, ref: "note" }],
   email: { type: String, unique: true, lowercase: true },
   hash: String,
   salt: String,

@@ -2,33 +2,43 @@ const User = require("../models/user");
 const Feeling = require("../models/feeling");
 
 exports.addFeeling = function (req, res) {
-  User.findOne({ _id: req.user._id }, function (err, user) {
-    if (!req.body.feeling) {
-      return res.status(400).send("Feeling is required.");
-    }
+  if (!req.body.feeling) {
+    return res.status(400).send("Feeling is required.");
+  }
 
-    if (!req.body.date) {
-      return res.status(400).send("Date is required.");
-    }
+  if (!req.body.date) {
+    return res.status(400).send("Date is required.");
+  }
 
-    const feeling = new Feeling.FeelingModel(req.body);
+  const user = User.findById(req.user._id);
 
-    feeling.save(function (err, feeling) {
-      user.feelings.unshift(feeling);
+  if (!user) {
+    return res.status(404).send("user not found");
+  }
 
-      user.save(function (err, user) {
-        res.send({
-          feeling,
-        });
-      });
-    });
+  const newFeeling = new Feeling({
+    feeling: req.body.feeling,
+    date: req.body.date,
   });
+
+  newFeeling.save();
+
+  const savedFeeling = Feeling.findById(newFeeling._id).populate("feeling");
+
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $addToSet: { feelings: newFeeling } },
+    (err, user) => {
+      if (err) {
+        return res.send(err);
+      }
+    }
+  );
 };
 
-exports.getFeelings = function (req, res) {
-  User.findOne({ _id: req.user._id }, function (err, user) {
-    res.send({
-      feelings: user.feelings,
-    });
-  });
+exports.getFeelings = async (req, res) => {
+  const response = await User.findById(req.user._id).populate("feelings");
+  if (response) res.status(200).send(response);
+
+  return response;
 };

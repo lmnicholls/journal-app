@@ -4,10 +4,16 @@ import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 
 export default function MonthlyFeelings({ feelings }) {
-  const feelingsPast30Days = feelings.slice(0, 29).reverse();
-  const datesPast30Days = feelingsPast30Days.map((day) =>
+  const feelingsPast30Days = feelings
+    ?.slice(0, 29)
+    .sort((a, b) => a.date - b.date);
+  const datesPast30Days = feelingsPast30Days?.map((day) =>
     moment(day.date).format("MMM DD")
   );
+
+  if (!feelingsPast30Days) {
+    return <div></div>;
+  }
   const feelingsArray = feelingsPast30Days.map((day) => {
     let feelings = ["angry", "sad", "nervous", "meh", "happy", "amazing"];
     let colors = [

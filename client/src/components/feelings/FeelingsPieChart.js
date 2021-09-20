@@ -3,10 +3,14 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 export default function FeelingsPieChart({ feelings }) {
-  const sortedFeelings = feelings.reduce((obj, item) => {
+  const sortedFeelings = feelings?.reduce((obj, item) => {
     obj[item.feeling] = (obj[item.feeling] || 0) + 1;
     return obj;
   }, {});
+
+  if (!sortedFeelings) {
+    return <div></div>;
+  }
 
   let seriesData = Object.entries(sortedFeelings).map((feeling) => {
     let feelings = ["angry", "sad", "nervous", "meh", "happy", "amazing"];
