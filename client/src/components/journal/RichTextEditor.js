@@ -6,6 +6,7 @@ import RichTextEditorToolbar, {
 import "react-quill/dist/quill.snow.css";
 import "./css/richTextEditor.css";
 import ReactQuill from "react-quill";
+import styled from "styled-components";
 
 const RichTextEditor = (props) => {
   const handleEditorChange = (state) => {
@@ -15,7 +16,7 @@ const RichTextEditor = (props) => {
   return (
     <div>
       <RichTextEditorToolbar />
-      <ReactQuill
+      <TextEditor
         theme="snow"
         className="entry-form"
         value={props.entry}
@@ -29,3 +30,9 @@ const RichTextEditor = (props) => {
 };
 
 export default RichTextEditor;
+
+const TextEditor = styled(ReactQuill)`
+  img {
+    width: 250px;
+  }
+`;
