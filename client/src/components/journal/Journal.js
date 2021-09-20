@@ -30,6 +30,10 @@ const Journal = () => {
     }
   }, [dispatch, authenticated]);
 
+  const handleAddEntryClick = () => {
+    history.push("/new-entry");
+  };
+
   const handleFirstPageClick = () => {
     setLeftPageIndex(-1);
     setRightPageIndex(0);
@@ -101,9 +105,11 @@ const Journal = () => {
   return (
     <JournalBackground>
       <Nav />
-      <JournalDiv>
+      <JournalHeading>
         <JournalTitle>My Journal</JournalTitle>
-
+        <Button onClick={handleAddEntryClick}>Add Entry</Button>
+      </JournalHeading>
+      <JournalDiv>
         <JournalBookDiv>
           {leftPageIndex < 0 ? (
             <LeftPage></LeftPage>
@@ -180,8 +186,15 @@ const JournalBackground = styled.div`
   );
 `;
 
+const JournalHeading = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 75px;
+`;
+
 const JournalDiv = styled.div`
-  padding-top: 100px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -190,7 +203,6 @@ const JournalDiv = styled.div`
 `;
 
 const JournalTitle = styled.h3`
-  padding-bottom: 15px;
   margin: 0;
   text-shadow: 3px 3px rgb(51, 167, 151);
   font-family: "Patrick Hand SC";
@@ -235,6 +247,7 @@ const RightPage = styled.div`
 const Button = styled.button`
   margin-top: 10px;
   margin-right: 2px;
+  margin-bottom: 10px;
   background-color: rgb(217, 219, 219);
   font-family: "Patrick Hand SC";
   font-size: 24px;
