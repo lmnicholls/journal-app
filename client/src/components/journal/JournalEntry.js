@@ -23,6 +23,10 @@ const JournalEntry = () => {
     }
   }, [authenticated, history]);
 
+  const handleAddEntryClick = () => {
+    history.push("/journal");
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(addEntry(title, date, entry));
@@ -34,6 +38,7 @@ const JournalEntry = () => {
     <div className="background">
       <Nav />
       <Journal>
+        <Button onClick={handleAddEntryClick}>Back To Journal</Button>
         <JournalEntryForm onSubmit={(e) => handleFormSubmit(e)}>
           <h3>New Journal Entry</h3>
           <JournalEntryTitleDate>
@@ -71,6 +76,7 @@ export default JournalEntry;
 const Journal = styled.div`
   padding-top: 100px;
   display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
   padding-bottom: 100px;
@@ -113,6 +119,24 @@ const JournalEntryTitleDate = styled.div`
   }
 `;
 
+const Button = styled.button`
+  margin-top: 10px;
+  margin-right: 2px;
+  margin-bottom: 10px;
+  background-color: rgb(217, 219, 219);
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  border: none;
+  color: rgb(95, 158, 189);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  :hover {
+    background-color: rgb(80, 180, 139);
+    color: rgb(112, 110, 110);
+  }
+`;
+
 const SubmitButton = styled.button`
   background-color: rgb(217, 219, 219);
   font-family: "Patrick Hand SC";
@@ -120,6 +144,7 @@ const SubmitButton = styled.button`
   border: none;
   color: rgb(95, 158, 189);
   margin-top: 10px;
+  margin-bottom: 10px;
   padding: 8px 16px;
   text-decoration: none;
   cursor: pointer;
