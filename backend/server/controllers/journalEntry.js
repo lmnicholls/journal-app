@@ -1,26 +1,52 @@
 const JournalEntry = require("../models/journal");
 const User = require("../models/user");
 
-exports.addEntryToJournal = function (req, res) {
-  User.findOne({ _id: req.user._id }, function (err, user) {
-    const entry = new JournalEntry.JournalEntryModel(req.body);
+exports.addEntryToJournal = async (req, res) => {
+  if (!req.body.title) {
+    return res.status(400).send("Title is required.");
+  }
 
-    entry.save(function (err, entry) {
-      user.entries.push(entry);
+  if (!req.body.date) {
+    return res.status(400).send("Date is required.");
+  }
 
-      user.save(function (err, user) {
-        res.send({
-          entry,
-        });
-      });
-    });
+  if (!req.body.entry) {
+    return res.status(400).send("Entry is required.");
+  }
+
+  const user = User.findById(req.user._id);
+
+  if (!user) {
+    return res.status(404).send("user not found");
+  }
+
+  const newEntry = new JournalEntry({
+    title: req.body.title,
+    date: req.body.date,
+    entry: req.body.entry,
   });
+
+  newEntry.save();
+
+  const savedEntry = JournalEntry.findById(newEntry._id);
+
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $addToSet: { entries: newEntry } },
+    (err, user) => {
+      if (err) {
+        return res.send(err);
+      }
+    }
+  ).populate({ path: "entries" });
 };
 
-exports.getJournal = function (req, res) {
-  User.findOne({ _id: req.user._id }, function (err, user) {
-    res.send({
-      entries: user.entries,
-    });
+exports.getJournal = async (req, res) => {
+  const response = await User.findById(req.user._id).populate({
+    path: "entries",
   });
+
+  if (response) res.status(200).send(response);
+
+  return response;
 };

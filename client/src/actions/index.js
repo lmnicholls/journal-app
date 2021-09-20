@@ -64,7 +64,7 @@ export const signout = (callback) => (dispatch) => {
   callback();
 };
 
-export const addEntry = (title, date, entry, callback) => (dispatch) => {
+export const addEntry = (title, date, entry) => (dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -75,7 +75,6 @@ export const addEntry = (title, date, entry, callback) => (dispatch) => {
     .post("http://localhost:5000/entries", { title, date, entry }, config)
     .then(function (response) {
       dispatch({ type: ADD_ENTRY, payload: response.data });
-      callback();
     })
     .catch(function (error) {
       console.log(error);

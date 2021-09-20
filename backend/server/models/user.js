@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   hash: String,
   salt: String,
-  entries: [{ type: Journal.JournalEntrySchema }],
+  entries: [{ type: Schema.Types.ObjectId, ref: "journal" }],
 });
 
 UserSchema.methods.setPassword = function (password) {

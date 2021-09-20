@@ -24,6 +24,12 @@ const Journal = () => {
     }
   }, [authenticated, history]);
 
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(fetchEntries());
+    }
+  }, [dispatch, authenticated]);
+
   const handleFirstPageClick = () => {
     setLeftPageIndex(-1);
     setRightPageIndex(0);
@@ -64,12 +70,6 @@ const Journal = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (authenticated) {
-      dispatch(fetchEntries());
-    }
-  }, [dispatch, authenticated]);
 
   useEffect(() => {
     if (numEntries !== 0) {
@@ -205,7 +205,7 @@ const JournalBookDiv = styled.div`
   border-radius: 5px;
   background-color: white;
   width: 70%;
-  height: 500px;
+  height: 85vh;
   .page-text img {
     width: 200px;
   }

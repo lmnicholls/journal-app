@@ -9,9 +9,4 @@ const journalEntrySchema = new Schema({
   entry: Object,
 });
 
-const JournalEntryModel = mongoose.model("journal", journalEntrySchema);
-
-module.exports = {
-  JournalEntryModel,
-  JournalEntrySchema: journalEntrySchema,
-};
+module.exports = mongoose.model("journal", journalEntrySchema);

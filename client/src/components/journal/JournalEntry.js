@@ -3,7 +3,7 @@ import { EditorState } from "draft-js";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../nav/Nav";
-import { addEntry } from "../../actions";
+import { addEntry, fetchEntries } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./css/journalentry.css";
 import RichTextEditor from "./RichTextEditor";
@@ -25,11 +25,9 @@ const JournalEntry = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      addEntry(title, date, entry, () => {
-        history.push("/journal");
-      })
-    );
+    dispatch(addEntry(title, date, entry));
+    dispatch(fetchEntries());
+    history.push("/journal");
   };
 
   return (
@@ -103,6 +101,7 @@ const JournalEntryTitleDate = styled.div`
   align-items: center;
   input {
     margin-left: 10px;
+    font-size: 24px;
   }
   h4 {
     margin-top: 10px;
