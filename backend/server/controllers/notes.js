@@ -41,30 +41,24 @@ exports.getNotes = async (req, res) => {
   return response;
 };
 
-exports.deleteNote = function (req, res) {
-  var ObjectID = require("mongodb").ObjectID;
-  const id = req.params.noteID;
-  const userID = new ObjectID(req.user._id);
+exports.deleteNote = async (req, res) => {
+  const note = await Note.findById(req.params.noteID);
+  const user = await User.findById(req.user._id);
+  const update = { $pull: { notes: note._id } };
 
-  Note.NoteModel.findByIdAndRemove(id, function (err, note) {
-    console.log("findByIdAndRemove note: ", note);
-    Note.NoteModel.find({}, function (err, notes) {
-      console.log("Finding all: ", notes);
-    });
-  });
+  await Note.deleteOne({ _id: note._id });
 
-  User.findByIdAndUpdate(
-    { _id: userID },
-    { $pull: { notes: { _id: new mongo.ObjectId(id) } } },
-    { new: true },
-    function (err, result) {
+  const updatedUser = await User.findByIdAndUpdate(
+    user._id,
+    update,
+    (err, user) => {
       if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
+        return err;
       }
     }
-  );
+  ).populate({ path: "notes" });
+
+  res.json({ deletedNote: note, updatedUser });
 };
 
 exports.editNoteCheck = function (req, res) {

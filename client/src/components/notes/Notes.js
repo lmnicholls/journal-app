@@ -14,12 +14,9 @@ const Notes = (props) => {
   const notes = useSelector((state) => {
     return state.notes.notes;
   });
-  const state = useSelector((state) => state);
-
-  console.log("state", state);
-  console.log("notes", notes);
   const [note, setNote] = useState("");
 
+  console.log("notes", notes);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -45,8 +42,11 @@ const Notes = (props) => {
 
   const handleDeleteClick = (e, noteID) => {
     e.preventDefault();
-    dispatch(deleteNote(noteID));
-    dispatch(fetchNotes());
+    dispatch(
+      deleteNote(noteID, () => {
+        dispatch(fetchNotes());
+      })
+    );
   };
 
   const handleCheckClick = (e, noteID, checkStatus) => {

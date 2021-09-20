@@ -179,7 +179,7 @@ export const fetchNotes = () => (dispatch) => {
     });
 };
 
-export const deleteNote = (noteID) => (dispatch) => {
+export const deleteNote = (noteID, callback) => (dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -190,6 +190,7 @@ export const deleteNote = (noteID) => (dispatch) => {
     .delete(`http://localhost:5000/notes/${noteID}`, config)
     .then(function (response) {
       dispatch({ type: DELETE_NOTE, payload: response.data });
+      callback();
     })
     .catch(function (error) {
       console.log(error);
