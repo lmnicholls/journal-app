@@ -1,0 +1,59 @@
+.strategy-form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.strategy-form textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid lightgray;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+.strategy-form button {
+  width: 100%;
+  background-color: #fff27f;
+  cursor: pointer;
+  padding: 10px;
+  border: 0;
+  outline: none;
+}
+
+.strategy-form button:hover {
+  background-color: tomato;
+  color: white;
+}
+
+.note {
+  position: absolute;
+  cursor: pointer;
+  background-image: url("../images/post-it-note.png");
+  background-size: cover;
+  top: 100px;
+  left: 300px;
+  height: 200px;
+  width: 200px;
+  padding: 30px;
+}
+
+.note .text {
+  font-family: Arial, Arial, Helvetica, sans-serif;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+  overflow-y: scroll;
+}
+
+.delete {
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.delete:hover {
+  color: red;
+}

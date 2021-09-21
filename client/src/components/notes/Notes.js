@@ -14,9 +14,9 @@ const Notes = (props) => {
   const notes = useSelector((state) => {
     return state.notes.notes;
   });
+  console.log("notes", notes);
   const [note, setNote] = useState("");
 
-  console.log("notes", notes);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -34,6 +34,7 @@ const Notes = (props) => {
 
   const handleAddNoteClick = (e) => {
     e.preventDefault();
+    if (!note) return;
     let checked = false;
     dispatch(addNote(note, checked));
     dispatch(fetchNotes());

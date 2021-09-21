@@ -14,7 +14,7 @@ import Home from "./components/Home";
 import MyCalendar from "./components/calendar/Calendar";
 import JournalEntry from "./components/journal/JournalEntry";
 import Journal from "./components/journal/Journal";
-import Chat from "./components/Chat";
+import Board from "./components/Board";
 import Notes from "./components/notes/Notes";
 import Feelings from "./components/feelings/Feelings";
 
@@ -32,7 +32,7 @@ render(
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/home" component={Home} />
-            <Route exact path="/chat" component={Chat} />
+            <Route exact path="/board" component={Board} />
             <Route exact path="/notes" component={Notes} />
             <Route exact path="/new-entry" component={JournalEntry} />
             <Route exact path="/journal" component={Journal}></Route>

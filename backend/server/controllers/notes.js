@@ -36,6 +36,7 @@ exports.getNotes = async (req, res) => {
   const response = await User.findById(req.user._id).populate({
     path: "notes",
   });
+  console.log("note", response);
   if (response) res.status(200).send(response);
 
   return response;

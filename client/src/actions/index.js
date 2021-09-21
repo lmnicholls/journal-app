@@ -11,6 +11,9 @@ import {
   FETCH_NOTES,
   DELETE_NOTE,
   EDIT_NOTE_CHECK,
+  ADD_POSTIT,
+  DELETE_POSTIT,
+  FETCH_POSTITS,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
@@ -212,6 +215,58 @@ export const editNoteCheck = (noteID, checkStatus, callback) => (dispatch) => {
     )
     .then(function (response) {
       dispatch({ type: EDIT_NOTE_CHECK, payload: response.data });
+      callback();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const fetchPostits = () => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .get("http://localhost:5000/postits", config)
+    .then(function (response) {
+      dispatch({ type: FETCH_POSTITS, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const addPostit = (postit, rotate, x, y) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .post("http://localhost:5000/postits", { postit, rotate, x, y }, config)
+    .then(function (response) {
+      dispatch({ type: ADD_POSTIT, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const deletePostit = (postitID, callback) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .delete(`http://localhost:5000/postits/${postitID}`, config)
+    .then(function (response) {
+      dispatch({ type: DELETE_POSTIT, payload: response.data });
       callback();
     })
     .catch(function (error) {

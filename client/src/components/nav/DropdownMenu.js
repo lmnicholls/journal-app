@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faCalendarAlt,
-  faComments,
   faPen,
   faBookOpen,
   faHome,
   faList,
   faSmile,
+  faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
 
 const DropdownMenu = () => {
@@ -55,15 +55,15 @@ const DropdownMenu = () => {
             </Link>
           </li>
           <li>
-            <Link to="/chat">
-              <Icon icon={faComments} />
-              Chat
+            <Link to="/board">
+              <Icon icon={faStickyNote} />
+              Strategies
             </Link>
           </li>
           <li>
             <Link to="/notes">
               <Icon icon={faList} />
-              Notes
+              Session Notes
             </Link>
           </li>
           <li>

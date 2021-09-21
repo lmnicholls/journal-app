@@ -10,7 +10,7 @@ import {
   faCalendarAlt,
   faPen,
   faBookOpen,
-  faComments,
+  faStickyNote,
   faList,
   faSmile,
 } from "@fortawesome/free-solid-svg-icons";
@@ -32,13 +32,13 @@ const Home = () => {
       <LinkDiv>
         <Start>
           <HomeLink
-            to="/chat"
+            to="/Board"
             style={{ textDecoration: "none" }}
             className="links"
           >
-            <h2>Chat</h2>
+            <h2>Board</h2>
             <IconBorder>
-              <Icon icon={faComments} size="2x" />
+              <Icon icon={faStickyNote} size="2x" />
             </IconBorder>
           </HomeLink>
 
@@ -47,7 +47,7 @@ const Home = () => {
             style={{ textDecoration: "none" }}
             className="links"
           >
-            <h2>Notes</h2>
+            <h2>Session Notes</h2>
             <IconBorder>
               <Icon icon={faList} size="2x" />
             </IconBorder>
@@ -136,7 +136,7 @@ const HomeLink = styled(Link)`
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  width: 250px;
+  width: 270px;
   :hover {
     background-color: rgb(80, 180, 139);
   }
