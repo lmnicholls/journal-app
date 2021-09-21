@@ -12,3 +12,4 @@ export const EDIT_NOTE_CHECK = "edit_note_check";
 export const FETCH_POSTITS = "fetch_postits";
 export const ADD_POSTIT = "add_postit";
 export const DELETE_POSTIT = "delete_postit";
+export const EDIT_POSTIT_POSITION = "edit_postitPosition";

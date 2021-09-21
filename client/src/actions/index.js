@@ -14,6 +14,7 @@ import {
   ADD_POSTIT,
   DELETE_POSTIT,
   FETCH_POSTITS,
+  EDIT_POSTIT_POSITION,
 } from "./types";
 
 export const signup = (formProps, callback) => (dispatch) => {
@@ -267,6 +268,28 @@ export const deletePostit = (postitID, callback) => (dispatch) => {
     .delete(`http://localhost:5000/postits/${postitID}`, config)
     .then(function (response) {
       dispatch({ type: DELETE_POSTIT, payload: response.data });
+      callback();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const editPostitPosition = (postitID, x, y, callback) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .put(
+      `http://localhost:5000/postits/${postitID}`,
+      { postitID, x, y },
+      config
+    )
+    .then(function (response) {
+      dispatch({ type: EDIT_POSTIT_POSITION, payload: response.data });
       callback();
     })
     .catch(function (error) {

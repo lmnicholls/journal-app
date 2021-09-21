@@ -62,3 +62,25 @@ exports.deletePostit = async (req, res) => {
 
   res.json({ deletedPostit: postit, updatedUser });
 };
+
+exports.editPostitPosition = async (req, res) => {
+  const postit = await Postit.findById(req.params.postitID);
+  const user = await User.findById(req.user._id);
+  let updatedPostit = await Postit.findByIdAndUpdate(
+    postit._id,
+    {
+      $set: { x: req.body.x, y: req.body.y },
+    },
+    { new: true },
+    (err, postit) => {
+      if (err) {
+        return res.send(err);
+      }
+    }
+  );
+  res.status(200).send(updatedPostit);
+
+  const response = await User.findById(req.user._id).populate({
+    path: "postits",
+  });
+};

@@ -24,4 +24,5 @@ module.exports = function (app) {
   app.get("/postits", requireAuth, Postits.fetchPostits);
   app.post("/postits", requireAuth, Postits.addPostit);
   app.delete("/postits/:postitID", requireAuth, Postits.deletePostit);
+  app.put("/postits/:postitID", requireAuth, Postits.editPostitPosition);
 };

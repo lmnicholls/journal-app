@@ -4,7 +4,12 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 import "./strategies.css";
-import { addPostit, fetchPostits, deletePostit } from "../actions";
+import {
+  addPostit,
+  fetchPostits,
+  deletePostit,
+  editPostitPosition,
+} from "../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -54,11 +59,18 @@ const Board = (props) => {
     );
   };
 
-  const handleDropStrategy = (e) => {
-    e.stopPropagation();
+  const handleDropPostit = (e, postitID) => {
     e.preventDefault();
-    e.target.style.left = `${e.pageX - 50}px`;
-    e.target.style.top = `${e.pageY - 50}px`;
+
+    // e.target.style.left = `${e.pageX - 50}px`;
+    // e.target.style.top = `${e.pageY - 50}px`;
+    let x = `${e.pageX - 50}px`;
+    let y = `${e.pageY - 50}px`;
+    dispatch(
+      editPostitPosition(postitID, x, y, () => {
+        dispatch(fetchPostits());
+      })
+    );
   };
 
   const handleDragOver = (e) => {
@@ -73,7 +85,7 @@ const Board = (props) => {
   return (
     <StrategiesBackground>
       <Nav />
-      <StatsDiv onDragDrop={handleDragOver}>
+      <StatsDiv onDrag={handleDragOver}>
         <h3>Board</h3>
 
         <form className="strategy-form">
@@ -94,7 +106,7 @@ const Board = (props) => {
               top: postit.y,
             }}
             draggable="true"
-            onDragEnd={handleDropStrategy}
+            onDragEnd={(e) => handleDropPostit(e, postit._id)}
           >
             <div
               className="delete"
@@ -102,7 +114,7 @@ const Board = (props) => {
             >
               <FontAwesomeIcon icon={faTimes} className="icon bars fa-1xx" />
             </div>
-            <pre className="text">{postit.postit}</pre>
+            <div className="text">{postit.postit}</div>
           </div>
         ))}
       </StatsDiv>

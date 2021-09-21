@@ -25,6 +25,7 @@
     "react": "^16.0.0",
     "react-bootstrap": "^1.6.3",
     "react-calendar": "^3.4.0",
+    "react-dnd": "^14.0.3",
     "react-dom": "^16.0.0",
     "react-draft-wysiwyg": "^1.14.7",
     "react-hook-form": "^7.11.1",

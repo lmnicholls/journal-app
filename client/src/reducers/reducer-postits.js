@@ -1,11 +1,16 @@
-import { FETCH_POSTITS, ADD_POSTIT, DELETE_POSTIT } from "../actions/types";
+import {
+  FETCH_POSTITS,
+  ADD_POSTIT,
+  DELETE_POSTIT,
+  EDIT_POSTIT_POSITION,
+} from "../actions/types";
 
 const DEFAULT_STATE = {
   postit: {},
   postits: [],
 };
 
-const strategiesReducer = (state = DEFAULT_STATE, action) => {
+const postitReducer = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case FETCH_POSTITS: {
       return {
@@ -24,8 +29,13 @@ const strategiesReducer = (state = DEFAULT_STATE, action) => {
         ...state,
       };
     }
-
     case DELETE_POSTIT: {
+      return {
+        postit: { ...state.postit },
+        postits: action.payload.postits,
+      };
+    }
+    case EDIT_POSTIT_POSITION: {
       return {
         postit: { ...state.postit },
         postits: action.payload.postits,
@@ -36,4 +46,4 @@ const strategiesReducer = (state = DEFAULT_STATE, action) => {
   }
 };
 
-export default strategiesReducer;
+export default postitReducer;
