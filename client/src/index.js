@@ -14,7 +14,7 @@ import Home from "./components/Home";
 import MyCalendar from "./components/calendar/Calendar";
 import JournalEntry from "./components/journal/JournalEntry";
 import Journal from "./components/journal/Journal";
-import Board from "./components/Board";
+import Board from "./components/board/Board";
 import Notes from "./components/notes/Notes";
 import Feelings from "./components/feelings/Feelings";
 

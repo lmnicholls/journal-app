@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import Example from "./Example";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import styled from "styled-components";
-import Nav from "./nav/Nav";
-import "./strategies.css";
+import "./board.css";
+import Nav from "../nav/Nav";
 import {
   addPostit,
   fetchPostits,
   deletePostit,
   editPostitPosition,
-} from "../actions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+} from "../../actions";
 
-const Board = (props) => {
+function Board() {
   const { authenticated } = useSelector((state) => state.auth);
   const postits = useSelector((state) => {
     return state.postits.postits;
@@ -43,8 +44,8 @@ const Board = (props) => {
     let rotate = Math.floor(Math.random() * 30);
     let winWidth = window.innerWidth;
     let winHeight = window.innerHeight;
-    let x = `${Math.floor(Math.random() * winWidth) - 50}px`;
-    let y = `${Math.floor(Math.random() * winHeight) - 50}px`;
+    let x = Math.floor(Math.random() * winWidth) - 50;
+    let y = Math.floor(Math.random() * winHeight) - 50;
     dispatch(addPostit(postitInput, rotate, x, y));
     dispatch(fetchPostits());
     setPostitInput("");
@@ -64,8 +65,8 @@ const Board = (props) => {
 
     e.target.style.left = `${e.pageX - 50}px`;
     e.target.style.top = `${e.pageY - 50}px`;
-    let x = `${e.pageX - 50}px`;
-    let y = `${e.pageY - 50}px`;
+    let x = e.pageX - 50;
+    let y = e.pageY - 50;
     dispatch(
       editPostitPosition(postitID, x, y, () => {
         dispatch(fetchPostits());
@@ -83,52 +84,31 @@ const Board = (props) => {
   }
 
   return (
-    <BoardBackground>
-      <Nav />
-      <BoardDiv onDrag={handleDragOver}>
-        <BoardTitle>Quotes • Improvements • Positivity</BoardTitle>
-
-        <form className="strategy-form">
-          <textarea
-            value={postitInput}
-            onChange={(e) => setPostitInput(e.target.value)}
-            placeholder="Add a new post it..."
-          ></textarea>
-          <button onClick={(e) => handleAddPostitClick(e)}>Add</button>
-        </form>
-        {postits.map((postit) => (
-          <div
-            className="note"
-            key={postit._id}
-            style={{
-              transform: `rotate(${postit.rotate}deg)`,
-              left: postit.x,
-              top: postit.y,
-            }}
-            draggable="true"
-            onDragEnd={(e) => handleDropPostit(e, postit._id)}
-          >
-            <div
-              className="delete"
-              onClick={(e) => handleDeletePostit(e, postit._id)}
-            >
-              <FontAwesomeIcon icon={faTimes} className="icon bars fa-1xx" />
-            </div>
-            <div className="text">{postit.postit}</div>
-          </div>
-        ))}
-      </BoardDiv>
-    </BoardBackground>
+    <>
+      <BoardBackground>
+        <Nav />
+        <BoardTitle>Quotes • Betterment • Positivity</BoardTitle>
+        <BoardDiv>
+          <Form>
+            <textarea
+              value={postitInput}
+              onChange={(e) => setPostitInput(e.target.value)}
+              placeholder="Add a new post it..."
+            ></textarea>
+            <button onClick={(e) => handleAddPostitClick(e)}>Add</button>
+          </Form>
+          <DndBoard>
+            <DndProvider backend={HTML5Backend}>
+              <Example postits={postits} />
+            </DndProvider>
+          </DndBoard>
+        </BoardDiv>
+      </BoardBackground>
+    </>
   );
-};
+}
 
 export default Board;
-
-const BoardDiv = styled.div`
-  padding-top: 75px;
-  display: flex;
-  flex-flow: column;
-`;
 
 const BoardBackground = styled.div`
   background-color: #5de4d2;
@@ -142,6 +122,12 @@ const BoardBackground = styled.div`
   height: 100vh;
 `;
 
+const BoardDiv = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-flow: row;
+`;
+
 const BoardTitle = styled.h3`
   margin: 0;
   text-shadow: 3px 3px rgb(51, 167, 151);
@@ -149,4 +135,37 @@ const BoardTitle = styled.h3`
   font-size: 64px;
   color: white;
   text-align: center;
+  padding-top: 50px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  font-family: Patrick Hand SC;
+  font-size: 22px;
+  textarea {
+    border: 1px solid lightgray;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+  button {
+    width: 100%;
+    background-color: #fff27f;
+    cursor: pointer;
+    padding: 5px;
+    border: 0;
+    outline: none;
+  }
+  button:hover {
+    background-color: red;
+    color: white;
+  }
+`;
+
+const DndBoard = styled.div`
+  margin-left: 10px;
+  width: 100%;
 `;
