@@ -7,6 +7,7 @@ const PostitSchema = new Schema({
   rotate: Number,
   x: Number,
   y: Number,
+  color: String,
 });
 
 module.exports = mongoose.model("postit", PostitSchema);

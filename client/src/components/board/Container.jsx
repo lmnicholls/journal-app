@@ -5,7 +5,9 @@ import { ItemTypes } from "./ItemTypes";
 import update from "immutability-helper";
 import styled from "styled-components";
 import { Box } from "./Box";
-import { editPostitPosition, fetchPostits } from "../../actions";
+import { editPostitPosition, fetchPostits, deletePostit } from "../../actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Container = ({ postits }) => {
   const [boxes, setBoxes] = useState(postits);
@@ -36,7 +38,6 @@ const Container = ({ postits }) => {
         const delta = monitor.getDifferenceFromInitialOffset();
         const x = Math.round(item.left + delta.x);
         const y = Math.round(item.top + delta.y);
-        console.log("x", x, "y", y, "item", item);
         moveBox(item._id, x, y);
         setBoxes((prevState) => {
           console.log("prevstate", prevState);
@@ -56,6 +57,15 @@ const Container = ({ postits }) => {
     [moveBox]
   );
 
+  const handleDeletePostit = (e, postitID) => {
+    e.preventDefault();
+    dispatch(
+      deletePostit(postitID, () => {
+        dispatch(fetchPostits());
+      })
+    );
+  };
+
   return (
     <ContainerDiv ref={drop}>
       {boxes.map((postit) => {
@@ -65,9 +75,14 @@ const Container = ({ postits }) => {
             id={postit._id}
             left={postit.x}
             top={postit.y}
+            color={postit.color}
             hideSourceOnDrag="true"
+            rotate={postit.rotate}
           >
-            {postit.postit}
+            <DeleteDiv onClick={(e) => handleDeletePostit(e, postit._id)}>
+              <FontAwesomeIcon icon={faTimes} className="icon bars fa-1xx" />
+            </DeleteDiv>
+            <TextDiv>{postit.postit}</TextDiv>
           </Box>
         );
       })}
@@ -80,6 +95,23 @@ export default Container;
 const ContainerDiv = styled.div`
   width: 100%;
   height: 80vh;
-  border: 1px solid black;
   position: relative;
+`;
+
+const DeleteDiv = styled.div`
+  text-align: right;
+  cursor: pointer;
+  :hover {
+    color: red;
+  }
+`;
+
+const TextDiv = styled.div`
+  font-family: Patrick Hand SC;
+  font-size: 24px;
+  height: 90%;
+  width: 100%;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  padding-right: 15px;
 `;

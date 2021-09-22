@@ -57,7 +57,7 @@ const DropdownMenu = () => {
           <li>
             <Link to="/board">
               <Icon icon={faStickyNote} />
-              Strategies
+              Think Board
             </Link>
           </li>
           <li>

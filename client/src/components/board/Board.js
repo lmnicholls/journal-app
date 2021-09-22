@@ -7,12 +7,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import styled from "styled-components";
 import "./board.css";
 import Nav from "../nav/Nav";
-import {
-  addPostit,
-  fetchPostits,
-  deletePostit,
-  editPostitPosition,
-} from "../../actions";
+import { addPostit, fetchPostits } from "../../actions";
 
 function Board() {
   const { authenticated } = useSelector((state) => state.auth);
@@ -20,6 +15,7 @@ function Board() {
     return state.postits.postits;
   });
   const [postitInput, setPostitInput] = useState("");
+  const colors = ["lightyellow", "lightblue", "lightpink", "lightgreen"];
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,42 +37,15 @@ function Board() {
     if (!postitInput) {
       return;
     }
-    let rotate = Math.floor(Math.random() * 30);
+    let rotate = Math.floor(-30 + Math.random() * (30 + 1 - -30));
     let winWidth = window.innerWidth;
     let winHeight = window.innerHeight;
+    let color = colors[Math.floor(Math.random() * 4)];
     let x = Math.floor(Math.random() * winWidth) - 50;
     let y = Math.floor(Math.random() * winHeight) - 50;
-    dispatch(addPostit(postitInput, rotate, x, y));
+    dispatch(addPostit(postitInput, rotate, x, y, color));
     dispatch(fetchPostits());
     setPostitInput("");
-  };
-
-  const handleDeletePostit = (e, postitID) => {
-    e.preventDefault();
-    dispatch(
-      deletePostit(postitID, () => {
-        dispatch(fetchPostits());
-      })
-    );
-  };
-
-  const handleDropPostit = (e, postitID) => {
-    e.preventDefault();
-
-    e.target.style.left = `${e.pageX - 50}px`;
-    e.target.style.top = `${e.pageY - 50}px`;
-    let x = e.pageX - 50;
-    let y = e.pageY - 50;
-    dispatch(
-      editPostitPosition(postitID, x, y, () => {
-        dispatch(fetchPostits());
-      })
-    );
-  };
-
-  const handleDragOver = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
   };
 
   if (!postits) {
@@ -150,6 +119,7 @@ const Form = styled.form`
     max-width: 100%;
     padding: 10px;
     outline: none;
+    background-color: #fff27f;
   }
   button {
     width: 100%;
@@ -158,14 +128,16 @@ const Form = styled.form`
     padding: 5px;
     border: 0;
     outline: none;
+    color: #666563;
   }
   button:hover {
-    background-color: red;
-    color: white;
+    background-color: #666563;
+    color: #fff27f;
   }
 `;
 
 const DndBoard = styled.div`
   margin-left: 10px;
   width: 100%;
+  height: 100%;
 `;

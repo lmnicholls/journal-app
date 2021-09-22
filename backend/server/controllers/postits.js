@@ -17,6 +17,7 @@ exports.addPostit = function (req, res) {
     rotate: req.body.rotate,
     x: req.body.x,
     y: req.body.y,
+    color: req.body.color,
   });
 
   newPostit.save();
@@ -32,6 +33,8 @@ exports.addPostit = function (req, res) {
       }
     }
   ).populate({ path: "postits" });
+
+  return res.status(200).send(newPostit);
 };
 
 exports.fetchPostits = async (req, res) => {

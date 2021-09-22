@@ -16,7 +16,6 @@ const Feelings = (props) => {
     return state.feelings.feelings;
   });
 
-  console.log("feelings", feelings);
   const history = useHistory();
   const dispatch = useDispatch();
 

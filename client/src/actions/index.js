@@ -240,7 +240,7 @@ export const fetchPostits = () => (dispatch) => {
     });
 };
 
-export const addPostit = (postit, rotate, x, y) => (dispatch) => {
+export const addPostit = (postit, rotate, x, y, color) => (dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -248,7 +248,11 @@ export const addPostit = (postit, rotate, x, y) => (dispatch) => {
   };
 
   axios
-    .post("http://localhost:5000/postits", { postit, rotate, x, y }, config)
+    .post(
+      "http://localhost:5000/postits",
+      { postit, rotate, x, y, color },
+      config
+    )
     .then(function (response) {
       dispatch({ type: ADD_POSTIT, payload: response.data });
     })

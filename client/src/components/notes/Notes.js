@@ -14,7 +14,6 @@ const Notes = (props) => {
   const notes = useSelector((state) => {
     return state.notes.notes;
   });
-  console.log("notes", notes);
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
@@ -59,7 +58,7 @@ const Notes = (props) => {
     );
   };
 
-  if (!notes) {
+  if (notes?.length === 0) {
     return (
       <NotesBackground>
         <Nav />
@@ -67,7 +66,7 @@ const Notes = (props) => {
           <NotesTitle>Notes</NotesTitle>
           <NotesDiv>
             <NotePad>
-              <div>Notes Loading...</div>
+              <div> Add a note...</div>
               <Form>
                 <AddNote>
                   <NoteFormInput
@@ -103,7 +102,7 @@ const Notes = (props) => {
         <NotesDiv>
           <NotePad>
             <div>
-              {notes.map((note, index) => (
+              {notes?.map((note, index) => (
                 <TherapyNoteItem
                   note={note.note}
                   value={note._id}

@@ -2,7 +2,15 @@ import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import styled from "styled-components";
 
-export const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
+export const Box = ({
+  id,
+  left,
+  top,
+  hideSourceOnDrag,
+  color,
+  children,
+  rotate,
+}) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: ItemTypes.BOX,
@@ -17,7 +25,16 @@ export const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
     return <div ref={drag} />;
   }
   return (
-    <BoxDiv ref={drag} style={{ left, top }} role="Box">
+    <BoxDiv
+      ref={drag}
+      style={{
+        left,
+        top,
+        transform: `rotate(${rotate}deg)`,
+        backgroundColor: `${color}`,
+      }}
+      role="Box"
+    >
       {children}
     </BoxDiv>
   );
@@ -25,10 +42,11 @@ export const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
 
 const BoxDiv = styled.div`
   position: absolute;
-  border: 1px dashed gray;
-  background-color: purple;
-  color: white;
-  width: 200px;
-  padding: 0.5rem 1rem;
+  border: none;
+  color: #4a4a48;
   cursor: move;
+  height: 200px;
+  width: 200px;
+  padding: 10px;
+  overflow: hidden;
 `;
