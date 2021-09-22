@@ -122,7 +122,7 @@ const Journal = () => {
           {leftPageIndex < 0 ? (
             <LeftPage></LeftPage>
           ) : (
-            <LeftPage>
+            <LeftPage onClick={() => handlePreviousPageClick()}>
               <div className="entry">
                 <EntryTitle>{entries[leftPageIndex].title}</EntryTitle>
                 <JournalDate>
@@ -142,7 +142,7 @@ const Journal = () => {
           {rightPageIndex > numEntries - 1 ? (
             <RightPage></RightPage>
           ) : (
-            <RightPage>
+            <RightPage onClick={() => handleNextPageClick()}>
               <div className="entry">
                 <EntryTitle>{entries[rightPageIndex].title}</EntryTitle>
                 <JournalDate>
