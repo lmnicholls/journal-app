@@ -22,7 +22,7 @@ const NavAuth = () => {
     return (
       <React.Fragment>
         <li>
-          <Link to="/signin" onClick={handleLogOut}>
+          <Link to="/" onClick={handleLogOut}>
             Logout
           </Link>
         </li>
@@ -72,7 +72,7 @@ const NavUl = styled.ul`
     float: left;
   }
   li {
-    margin-left: 0.8em;
+    // margin-left: 0.8em;
     height: 30px;
   }
   li a {
@@ -81,8 +81,8 @@ const NavUl = styled.ul`
     font-size: 20px;
   }
   padding-right: 10px;
-  li:hover {
-    background-color: gray;
+  li a:hover {
+    color: black;
   }
 `;
 

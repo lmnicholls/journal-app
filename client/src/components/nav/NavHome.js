@@ -59,7 +59,7 @@ const NavUl = styled.ul`
     font-size: 20px;
   }
   padding-right: 10px;
-  li:hover {
-    background-color: gray;
+  li a:hover {
+    color: black;
   }
 `;

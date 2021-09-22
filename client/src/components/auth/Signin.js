@@ -125,6 +125,9 @@ const FormGroup = styled.div`
   display: flex;
   flex-flow: column;
   text-align: left;
+  input {
+    font-size: 24px;
+  }
 `;
 
 const FormLabels = styled.div`
