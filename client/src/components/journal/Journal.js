@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../nav/Nav";
 import { fetchEntries } from "../../actions";
+import moment from "moment";
 
 const Journal = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,13 @@ const Journal = () => {
   const entries = useSelector((state) => {
     return state.journalEntries.entries[0];
   });
+  entries?.sort(
+    (a, b) =>
+      new moment(a.date).format("YYYYMMDD") -
+      new moment(b.date).format("YYYYMMDD")
+  );
+
+  console.log(entries);
   const numEntries = useSelector((state) => {
     return state.journalEntries.numEntries;
   });
