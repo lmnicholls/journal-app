@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css2?family=Amatic+SC&family=Rochester&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Caveat&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Caveat&family=Patrick+Hand&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Quicksand&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap);
 
 .wrapper-class {
   padding: 10px;
@@ -30,10 +32,6 @@
 }
 
 /* Set droplist names - -item is the currently selected font, -label is the font's appearance in the droplist*/
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=""]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=""]::before {
-  content: "Default";
-}
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="patrick-hand"]::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="patrick-hand"]::before {
@@ -41,10 +39,22 @@
   font-family: "Patrick Hand";
 }
 
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="quicksand"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="quicksand"]::before {
+  content: "Quicksand";
+  font-family: "Quicksand";
+}
+
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="amatic-sc"]::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="amatic-sc"]::before {
   content: "Amatic SC";
   font-family: "Amatic SC";
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="josefin-slab"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="josefin-slab"]::before {
+  content: "Josefin Slab";
+  font-family: "Josefin Slab";
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="caveat"]::before,
@@ -68,6 +78,14 @@ Set the font-family content used for the HTML content.
 
 .ql-font-caveat {
   font-family: "Caveat";
+}
+
+.ql-font-josefin-slab {
+  font-family: "Josefin Slab";
+}
+
+.ql-font-quicksand {
+  font-family: "Quicksand";
 }
 
 .ql-font-amatic-sc {

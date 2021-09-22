@@ -53,7 +53,15 @@ Quill.register(Size, true);
 
 // Add fonts to whitelist and register them
 const Font = Quill.import("formats/font");
-Font.whitelist = ["", "patrick-hand", "amatic-sc", "caveat", "rochester"];
+Font.whitelist = [
+  "",
+  "patrick-hand",
+  "quicksand",
+  "amatic-sc",
+  "josefin-slab",
+  "caveat",
+  "rochester",
+];
 Quill.register(Font, true);
 
 // Modules object for setting up the Quill editor
@@ -99,18 +107,23 @@ export const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
       <select className="ql-font" defaultValue="">
-        <option value=""></option>
-        <option value="patrick-hand">Patrick Hand</option>
+        <option default value="patrick-hand">
+          Patrick Hand
+        </option>
+        <option value="quicksand">Quicksand</option>
         <option value="amatic-sc">Amatic SC</option>
+        <option value="josefin-slab">Josefin Slab</option>
         <option value="caveat">Caveat</option>
         <option value="rochester">Rochester</option>
       </select>
-      <select className="ql-size" defaultValue="20px">
+      <select className="ql-size" defaultValue="24px">
         <option value="12px">12</option>
         <option value="14px">14</option>
         <option value="16px">16</option>
         <option value="20px">20</option>
-        <option value="24px">24</option>
+        <option default value="24px">
+          24
+        </option>
         <option value="32px">32</option>
         <option value="42px">42</option>
         <option value="54px">54</option>

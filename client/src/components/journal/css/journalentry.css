@@ -7,6 +7,11 @@
   padding-top: 15px;
 }
 
+.ql-container {
+  font-family: "Patrick Hand SC" !important;
+  font-size: 24px !important;
+}
+
 .ql-editor {
   min-height: 200px;
   background-color: white;
@@ -19,8 +24,6 @@
 
 /* Set default font-family */
 #editor-container {
-  font-family: "Rochester";
-  font-size: 18px;
   height: 375px;
 }
 
