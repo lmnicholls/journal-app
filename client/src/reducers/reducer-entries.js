@@ -23,7 +23,7 @@ const journalEntriesReducer = (state = DEFAULT_STATE, action) => {
     case FETCH_ENTRIES:
       return {
         entry: { ...state.entry },
-        entries: [action.payload.entries],
+        entries: action.payload.entries,
         numEntries: action.payload.entries.length,
       };
     default:

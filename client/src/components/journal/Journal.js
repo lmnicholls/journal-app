@@ -11,7 +11,7 @@ const Journal = () => {
   const history = useHistory();
   const { authenticated } = useSelector((state) => state.auth);
   const entries = useSelector((state) => {
-    return state.journalEntries.entries[0];
+    return state.journalEntries.entries;
   });
   entries?.sort(
     (a, b) =>
@@ -19,7 +19,6 @@ const Journal = () => {
       new moment(b.date).format("YYYYMMDD")
   );
 
-  console.log(entries);
   const numEntries = useSelector((state) => {
     return state.journalEntries.numEntries;
   });

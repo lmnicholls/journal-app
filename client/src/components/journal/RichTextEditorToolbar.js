@@ -107,9 +107,8 @@ export const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
       <select className="ql-font" defaultValue="">
-        <option default value="patrick-hand">
-          Patrick Hand
-        </option>
+        <option value=""></option>
+        <option value="patrick-hand">Patrick Hand</option>
         <option value="quicksand">Quicksand</option>
         <option value="amatic-sc">Amatic SC</option>
         <option value="josefin-slab">Josefin Slab</option>
