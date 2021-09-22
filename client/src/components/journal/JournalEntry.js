@@ -35,8 +35,9 @@ const JournalEntry = () => {
   };
 
   return (
-    <div className="background">
+    <>
       <Nav />
+      <JournalEntryBackground />
       <Journal>
         <Button onClick={handleAddEntryClick}>Back To Journal</Button>
         <JournalEntryForm onSubmit={(e) => handleFormSubmit(e)}>
@@ -67,7 +68,7 @@ const JournalEntry = () => {
           </div>
         </JournalEntryForm>
       </Journal>
-    </div>
+    </>
   );
 };
 
@@ -80,6 +81,21 @@ const Journal = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 100px;
+`;
+
+const JournalEntryBackground = styled.div`
+  background-color: #5de4d2;
+  background-image: linear-gradient(
+    315deg,
+    #5de4d2 25%,
+    #6cdcbf 52%,
+    #49a7da 90%
+  );
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: -10;
 `;
 
 const JournalEntryForm = styled.form`

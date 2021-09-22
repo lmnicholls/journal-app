@@ -60,8 +60,9 @@ const Notes = (props) => {
 
   if (notes?.length === 0) {
     return (
-      <NotesBackground>
+      <>
         <Nav />
+        <NotesBackground />
         <NotesContainer>
           <NotesTitle>Notes</NotesTitle>
           <NotesDiv>
@@ -90,13 +91,14 @@ const Notes = (props) => {
             </NotePad>
           </NotesDiv>
         </NotesContainer>
-      </NotesBackground>
+      </>
     );
   }
 
   return (
-    <NotesBackground>
+    <>
       <Nav />
+      <NotesBackground />
       <NotesContainer>
         <NotesTitle>Notes</NotesTitle>
         <NotesDiv>
@@ -139,7 +141,7 @@ const Notes = (props) => {
           </NotePad>
         </NotesDiv>
       </NotesContainer>
-    </NotesBackground>
+    </>
   );
 };
 
@@ -196,6 +198,9 @@ const NotesBackground = styled.div`
   );
   width: 100vw;
   height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: -10;
 `;
 
 const NoteFormInput = styled(Form.Control)`

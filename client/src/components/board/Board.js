@@ -38,11 +38,14 @@ function Board() {
       return;
     }
     let rotate = Math.floor(-30 + Math.random() * (30 + 1 - -30));
-    let winWidth = window.innerWidth;
-    let winHeight = window.innerHeight;
+    let dndboard = document.querySelector("#dndboard");
+    let width = dndboard.clientWidth;
+    let height = dndboard.clientHeight;
+    // let winWidth = window.innerWidth;
+    // let winHeight = window.innerHeight;
     let color = colors[Math.floor(Math.random() * 4)];
-    let x = Math.floor(Math.random() * winWidth) - 50;
-    let y = Math.floor(Math.random() * winHeight) - 50;
+    let x = Math.floor(Math.random() * width) - 50;
+    let y = Math.floor(Math.random() * height) - 50;
     dispatch(addPostit(postitInput, rotate, x, y, color));
     dispatch(fetchPostits());
     setPostitInput("");
@@ -54,25 +57,24 @@ function Board() {
 
   return (
     <>
-      <BoardBackground>
-        <Nav />
-        <BoardTitle>Quotes • Betterment • Positivity</BoardTitle>
-        <BoardDiv>
-          <Form>
-            <textarea
-              value={postitInput}
-              onChange={(e) => setPostitInput(e.target.value)}
-              placeholder="Add a new post it..."
-            ></textarea>
-            <button onClick={(e) => handleAddPostitClick(e)}>Add</button>
-          </Form>
-          <DndBoard>
-            <DndProvider backend={HTML5Backend}>
-              <Example postits={postits} />
-            </DndProvider>
-          </DndBoard>
-        </BoardDiv>
-      </BoardBackground>
+      <Nav />
+      <BoardBackground />
+      <BoardTitle>Quotes • Betterment • Positivity</BoardTitle>
+      <BoardDiv>
+        <Form>
+          <textarea
+            value={postitInput}
+            onChange={(e) => setPostitInput(e.target.value)}
+            placeholder="Add a new post it..."
+          ></textarea>
+          <button onClick={(e) => handleAddPostitClick(e)}>Add</button>
+        </Form>
+        <DndBoard id="dndboard">
+          <DndProvider backend={HTML5Backend}>
+            <Example postits={postits} />
+          </DndProvider>
+        </DndBoard>
+      </BoardDiv>
     </>
   );
 }
@@ -89,6 +91,9 @@ const BoardBackground = styled.div`
   );
   width: 100vw;
   height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: -10;
 `;
 
 const BoardDiv = styled.div`
@@ -138,6 +143,9 @@ const Form = styled.form`
 
 const DndBoard = styled.div`
   margin-left: 10px;
-  width: 100%;
-  height: 100%;
+  // position: absolute;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  width: 1670px;
+  height: 800px;
 `;

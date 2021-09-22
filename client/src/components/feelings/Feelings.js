@@ -44,8 +44,9 @@ const Feelings = (props) => {
   };
 
   return (
-    <FeelingsBackground>
+    <>
       <Nav />
+      <FeelingsBackground />
       <FeelingsDiv>
         <FeelingsTitle>How are you feeling today?</FeelingsTitle>
         <Form>
@@ -111,7 +112,7 @@ const Feelings = (props) => {
           </Graph>
         </ChartRow>
       </ChartContainer>
-    </FeelingsBackground>
+    </>
   );
 };
 
@@ -144,6 +145,9 @@ const FeelingsBackground = styled.div`
   );
   width: 100vw;
   height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: -10;
 `;
 
 const FeelingsContainer = styled.div`

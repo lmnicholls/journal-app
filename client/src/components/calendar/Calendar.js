@@ -51,8 +51,9 @@ const MyCalendar = (props) => {
     });
 
     return (
-      <CalendarBackground>
+      <>
         <Nav />
+        <CalendarBackground />
         <CalendarDiv>
           <Calendar
             onChange={onChange}
@@ -77,7 +78,7 @@ const MyCalendar = (props) => {
           handleClose={handleClose}
           handleShow={handleShow}
         />
-      </CalendarBackground>
+      </>
     );
   }
 
@@ -110,6 +111,9 @@ const CalendarBackground = styled.div`
   );
   width: 100vw;
   height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: -10;
 `;
 
 const Background = styled.div`
