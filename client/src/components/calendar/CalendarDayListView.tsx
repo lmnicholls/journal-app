@@ -6,7 +6,7 @@ import "./calendar.css";
 import styled from "styled-components";
 import moment from "moment";
 
-export default function CalendarDayListView(props) {
+export default function CalendarDayListView(props: any) {
   const [show, setShow] = useState(false);
   const [entryID, setEntryID] = useState("");
 
@@ -14,13 +14,14 @@ export default function CalendarDayListView(props) {
   const handleShow = () => setShow(true);
 
   const entries = props.entries.filter(
-    (entry) =>
+    (entry: any) =>
       moment(entry.date).format("MM/DD/YYYY") ===
       moment(props.date).format("MM/DD/YYYY")
   );
 
-  const handleJournalEntryClick = (e) => {
-    setEntryID(e.target.value);
+  const handleJournalEntryClick = (e: any, entryID: string) => {
+    e.preventDefault();
+    setEntryID(entryID);
     handleShow();
   };
 
@@ -52,12 +53,12 @@ export default function CalendarDayListView(props) {
               {entries.length === 0 ? (
                 <Col>No journal entries for this date.</Col>
               ) : (
-                entries.map((entry) => {
+                entries.map((entry: any) => {
                   return (
                     <Col key={entry._id}>
                       <JournalEntryButton
                         value={entry._id}
-                        onClick={(e) => handleJournalEntryClick(e)}
+                        onClick={(e) => handleJournalEntryClick(e, entry._id)}
                       >
                         {entry.title}
                       </JournalEntryButton>
