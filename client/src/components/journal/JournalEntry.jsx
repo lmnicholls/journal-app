@@ -10,9 +10,9 @@ import RichTextEditor from "./RichTextEditor";
 
 const JournalEntry = () => {
   const [title, setTitle] = useState("");
-  const [entry, setEntry] = useState<EditorState>(EditorState.createEmpty());
+  const [entry, setEntry] = useState(EditorState.createEmpty());
   const date = new Date();
-  const { authenticated } = useSelector<any, any>((state) => state.auth);
+  const { authenticated } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,7 +27,7 @@ const JournalEntry = () => {
     history.push("/journal");
   };
 
-  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(addEntry(title, date, entry));
     dispatch(fetchEntries());
