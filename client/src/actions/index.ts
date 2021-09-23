@@ -105,7 +105,7 @@ export const fetchEntries = () => (dispatch: any) => {
 };
 
 export const addFeeling =
-  (feeling: string, date: Date, callback: () => void) => (dispatch: any) => {
+  (feeling: string, date: string) => (dispatch: any) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -113,14 +113,9 @@ export const addFeeling =
     };
 
     axios
-      .post(
-        "http://localhost:5000/feelings",
-        { feeling, date, callback },
-        config
-      )
+      .post("http://localhost:5000/feelings", { feeling, date }, config)
       .then(function (response) {
         dispatch({ type: ADD_FEELING, payload: response.data });
-        callback();
       })
       .catch(function (error) {
         console.log(error);
