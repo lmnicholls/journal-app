@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { fetchUser, fetchEntries } from "../actions";
 import "../App.css";
 
-const App = (props) => {
+const App = (props: any) => {
   const dispatch = useDispatch();
-  const authenticated = useSelector((state) => state.auth.authenticated);
+  const authenticated = useSelector<any, any>(
+    (state) => state.auth.authenticated
+  );
 
   useEffect(() => {
     if (authenticated) {
