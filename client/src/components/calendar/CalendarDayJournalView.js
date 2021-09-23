@@ -18,7 +18,7 @@ export default function CalendarDayJournalView(props) {
           onHide={() => {
             props.handleClose();
           }}
-          style={{ "background-color": "rgba(62, 164, 219, 0.4)" }}
+          style={{ backgroundColor: "rgba(62, 164, 219, 0.4)" }}
           size="lg"
         >
           <ModalHeader>

@@ -9,12 +9,13 @@ import { fetchEntries } from "../../actions";
 import moment from "moment";
 import "./calendar.css";
 
-const MyCalendar = (props) => {
+const MyCalendar = () => {
   const [date, setDate] = useState(new Date());
-  const { authenticated } = useSelector((state) => state.auth);
-  const entries = useSelector((state) => {
-    return state.journalEntries.entries[0];
+  const { authenticated } = useSelector<any, any>((state) => state.auth);
+  const entries = useSelector<any, any>((state) => {
+    return state.journalEntries.entries;
   });
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -35,17 +36,17 @@ const MyCalendar = (props) => {
     }
   }, [dispatch, authenticated]);
 
-  const onChange = (date) => {
+  const onChange = (date: Date) => {
     setDate(date);
   };
 
-  const handleDayClick = (date) => {
+  const handleDayClick = (date: Date) => {
     setDate(date);
     handleShow();
   };
 
   if (entries) {
-    let dailyEntriesDates = entries.map((entry) => {
+    let dailyEntriesDates = entries.map((entry: any) => {
       let date = moment(new Date(entry.date)).format("MM/DD/YYYY");
       return date;
     });
@@ -59,14 +60,15 @@ const MyCalendar = (props) => {
             onChange={onChange}
             onClickDay={(date) => handleDayClick(date)}
             value={date}
-            tileClassName={({ date, view }) => {
+            tileClassName={({ date }) => {
               if (
                 dailyEntriesDates.find(
-                  (entryDate) => entryDate === moment(date).format("MM/DD/YYYY")
+                  (entryDate: string) =>
+                    entryDate === moment(date).format("MM/DD/YYYY")
                 )
               ) {
                 return "highlight";
-              }
+              } else return "";
             }}
           />
         </CalendarDiv>
