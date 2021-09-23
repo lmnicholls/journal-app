@@ -1,5 +1,5 @@
+import { AnyAction } from "redux";
 import { ADD_ENTRY, FETCH_ENTRIES } from "../actions/types";
-// import { normalize, schema } from "normalizr";
 
 const DEFAULT_STATE = {
   entry: {},
@@ -7,18 +7,16 @@ const DEFAULT_STATE = {
   numEntries: 0,
 };
 
-// const journalEntriesSchema = new schema.Entity("entry", undefined);
-
-const journalEntriesReducer = (state = DEFAULT_STATE, action) => {
+const journalEntriesReducer = (state = DEFAULT_STATE, action: AnyAction) => {
   switch (action.type) {
     case ADD_ENTRY:
       return {
+        ...state,
         entry: {
           title: action.payload.title,
           date: action.payload.date,
           entry: action.payload.entry,
         },
-        ...state,
       };
     case FETCH_ENTRIES:
       return {

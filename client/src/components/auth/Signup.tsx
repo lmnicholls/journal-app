@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Resolver } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,13 +17,15 @@ const userSchema = Yup.object().shape({
   password: Yup.string().required(),
 });
 
+const resolver: Resolver<any> = yupResolver(userSchema);
+
 const Signup = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(userSchema),
+    resolver,
   });
 
   const dispatch = useDispatch();
@@ -49,7 +51,6 @@ const Signup = () => {
             <FormGroup>
               <input
                 className="form-control"
-                name="firstName"
                 {...register("first name", { required: "Required" })}
               ></input>
               <div className="form-labels">
@@ -65,7 +66,6 @@ const Signup = () => {
               </div>
               <input
                 className="form-control"
-                name="lastName"
                 {...register("last name", { required: "Required" })}
               ></input>
               <div className="form-labels">
@@ -84,26 +84,6 @@ const Signup = () => {
             <FormGroup>
               <input
                 className="form-control"
-                name="therapist"
-                {...register("therapist", { required: "Required" })}
-              ></input>
-              <div className="form-labels">
-                <label>Therapist Name</label>
-                <span
-                  style={{
-                    color: "white",
-                    textShadow: "1px 1px red",
-                  }}
-                >
-                  {errors.therapist?.message}
-                </span>
-              </div>
-            </FormGroup>
-
-            <FormGroup>
-              <input
-                className="form-control"
-                name="email"
                 {...register("email", { required: "Required" })}
               ></input>
               <div className="form-labels">
@@ -122,7 +102,6 @@ const Signup = () => {
             <FormGroup>
               <input
                 className="form-control"
-                name="password"
                 type="password"
                 {...register("password", { required: "Required" })}
               ></input>

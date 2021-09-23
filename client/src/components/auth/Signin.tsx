@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Resolver } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,13 +14,15 @@ const userSchema = Yup.object().shape({
   password: Yup.string().required(),
 });
 
+const resolver: Resolver<any> = yupResolver(userSchema);
+
 const Signin = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(userSchema),
+  } = useForm<{ email: any; password: any }>({
+    resolver,
   });
 
   const dispatch = useDispatch();
@@ -45,7 +47,6 @@ const Signin = () => {
             <FormGroup>
               <input
                 className="form-control"
-                name="email"
                 {...register("email", { required: "Required" })}
               ></input>
               <FormLabels>
@@ -64,7 +65,6 @@ const Signin = () => {
             <FormGroup>
               <input
                 className="form-control"
-                name="password"
                 type="password"
                 {...register("password", { required: "Required" })}
               ></input>

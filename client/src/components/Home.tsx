@@ -36,7 +36,7 @@ const Home = () => {
             style={{ textDecoration: "none" }}
             className="links"
           >
-            <h2>Think Board</h2>
+            <h2>Post It Board</h2>
             <IconBorder>
               <Icon icon={faStickyNote} size="2x" />
             </IconBorder>
