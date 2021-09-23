@@ -9,9 +9,9 @@ import { editPostitPosition, fetchPostits, deletePostit } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const Container = ({ postits }) => {
+const Container = ({ postits }: any) => {
   const [boxes, setBoxes] = useState(postits);
-
+  console.log(postits);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,14 +34,14 @@ const Container = ({ postits }) => {
   const [, drop] = useDrop(
     () => ({
       accept: ItemTypes.BOX,
-      drop(item, monitor) {
+      drop(item: any, monitor) {
         const delta = monitor.getDifferenceFromInitialOffset();
+        if (!delta) return;
         const x = Math.round(item.left + delta.x);
         const y = Math.round(item.top + delta.y);
         moveBox(item._id, x, y);
-        setBoxes((prevState) => {
-          console.log("prevstate", prevState);
-          let index = prevState.findIndex((box) => (box._id = item.id));
+        setBoxes((prevState: any) => {
+          let index = prevState.findIndex((box: any) => (box._id = item.id));
           console.log("index", index);
           prevState[index][x] = x;
           prevState[index][y] = y;
@@ -57,7 +57,7 @@ const Container = ({ postits }) => {
     [moveBox]
   );
 
-  const handleDeletePostit = (e, postitID) => {
+  const handleDeletePostit = (e: React.ChangeEvent<any>, postitID: string) => {
     e.preventDefault();
     dispatch(
       deletePostit(postitID, () => {
@@ -68,7 +68,7 @@ const Container = ({ postits }) => {
 
   return (
     <ContainerDiv ref={drop}>
-      {boxes.map((postit) => {
+      {boxes.map((postit: any) => {
         return (
           <Box
             key={postit._id}
@@ -76,7 +76,7 @@ const Container = ({ postits }) => {
             left={postit.x}
             top={postit.y}
             color={postit.color}
-            hideSourceOnDrag="true"
+            hideSourceOnDrag={true}
             rotate={postit.rotate}
           >
             <DeleteDiv onClick={(e) => handleDeletePostit(e, postit._id)}>

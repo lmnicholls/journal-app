@@ -44,8 +44,6 @@ function Board() {
     if (!dndboard) return;
     let width = dndboard.clientWidth;
     let height = dndboard.clientHeight;
-    // let winWidth = window.innerWidth;
-    // let winHeight = window.innerHeight;
     let color = colors[Math.floor(Math.random() * 4)];
     let x = Math.floor(Math.random() * width) - 50;
     let y = Math.floor(Math.random() * height) - 50;
