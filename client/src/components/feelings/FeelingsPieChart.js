@@ -4,7 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 
 export default function FeelingsPieChart({ feelings }) {
   const sortedFeelings = feelings?.reduce((obj, item) => {
-    obj[item.feeling] = (obj[item.feeling] || 0) + 1;
+    obj[item.text] = (obj[item.text] || 0) + 1;
     return obj;
   }, {});
 

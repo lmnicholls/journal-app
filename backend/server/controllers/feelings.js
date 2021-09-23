@@ -17,7 +17,7 @@ exports.addFeeling = function (req, res) {
   }
 
   const newFeeling = new Feeling({
-    feeling: req.body.feeling,
+    text: req.body.feeling,
     date: req.body.date,
   });
 

@@ -15,6 +15,7 @@ const Feelings = () => {
   const feelings = useSelector<any, any>((state) => {
     return state.feelings.feelings;
   });
+  console.log(feelings);
 
   const history = useHistory();
   const dispatch = useDispatch();

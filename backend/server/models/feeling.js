@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Define our model
 const feelingSchema = new Schema({
-  feeling: String,
+  text: String,
   date: String,
 });
 
