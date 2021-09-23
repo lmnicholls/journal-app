@@ -11,7 +11,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Container = ({ postits }: any) => {
   const [boxes, setBoxes] = useState(postits);
-  console.log(postits);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +41,6 @@ const Container = ({ postits }: any) => {
         moveBox(item._id, x, y);
         setBoxes((prevState: any) => {
           let index = prevState.findIndex((box: any) => (box._id = item.id));
-          console.log("index", index);
           prevState[index][x] = x;
           prevState[index][y] = y;
           return prevState;

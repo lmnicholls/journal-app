@@ -8,8 +8,8 @@ import "./css/richTextEditor.css";
 import ReactQuill from "react-quill";
 import styled from "styled-components";
 
-const RichTextEditor = (props) => {
-  const handleEditorChange = (state) => {
+const RichTextEditor = (props: any) => {
+  const handleEditorChange = (state: any) => {
     props.setEntry(state);
   };
 
