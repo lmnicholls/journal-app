@@ -14,18 +14,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const DropdownMenu = () => {
-  const dropdownRef = useRef(null);
+  const dropdownRef: React.Ref<HTMLElement> = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const onClick = (e) => {
+  const onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setIsActive(!isActive);
   };
 
   useEffect(() => {
-    const pageClickEvent = (e) => {
+    const pageClickEvent: (this: Window, ev: MouseEvent) => any = (e) => {
       if (
         dropdownRef.current !== null &&
-        !dropdownRef.current.contains(e.target)
+        !dropdownRef.current.contains(e.target as Node)
       ) {
         setIsActive(!isActive);
       }

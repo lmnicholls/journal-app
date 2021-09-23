@@ -10,6 +10,14 @@ export const Box = ({
   color,
   children,
   rotate,
+}: {
+  id: string;
+  left: number;
+  top: number;
+  hideSourceOnDrag: boolean;
+  color: string;
+  children: any;
+  rotate: number;
 }) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({

@@ -5,16 +5,19 @@ import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import styled from "styled-components";
-import { signin } from "../../actions";
-import Background from "../Background";
+import { signup } from "../../actions";
 import NavAuth from "../nav/NavAuth";
+import Background from "../Background.js";
 
 const userSchema = Yup.object().shape({
+  firstName: Yup.string().required("First Name is a required field"),
+  lastName: Yup.string().required("Last Name is a required field"),
+  therapist: Yup.string().required("Therapist is a required field"),
   email: Yup.string().email().required(),
   password: Yup.string().required(),
 });
 
-const Signin = () => {
+const Signup = () => {
   const {
     register,
     handleSubmit,
@@ -26,9 +29,9 @@ const Signin = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = (data: any) => {
     dispatch(
-      signin(data, () => {
+      signup(data, () => {
         history.push("/home");
       })
     );
@@ -36,19 +39,74 @@ const Signin = () => {
 
   return (
     <Fragment>
+      <Background />
       <NavAuth />
       <SignInStyles>
-        <Background />
-        <SignInContainer>
-          <SignInForm onSubmit={handleSubmit(handleFormSubmit)}>
-            <h3>Sign In</h3>
+        <SignUpContainer>
+          <SignUpForm onSubmit={handleSubmit(handleFormSubmit)}>
+            <h3 style={{ marginBottom: "0px" }}>Welcome to Therapy & Me!</h3>
+            <h3>Let's create your account.</h3>
+            <FormGroup>
+              <input
+                className="form-control"
+                name="firstName"
+                {...register("first name", { required: "Required" })}
+              ></input>
+              <div className="form-labels">
+                <label>First Name</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.firstName?.message}
+                </span>
+              </div>
+              <input
+                className="form-control"
+                name="lastName"
+                {...register("last name", { required: "Required" })}
+              ></input>
+              <div className="form-labels">
+                <label>Last Name</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.lastName?.message}
+                </span>
+              </div>
+            </FormGroup>
+
+            <FormGroup>
+              <input
+                className="form-control"
+                name="therapist"
+                {...register("therapist", { required: "Required" })}
+              ></input>
+              <div className="form-labels">
+                <label>Therapist Name</label>
+                <span
+                  style={{
+                    color: "white",
+                    textShadow: "1px 1px red",
+                  }}
+                >
+                  {errors.therapist?.message}
+                </span>
+              </div>
+            </FormGroup>
+
             <FormGroup>
               <input
                 className="form-control"
                 name="email"
                 {...register("email", { required: "Required" })}
               ></input>
-              <FormLabels>
+              <div className="form-labels">
                 <label>Email</label>
                 <span
                   style={{
@@ -58,7 +116,7 @@ const Signin = () => {
                 >
                   {errors.email?.message}
                 </span>
-              </FormLabels>
+              </div>
             </FormGroup>
 
             <FormGroup>
@@ -81,29 +139,31 @@ const Signin = () => {
               </div>
             </FormGroup>
             <div style={{ textAlign: "right" }}>
-              <SubmitButton type="submit">Submit</SubmitButton>
+              <SubmitButton className="btn btn-primary submit" type="submit">
+                Create Account
+              </SubmitButton>
             </div>
-          </SignInForm>
-        </SignInContainer>
+          </SignUpForm>
+        </SignUpContainer>
       </SignInStyles>
     </Fragment>
   );
 };
 
-export default Signin;
+export default Signup;
 
 const SignInStyles = styled.div`
   margin-top: 0px;
-  padding-top: 200px;
+  padding-top: 100px;
   padding-bottom: 100px;
 `;
 
-const SignInContainer = styled.div`
+const SignUpContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const SignInForm = styled.form`
+const SignUpForm = styled.form`
   font-family: "Patrick Hand SC";
   color: white;
   text-align: center;
@@ -130,16 +190,6 @@ const FormGroup = styled.div`
   }
 `;
 
-const FormLabels = styled.div`
-  display: flex;
-  flex-flow: row;
-  span: {
-    font-size: 18px;
-    padding-top: 4px;
-    padding-left: 10px;
-  }
-`;
-
 const SubmitButton = styled.button`
   background-color: rgb(217, 219, 219);
   font-family: "Patrick Hand SC";
@@ -155,3 +205,12 @@ const SubmitButton = styled.button`
     color: rgb(112, 110, 110);
   }
 `;
+
+// const FormInput = styled.input`
+//   border: 2px solid white;
+//   border-radius: 4px;
+//   height: 25px;
+//   font-family: "Comic Neue";
+//   font-size: 18px;
+//   color: rgb(8, 64, 92);
+// `;

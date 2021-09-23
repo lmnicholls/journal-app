@@ -16,7 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const { authenticated } = useSelector((state) => state.auth);
+  const { authenticated } = useSelector<any, any>((state) => state.auth);
   const history = useHistory();
 
   useEffect(() => {

@@ -10,8 +10,8 @@ import Nav from "../nav/Nav";
 import { addPostit, fetchPostits } from "../../actions";
 
 function Board() {
-  const { authenticated } = useSelector((state) => state.auth);
-  const postits = useSelector((state) => {
+  const { authenticated } = useSelector<any, any>((state) => state.auth);
+  const postits = useSelector<any, any>((state) => {
     return state.postits.postits;
   });
   const [postitInput, setPostitInput] = useState("");
@@ -32,13 +32,16 @@ function Board() {
     }
   }, [authenticated, history]);
 
-  const handleAddPostitClick = (e) => {
+  const handleAddPostitClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
     e.preventDefault();
     if (!postitInput) {
       return;
     }
     let rotate = Math.floor(-30 + Math.random() * (30 + 1 - -30));
     let dndboard = document.querySelector("#dndboard");
+    if (!dndboard) return;
     let width = dndboard.clientWidth;
     let height = dndboard.clientHeight;
     // let winWidth = window.innerWidth;
