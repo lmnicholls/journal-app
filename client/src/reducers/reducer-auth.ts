@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import { AUTH_USER, AUTH_ERROR } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -5,7 +6,7 @@ const INITIAL_STATE = {
   errorMessage: "",
   email: null,
 };
-const AuthReducer = function (state = INITIAL_STATE, action) {
+const AuthReducer = function (state = INITIAL_STATE, action: AnyAction) {
   switch (action.type) {
     case AUTH_USER:
       return {
