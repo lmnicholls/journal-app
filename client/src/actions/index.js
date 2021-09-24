@@ -3,6 +3,7 @@ import {
   AUTH_USER,
   AUTH_ERROR,
   ADD_ENTRY,
+  DELETE_ENTRY,
   FETCH_ENTRY,
   FETCH_ENTRIES,
   ADD_FEELING,
@@ -79,6 +80,24 @@ export const addEntry = (title, date, entry) => (dispatch) => {
     .post("http://localhost:5000/entries", { title, date, entry }, config)
     .then(function (response) {
       dispatch({ type: ADD_ENTRY, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const deleteEntry = (entryID, callback) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .delete(`http://localhost:5000/entries/${entryID}`, config)
+    .then(function (response) {
+      dispatch({ type: DELETE_ENTRY, payload: response.data });
+      callback();
     })
     .catch(function (error) {
       console.log(error);

@@ -13,7 +13,7 @@ import Signin from "./components/auth/Signin";
 import Home from "./components/Home";
 import MyCalendar from "./components/calendar/Calendar";
 import JournalEntry from "./components/journal/JournalEntry";
-import Journal from "./components/journal/Journal";
+import RevisedJournal from "./components/journal/RevisedJournal";
 import Board from "./components/board/Board";
 import Notes from "./components/notes/Notes";
 import Feelings from "./components/feelings/Feelings";
@@ -35,7 +35,7 @@ render(
             <Route exact path="/board" component={Board} />
             <Route exact path="/notes" component={Notes} />
             <Route exact path="/new-entry" component={JournalEntry} />
-            <Route exact path="/journal" component={Journal}></Route>
+            <Route exact path="/journal" component={RevisedJournal} />
             <Route exact path="/calendar" component={MyCalendar} />
             <Route exact path="/feelings" component={Feelings} />
           </Switch>

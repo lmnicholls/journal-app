@@ -1,13 +1,10 @@
-import { ADD_ENTRY, FETCH_ENTRIES } from "../actions/types";
-// import { normalize, schema } from "normalizr";
+import { ADD_ENTRY, DELETE_ENTRY, FETCH_ENTRIES } from "../actions/types";
 
 const DEFAULT_STATE = {
   entry: {},
   entries: [],
   numEntries: 0,
 };
-
-// const journalEntriesSchema = new schema.Entity("entry", undefined);
 
 const journalEntriesReducer = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
@@ -19,6 +16,11 @@ const journalEntriesReducer = (state = DEFAULT_STATE, action) => {
           entry: action.payload.entry,
         },
         ...state,
+      };
+    case DELETE_ENTRY:
+      return {
+        entry: { ...state.entry },
+        entries: action.payload.entries,
       };
     case FETCH_ENTRIES:
       return {
