@@ -1,8 +1,11 @@
-@import url(https://fonts.googleapis.com/css2?family=Amatic+SC&family=Rochester&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Rochester&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Caveat&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Quicksand&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Birthstone&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Neucha&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Mali&display=swap);
 
 .wrapper-class {
   padding: 10px;
@@ -37,10 +40,10 @@
   content: "Default";
 }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="patrick-hand"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="patrick-hand"]::before {
-  content: "Patrick Hand";
-  font-family: "Patrick Hand";
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="birthstone"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="birthstone"]::before {
+  content: "Birthstone";
+  font-family: "Birthstone";
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="quicksand"]::before,
@@ -49,16 +52,16 @@
   font-family: "Quicksand";
 }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="amatic-sc"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="amatic-sc"]::before {
-  content: "Amatic SC";
-  font-family: "Amatic SC";
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="neucha"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="neucha"]::before {
+  content: "Neucha";
+  font-family: "Neucha";
 }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="josefin-slab"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="josefin-slab"]::before {
-  content: "Josefin Slab";
-  font-family: "Josefin Slab";
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="mali"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="mali"]::before {
+  content: "Mali";
+  font-family: "Mali";
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="caveat"]::before,
@@ -76,24 +79,24 @@
 /****************************************************
 Set the font-family content used for the HTML content.
 *****************************************************/
-.ql-font-patrick-hand {
-  font-family: "Patrick Hand";
+.ql-font-birthstone {
+  font-family: "Birthstone";
 }
 
 .ql-font-caveat {
   font-family: "Caveat";
 }
 
-.ql-font-josefin-slab {
-  font-family: "Josefin Slab";
+.ql-font-mali {
+  font-family: "Mali";
 }
 
 .ql-font-quicksand {
   font-family: "Quicksand";
 }
 
-.ql-font-amatic-sc {
-  font-family: "Amatic SC";
+.ql-font-neucha {
+  font-family: "Neucha";
 }
 
 .ql-font-rochester {
