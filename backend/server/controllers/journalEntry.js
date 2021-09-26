@@ -41,6 +41,26 @@ exports.addEntryToJournal = async (req, res) => {
   ).populate({ path: "entries" });
 };
 
+exports.deleteEntry = async (req, res) => {
+  const entry = await JournalEntry.findById(req.params.entryID);
+  const user = await User.findById(req.user._id);
+  const update = { $pull: { entries: entry._id } };
+
+  await JournalEntry.deleteOne({ _id: entry._id });
+
+  const updatedUser = await User.findByIdAndUpdate(
+    user._id,
+    update,
+    (err, user) => {
+      if (err) {
+        return err;
+      }
+    }
+  ).populate({ path: "entries" });
+
+  res.json({ deletedEntry: entry, updatedUser });
+};
+
 exports.getJournal = async (req, res) => {
   const response = await User.findById(req.user._id).populate({
     path: "entries",
@@ -49,4 +69,29 @@ exports.getJournal = async (req, res) => {
   if (response) res.status(200).send(response);
 
   return response;
+};
+
+exports.editEntry = async (req, res) => {
+  const entry = await JournalEntry.findById(req.params.entryID);
+  const title = req.body.title;
+  const entryContent = req.body.entry;
+
+  let updatedEntry = await JournalEntry.findByIdAndUpdate(
+    entry._id,
+    {
+      $set: { title: title, entry: entryContent },
+    },
+    { new: true },
+    (err, entry) => {
+      if (err) {
+        return res.send(entry);
+      }
+    }
+  );
+
+  res.status(200).send(updatedEntry);
+
+  const response = await User.findById(req.user._id).populate({
+    path: "entries",
+  });
 };

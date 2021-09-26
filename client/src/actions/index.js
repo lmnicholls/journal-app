@@ -3,6 +3,8 @@ import {
   AUTH_USER,
   AUTH_ERROR,
   ADD_ENTRY,
+  DELETE_ENTRY,
+  EDIT_ENTRY,
   FETCH_ENTRY,
   FETCH_ENTRIES,
   ADD_FEELING,
@@ -16,6 +18,7 @@ import {
   FETCH_POSTITS,
   EDIT_POSTIT_POSITION,
 } from "./types";
+import { convertToRaw } from "draft-js";
 
 export const signup = (formProps, callback) => (dispatch) => {
   axios
@@ -79,6 +82,46 @@ export const addEntry = (title, date, entry) => (dispatch) => {
     .post("http://localhost:5000/entries", { title, date, entry }, config)
     .then(function (response) {
       dispatch({ type: ADD_ENTRY, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const deleteEntry = (entryID, callback) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .delete(`http://localhost:5000/entries/${entryID}`, config)
+    .then(function (response) {
+      dispatch({ type: DELETE_ENTRY, payload: response.data });
+      callback();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const editEntry = (entryID, title, entry, callback) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  axios
+    .put(
+      `http://localhost:5000/entries/${entryID}`,
+      { entryID, title, entry },
+      config
+    )
+    .then(function (response) {
+      dispatch({ type: EDIT_ENTRY, payload: response.data });
+      callback();
     })
     .catch(function (error) {
       console.log(error);
@@ -201,7 +244,6 @@ export const deleteNote = (noteID, callback) => (dispatch) => {
 };
 
 export const editNoteCheck = (noteID, checkStatus, callback) => (dispatch) => {
-  console.log(noteID, checkStatus);
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
