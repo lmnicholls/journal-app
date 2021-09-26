@@ -5,11 +5,7 @@ import { editEntry, fetchEntries } from "../../actions";
 import "./css/journalentry.css";
 import "react-quill/dist/quill.snow.css";
 import "./css/richTextEditor.css";
-import ReactQuill, {
-  BackgroundClass,
-  ColorClass,
-  SizeStyle,
-} from "react-quill";
+import ReactQuill from "react-quill";
 import RichTextEditorToolbar, {
   modules,
   formats,

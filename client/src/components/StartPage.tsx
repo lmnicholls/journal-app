@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Background from "./Background";
 import NavHome from "./nav/NavHome";
 
-const StartPage = (props) => {
+const StartPage = (props: any) => {
   return (
     <Fragment>
       <NavHome />

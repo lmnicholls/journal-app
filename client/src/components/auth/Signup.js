@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import styled from "styled-components";
 import { signup } from "../../actions";
 import NavAuth from "../nav/NavAuth";
-import Background from "../Background.js";
+import Background from "../Background";
 
 const userSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is a required field"),

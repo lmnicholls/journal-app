@@ -16,7 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const { authenticated } = useSelector((state) => state.auth);
+  const { authenticated } = useSelector<any, any>((state) => state.auth);
   const history = useHistory();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Home = () => {
             style={{ textDecoration: "none" }}
             className="links"
           >
-            <h2>Think Board</h2>
+            <h2>Post It Board</h2>
             <IconBorder>
               <Icon icon={faStickyNote} size="2x" />
             </IconBorder>

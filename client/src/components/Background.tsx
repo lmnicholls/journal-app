@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Background = () => {
   return (
     <AnimatedBackground>
-      <ParticlesBg type="circle" bg={true} style={{ position: "fixed" }} />
+      <ParticlesBg type="circle" bg={true} />
     </AnimatedBackground>
   );
 };
