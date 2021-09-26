@@ -32,7 +32,7 @@ const NavContainer = styled.div`
   justify-content: space-between;
   position: fixed;
   z-index: 150;
-  background: rgba(98, 169, 207, 0.8);
+  background: rgb(98, 169, 207);
   color: white;
   margin: 0;
   width: 100%;

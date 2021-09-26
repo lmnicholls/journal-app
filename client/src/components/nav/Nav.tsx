@@ -50,7 +50,7 @@ const NavContainer = styled.div`
   align-items: center;
   position: fixed;
   z-index: 150;
-  background-color: rgba(98, 169, 207, 0.8);
+  background-color: rgb(98, 169, 207);
   color: white;
   margin: 0;
   width: 100%;

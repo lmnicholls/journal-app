@@ -6,7 +6,12 @@ import Nav from "../nav/Nav";
 import EditEntry from "./EditEntry";
 import { fetchEntries, deleteEntry } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faEdit,
+  faArrowRight,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Journal = () => {
   const { authenticated } = useSelector((state) => state.auth);
@@ -18,7 +23,6 @@ const Journal = () => {
   const [rightPageIndex, setRightPageIndex] = useState(0);
   const [entryID, setEntryID] = useState("");
   const [entry, setEntry] = useState("");
-  console.log("journalentry", entry);
 
   const [show, setShow] = useState(false);
 
@@ -122,83 +126,118 @@ const Journal = () => {
       <JournalDiv>
         <JournalBookDiv>
           {!entries[leftPageIndex] ? (
-            <LeftPage>Beginning of Journal</LeftPage>
+            <PageDiv>
+              <LeftPage
+                style={{
+                  fontFamily: "Patrick Hand SC",
+                  fontSize: "24px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                Beginning of Journal
+              </LeftPage>
+            </PageDiv>
           ) : (
-            <LeftPage>
-              <JournalPageDiv>
-                <div style={{ textAlign: "right" }}>
-                  <EditButton
-                    onClick={() =>
-                      handleEditEntry(
-                        entries[leftPageIndex]._id,
-                        entries[leftPageIndex].title
-                      )
-                    }
-                    icon={faEdit}
-                    className="icon bars fa-1x"
-                  />
-                  <DeleteButton
-                    onClick={() =>
-                      handleDeleteEntry(entries[leftPageIndex]._id)
-                    }
-                    icon={faTrash}
-                    className="icon bars fa-1x"
-                  />
-                </div>
-                <Entry onClick={() => handlePreviousPageClick()}>
-                  <EntryHeader>
-                    <EntryTitle>{entries[leftPageIndex].title}</EntryTitle>
-                  </EntryHeader>
-                  <JournalDate>
-                    {new Date(entries[leftPageIndex].date).toDateString()}
-                  </JournalDate>
-                  <JournalText
-                    className="page-text"
-                    dangerouslySetInnerHTML={{
-                      __html: entries[leftPageIndex].entry,
-                    }}
-                  ></JournalText>
-                </Entry>
-              </JournalPageDiv>
-              <PageNumber>Page {leftPageIndex + 1}</PageNumber>
-            </LeftPage>
+            <PageDiv>
+              <PageFlip>
+                <FontAwesomeIcon
+                  onClick={() => handlePreviousPageClick()}
+                  icon={faArrowLeft}
+                  className="icon bars fa-1x"
+                />
+              </PageFlip>
+              <LeftPage>
+                <JournalPageDiv>
+                  <Entry onClick={() => handlePreviousPageClick()}>
+                    <EntryHeader>
+                      <EntryTitle>{entries[leftPageIndex].title}</EntryTitle>
+                      <div style={{ textAlign: "right" }}>
+                        <EditButton
+                          onClick={() =>
+                            handleEditEntry(
+                              entries[leftPageIndex]._id,
+                              entries[leftPageIndex].title
+                            )
+                          }
+                          icon={faEdit}
+                          className="icon bars fa-1x"
+                        />
+                        <DeleteButton
+                          onClick={() =>
+                            handleDeleteEntry(entries[leftPageIndex]._id)
+                          }
+                          icon={faTrash}
+                          className="icon bars fa-1x"
+                        />
+                      </div>
+                    </EntryHeader>
+                    <JournalDate>
+                      {new Date(entries[leftPageIndex].date).toDateString()}
+                    </JournalDate>
+                    <JournalText
+                      className="page-text"
+                      dangerouslySetInnerHTML={{
+                        __html: entries[leftPageIndex].entry,
+                      }}
+                    ></JournalText>
+                  </Entry>
+                </JournalPageDiv>
+                <PageNumber>Page {leftPageIndex + 1}</PageNumber>
+              </LeftPage>
+            </PageDiv>
           )}
           {!entries[rightPageIndex] ? (
-            <RightPage>End of Journal</RightPage>
+            <PageDiv>End of Journal</PageDiv>
           ) : (
-            <RightPage>
-              <JournalPageDiv>
-                <div style={{ textAlign: "right" }}>
-                  <EditButton
-                    onClick={() => handleEditEntry(entries[rightPageIndex]._id)}
-                    icon={faEdit}
+            <PageDiv>
+              <RightPage>
+                <JournalPageDiv>
+                  <Entry onClick={() => handleNextPageClick()}>
+                    <EntryHeader>
+                      <EntryTitle>{entries[rightPageIndex].title}</EntryTitle>
+                      <div style={{ textAlign: "right" }}>
+                        <EditButton
+                          onClick={() =>
+                            handleEditEntry(entries[rightPageIndex]._id)
+                          }
+                          icon={faEdit}
+                          className="icon bars fa-1x"
+                        />
+                        <DeleteButton
+                          onClick={() =>
+                            handleDeleteEntry(entries[rightPageIndex]._id)
+                          }
+                          icon={faTrash}
+                          className="icon bars fa-1x"
+                        />
+                      </div>
+                    </EntryHeader>
+                    <JournalDate>
+                      {new Date(entries[rightPageIndex].date).toDateString()}
+                    </JournalDate>
+                    <JournalText
+                      className="page-text"
+                      dangerouslySetInnerHTML={{
+                        __html: entries[rightPageIndex].entry,
+                      }}
+                    ></JournalText>
+                  </Entry>
+                </JournalPageDiv>
+                <PageNumber>Page {rightPageIndex + 1}</PageNumber>
+              </RightPage>
+              {rightPageIndex === entries.length - 1 ? (
+                <RightPageFlip></RightPageFlip>
+              ) : (
+                <RightPageFlip>
+                  <FontAwesomeIcon
+                    onClick={() => handleNextPageClick()}
+                    icon={faArrowRight}
                     className="icon bars fa-1x"
                   />
-                  <DeleteButton
-                    onClick={() =>
-                      handleDeleteEntry(entries[rightPageIndex]._id)
-                    }
-                    icon={faTrash}
-                    className="icon bars fa-1x"
-                  />
-                </div>
-                <Entry onClick={() => handleNextPageClick()}>
-                  <EntryHeader>
-                    <EntryTitle>{entries[rightPageIndex].title}</EntryTitle>
-                  </EntryHeader>
-                  <JournalDate>
-                    {new Date(entries[rightPageIndex].date).toDateString()}
-                  </JournalDate>
-                  <JournalText
-                    className="page-text"
-                    dangerouslySetInnerHTML={{
-                      __html: entries[rightPageIndex].entry,
-                    }}
-                  ></JournalText>
-                </Entry>
-              </JournalPageDiv>
-              <PageNumber>Page {rightPageIndex + 1}</PageNumber>
-            </RightPage>
+                </RightPageFlip>
+              )}
+            </PageDiv>
           )}
         </JournalBookDiv>
 
@@ -304,9 +343,15 @@ const JournalText = styled.div`
   height: 100%;
 `;
 
-const LeftPage = styled.div`
+const PageDiv = styled.div`
   width: 50%;
+  display: flex;
+  flex-flow: row;
   border-right: 4px solid rgba(97, 100, 100, 0.3);
+`;
+
+const LeftPage = styled.div`
+  width: 100%;
   padding: 5px;
   display: flex;
   flex-flow: column;
@@ -316,7 +361,7 @@ const LeftPage = styled.div`
 `;
 
 const RightPage = styled.div`
-  width: 50%;
+  width: 100%;
   padding: 5px;
   display: flex;
   flex-flow: column;
@@ -359,4 +404,27 @@ const EntryTitle = styled.h1`
 const JournalDate = styled.h3`
   font-family: "Patrick Hand SC";
   font-size: 18px;
+`;
+
+const RightPageFlip = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 3px;
+  padding-right: 3px;
+  :hover {
+    cursor: pointer;
+  }
+  width: 20px;
+`;
+
+const PageFlip = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 3px;
+  padding-right: 3px;
+  :hover {
+    cursor: pointer;
+  }
 `;
