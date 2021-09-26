@@ -70,3 +70,28 @@ exports.getJournal = async (req, res) => {
 
   return response;
 };
+
+exports.editEntry = async (req, res) => {
+  const entry = await JournalEntry.findById(req.params.entryID);
+  const title = req.body.title;
+  const entryContent = req.body.entry;
+
+  let updatedEntry = await JournalEntry.findByIdAndUpdate(
+    entry._id,
+    {
+      $set: { title: title, entry: entryContent },
+    },
+    { new: true },
+    (err, entry) => {
+      if (err) {
+        return res.send(entry);
+      }
+    }
+  );
+
+  res.status(200).send(updatedEntry);
+
+  const response = await User.findById(req.user._id).populate({
+    path: "entries",
+  });
+};

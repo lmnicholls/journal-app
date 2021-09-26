@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../nav/Nav";
+import EditEntry from "./EditEntry";
 import { fetchEntries, deleteEntry } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +16,14 @@ const Journal = () => {
 
   const [leftPageIndex, setLeftPageIndex] = useState(-1);
   const [rightPageIndex, setRightPageIndex] = useState(0);
+  const [entryID, setEntryID] = useState("");
+  const [entry, setEntry] = useState("");
+  console.log("journalentry", entry);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -68,7 +77,16 @@ const Journal = () => {
         dispatch(fetchEntries());
       })
     );
-    console.log(id);
+  };
+
+  const handleEditEntry = (id) => {
+    setEntryID(id);
+    setEntry(
+      entries?.find((entry) => {
+        return entry._id === id;
+      })
+    );
+    handleShow();
   };
 
   if (!entries) {
@@ -88,6 +106,14 @@ const Journal = () => {
 
   return (
     <JournalBackground>
+      <EditEntry
+        setShow={setShow}
+        show={show}
+        handleClose={handleClose}
+        handleShow={handleShow}
+        entryID={entryID}
+        entry={entry}
+      />
       <Nav />
       <JournalHeading>
         <JournalTitle>My Journal</JournalTitle>
@@ -101,7 +127,16 @@ const Journal = () => {
             <LeftPage>
               <JournalPageDiv>
                 <div style={{ textAlign: "right" }}>
-                  <EditButton icon={faEdit} className="icon bars fa-1x" />
+                  <EditButton
+                    onClick={() =>
+                      handleEditEntry(
+                        entries[leftPageIndex]._id,
+                        entries[leftPageIndex].title
+                      )
+                    }
+                    icon={faEdit}
+                    className="icon bars fa-1x"
+                  />
                   <DeleteButton
                     onClick={() =>
                       handleDeleteEntry(entries[leftPageIndex]._id)
@@ -134,10 +169,14 @@ const Journal = () => {
             <RightPage>
               <JournalPageDiv>
                 <div style={{ textAlign: "right" }}>
-                  <EditButton icon={faEdit} className="icon bars fa-1x" />
+                  <EditButton
+                    onClick={() => handleEditEntry(entries[rightPageIndex]._id)}
+                    icon={faEdit}
+                    className="icon bars fa-1x"
+                  />
                   <DeleteButton
                     onClick={() =>
-                      handleDeleteEntry(entries[leftPageIndex]._id)
+                      handleDeleteEntry(entries[rightPageIndex]._id)
                     }
                     icon={faTrash}
                     className="icon bars fa-1x"

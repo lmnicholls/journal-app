@@ -15,6 +15,7 @@ module.exports = function (app) {
   app.get("/current_user", requireAuth, Authentication.currentUser);
   app.post("/entries", requireAuth, JournalEntry.addEntryToJournal);
   app.delete("/entries/:entryID", requireAuth, JournalEntry.deleteEntry);
+  app.put("/entries/:entryID", requireAuth, JournalEntry.editEntry);
   app.get("/entries", requireAuth, JournalEntry.getJournal);
   app.post("/feelings", requireAuth, Feelings.addFeeling);
   app.get("/feelings", requireAuth, Feelings.getFeelings);

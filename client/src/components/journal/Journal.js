@@ -166,9 +166,6 @@ const Journal = () => {
           <Button type="button" onClick={() => handlePreviousPageClick()}>
             Previous
           </Button>
-          {/* <span className="current_pages">
-              Pages {leftPageIndex + 1}-{rightPageIndex + 1} of {numEntries}
-            </span> */}
           <Button type="button" onClick={() => handleNextPageClick()}>
             Next
           </Button>

@@ -6,6 +6,8 @@ import Nav from "../nav/Nav";
 import { addEntry, fetchEntries } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./css/journalentry.css";
+import "react-quill/dist/quill.snow.css";
+import "./css/richTextEditor.css";
 import RichTextEditor from "./RichTextEditor";
 
 const JournalEntry = () => {
