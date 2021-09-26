@@ -31,10 +31,6 @@ const EditEntry = (props) => {
     setEntry(props.entry.entry);
   }, [props.entry.entry, props.entry.title]);
 
-  console.log("fullentry", props.entry);
-  console.log("title", title);
-  console.log("entrycontent", entry);
-
   const handleEditorChange = (state) => {
     setEntry(state);
   };

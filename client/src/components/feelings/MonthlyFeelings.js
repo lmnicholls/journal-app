@@ -25,9 +25,9 @@ export default function MonthlyFeelings({ feelings }) {
       "#ba82ed",
     ];
     return {
-      name: day.feeling,
-      color: colors[feelings.indexOf(day.feeling)],
-      y: feelings.indexOf(day.feeling),
+      name: day.text,
+      color: colors[feelings.indexOf(day.text)],
+      y: feelings.indexOf(day.text),
     };
   });
 

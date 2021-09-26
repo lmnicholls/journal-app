@@ -10,7 +10,7 @@ const feelingsReducer = (state = DEFAULT_STATE, action) => {
     case ADD_FEELING:
       return {
         feeling: {
-          feeling: action.payload.feeling,
+          text: action.payload.feeling,
           date: action.payload.date,
         },
         ...state,
