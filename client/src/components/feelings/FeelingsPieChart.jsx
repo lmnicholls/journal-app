@@ -2,8 +2,8 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-export default function FeelingsPieChart({ feelings }) {
-  const sortedFeelings = feelings?.reduce((obj, item) => {
+export default function FeelingsPieChart({ feelings }: any) {
+  const sortedFeelings = feelings?.reduce((obj: any, item: any) => {
     obj[item.text] = (obj[item.text] || 0) + 1;
     return obj;
   }, {});

@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import {
   FETCH_POSTITS,
   ADD_POSTIT,
@@ -10,7 +11,7 @@ const DEFAULT_STATE = {
   postits: [],
 };
 
-const postitReducer = (state = DEFAULT_STATE, action) => {
+const postitReducer = (state = DEFAULT_STATE, action: AnyAction) => {
   switch (action.type) {
     case FETCH_POSTITS: {
       return {
@@ -20,13 +21,13 @@ const postitReducer = (state = DEFAULT_STATE, action) => {
     }
     case ADD_POSTIT: {
       return {
+        ...state,
         postit: {
           postit: action.payload.postit,
           rotate: action.payload.rotate,
           x: action.payload.x,
           y: action.payload.y,
         },
-        ...state,
       };
     }
     case DELETE_POSTIT: {

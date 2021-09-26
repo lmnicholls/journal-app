@@ -5,9 +5,9 @@ import "./calendar.css";
 import styled from "styled-components";
 import moment from "moment";
 
-export default function CalendarDayJournalView(props) {
+export default function CalendarDayJournalView(props: any) {
   const journalEntry = props.entries.filter(
-    (entry) => entry._id === props.entryID
+    (entry: any) => entry._id === props.entryID
   );
 
   if (journalEntry.length !== 0) {
@@ -18,7 +18,7 @@ export default function CalendarDayJournalView(props) {
           onHide={() => {
             props.handleClose();
           }}
-          style={{ "background-color": "rgba(62, 164, 219, 0.4)" }}
+          style={{ backgroundColor: "rgba(62, 164, 219, 0.4)" }}
           size="lg"
         >
           <ModalHeader>

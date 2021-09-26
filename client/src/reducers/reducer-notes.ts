@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import {
   ADD_NOTE,
   FETCH_NOTES,
@@ -10,15 +11,15 @@ const DEFAULT_STATE = {
   notes: [],
 };
 
-const notesReducer = (state = DEFAULT_STATE, action) => {
+const notesReducer = (state = DEFAULT_STATE, action: AnyAction) => {
   switch (action.type) {
     case ADD_NOTE:
       return {
+        ...state,
         note: {
           note: action.payload.note,
           checked: action.payload.checked,
         },
-        ...state,
       };
     case FETCH_NOTES:
       return {

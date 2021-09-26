@@ -10,9 +10,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import FeelingsPieChart from "./FeelingsPieChart";
 import MonthlyFeelings from "./MonthlyFeelings";
 
-const Feelings = (props) => {
-  const { authenticated } = useSelector((state) => state.auth);
-  const feelings = useSelector((state) => {
+const Feelings = () => {
+  const { authenticated } = useSelector<any, any>((state) => state.auth);
+  const feelings = useSelector<any, any>((state) => {
     return state.feelings.feelings;
   });
 
@@ -31,12 +31,15 @@ const Feelings = (props) => {
     }
   }, [dispatch, authenticated]);
 
-  const handleFeelingClick = (e) => {
+  const handleFeelingClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
     e.preventDefault();
     if (feelings[feelings.length - 1].date === moment().format("MM/DD/YYYY")) {
       alert("You already logged your feeling for today.");
     } else {
-      let feeling = e.target.value;
+      const target = e.target as HTMLTextAreaElement;
+      let feeling = target.value;
       let date = moment().format("MM/DD/YYYY");
       dispatch(addFeeling(feeling, date));
       dispatch(fetchFeelings());

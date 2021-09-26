@@ -2,6 +2,16 @@ import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import styled from "styled-components";
 
+interface Props {
+  id: string;
+  left: number;
+  top: number;
+  hideSourceOnDrag: boolean;
+  color: string;
+  children: any;
+  rotate: number;
+}
+
 export const Box = ({
   id,
   left,
@@ -10,7 +20,7 @@ export const Box = ({
   color,
   children,
   rotate,
-}) => {
+}: Props) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: ItemTypes.BOX,

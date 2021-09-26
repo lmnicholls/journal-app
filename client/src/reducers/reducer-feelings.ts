@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import { ADD_FEELING, FETCH_FEELINGS } from "../actions/types";
 
 const DEFAULT_STATE = {
@@ -5,15 +6,15 @@ const DEFAULT_STATE = {
   feelings: [],
 };
 
-const feelingsReducer = (state = DEFAULT_STATE, action) => {
+const feelingsReducer = (state = DEFAULT_STATE, action: AnyAction) => {
   switch (action.type) {
     case ADD_FEELING:
       return {
+        ...state,
         feeling: {
           text: action.payload.feeling,
           date: action.payload.date,
         },
-        ...state,
       };
     case FETCH_FEELINGS:
       return {
