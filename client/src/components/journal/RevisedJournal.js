@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../nav/Nav";
 import EditEntry from "./EditEntry";
-import { fetchEntries, deleteEntry } from "../../actions";
+import DeleteModal from "./DeleteModal";
+import { fetchEntries } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -28,9 +29,12 @@ const Journal = () => {
   const [entry, setEntry] = useState("");
 
   const [show, setShow] = useState(false);
+  const [deleteShow, setDeleteShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleDeleteClose = () => setDeleteShow(false);
+  const handleDeleteShow = () => setDeleteShow(true);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -69,25 +73,28 @@ const Journal = () => {
   };
 
   const handleLastPageClick = useCallback(() => {
-    if (entries.length % 2 === 0) {
-      setLeftPageIndex(entries.length - 1);
-      setRightPageIndex(entries.length);
+    if (entries?.length % 2 === 0) {
+      setLeftPageIndex(entries?.length - 1);
+      setRightPageIndex(entries?.length);
     } else {
-      setLeftPageIndex(entries.length - 2);
-      setRightPageIndex(entries.length - 1);
+      setLeftPageIndex(entries?.length - 2);
+      setRightPageIndex(entries?.length - 1);
     }
-  }, [entries.length]);
+  }, [entries?.length]);
 
   useEffect(() => {
     handleLastPageClick();
   }, [handleLastPageClick]);
 
   const handleDeleteEntry = (id) => {
-    dispatch(
-      deleteEntry(id, () => {
-        dispatch(fetchEntries());
+    setEntryID(id);
+    setEntry(
+      entries?.find((entry) => {
+        return entry._id === id;
       })
     );
+    handleDeleteShow();
+    console.log("delete");
   };
 
   const handleEditEntry = (id) => {
@@ -126,6 +133,13 @@ const Journal = () => {
         entry={entry.entry}
         title={entry.title}
         date={entry.date}
+      />
+      <DeleteModal
+        setShow={setDeleteShow}
+        show={deleteShow}
+        handleClose={handleDeleteClose}
+        handleShow={handleDeleteShow}
+        entryID={entryID}
       />
       <Nav />
       <JournalHeading>

@@ -21,7 +21,6 @@ const EditEntry = (props) => {
   const [title, setTitle] = useState(props.title);
   const [entry, setEntry] = useState(props.entry);
 
-  console.log("props", props);
   useEffect(() => {
     setTitle(props.title);
     setEntry(props.entry);
