@@ -14,10 +14,6 @@ export default function CalendarDayJournalView(props: any) {
   const journalEntry = props.entries.filter(
     (entry: any) => entry._id === props.entryID
   );
-  console.log("entry", journalEntry);
-
-  const [entryID, setEntryID] = useState(props.entryID);
-  const [entry, setEntry] = useState(journalEntry);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -35,8 +31,6 @@ export default function CalendarDayJournalView(props: any) {
   };
 
   const handleEditEntry = (id: string) => {
-    setEntryID(id);
-    setEntry(props.entryID);
     handleShow();
   };
 

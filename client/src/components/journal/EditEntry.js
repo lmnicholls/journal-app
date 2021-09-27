@@ -70,7 +70,7 @@ const EditEntry = (props) => {
           <Modal.Body style={{ backgroundColor: "#49a7da", color: "white" }}>
             <JournalEntryForm onSubmit={(e) => handleEditEntry(e)}>
               <JournalEntryTitleDate>
-                <label>Title</label>
+                <label>Title:</label>
                 <input
                   type="text"
                   className="form-control"
@@ -84,8 +84,8 @@ const EditEntry = (props) => {
                 />
               </JournalEntryTitleDate>
               <JournalEntryTitleDate>
-                <label>Date</label>
-                <h4>{moment(props.entry?.date).format("MM/DD/YYYY")}</h4>
+                <label>Date:</label>
+                <h4>{moment(props.date).format("MM/DD/YYYY")}</h4>
               </JournalEntryTitleDate>
               <div className="textEditor">
                 <RichTextEditorToolbar />

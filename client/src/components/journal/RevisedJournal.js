@@ -9,8 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
   faEdit,
-  faArrowRight,
-  faArrowLeft,
+  faPlusCircle,
+  faAngleLeft,
+  faAngleRight,
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Journal = () => {
@@ -123,7 +126,14 @@ const Journal = () => {
       <Nav />
       <JournalHeading>
         <JournalTitle>My Journal</JournalTitle>
-        <Button onClick={handleAddEntryClick}>Add Entry</Button>
+        <Button onClick={handleAddEntryClick}>
+          <FontAwesomeIcon
+            icon={faPlusCircle}
+            className="icon bars fa-1xx"
+            style={{ paddingRight: "5px" }}
+          />
+          Add Entry
+        </Button>
       </JournalHeading>
       <JournalDiv>
         <JournalBookDiv>
@@ -142,16 +152,9 @@ const Journal = () => {
             </PageDiv>
           ) : (
             <PageDiv>
-              <PageFlip>
-                <FontAwesomeIcon
-                  onClick={() => handlePreviousPageClick()}
-                  icon={faArrowLeft}
-                  className="icon bars fa-1x"
-                />
-              </PageFlip>
               <LeftPage>
                 <JournalPageDiv>
-                  <Entry onClick={() => handlePreviousPageClick()}>
+                  <Entry>
                     <EntryHeader>
                       <EntryTitle>{entries[leftPageIndex].title}</EntryTitle>
                       <div style={{ textAlign: "right" }}>
@@ -177,7 +180,9 @@ const Journal = () => {
                     <JournalDate>
                       {new Date(entries[leftPageIndex].date).toDateString()}
                     </JournalDate>
+
                     <JournalText
+                      onClick={() => handlePreviousPageClick()}
                       className="page-text"
                       dangerouslySetInnerHTML={{
                         __html: entries[leftPageIndex].entry,
@@ -190,12 +195,23 @@ const Journal = () => {
             </PageDiv>
           )}
           {!entries[rightPageIndex] ? (
-            <PageDiv>End of Journal</PageDiv>
+            <PageDiv>
+              <RightPage
+                style={{
+                  fontFamily: "Patrick Hand SC",
+                  fontSize: "24px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                End of Journal
+              </RightPage>
+            </PageDiv>
           ) : (
             <PageDiv>
               <RightPage>
                 <JournalPageDiv>
-                  <Entry onClick={() => handleNextPageClick()}>
+                  <Entry>
                     <EntryHeader>
                       <EntryTitle>{entries[rightPageIndex].title}</EntryTitle>
                       <div style={{ textAlign: "right" }}>
@@ -218,43 +234,54 @@ const Journal = () => {
                     <JournalDate>
                       {new Date(entries[rightPageIndex].date).toDateString()}
                     </JournalDate>
+
                     <JournalText
+                      onClick={() => handleNextPageClick()}
                       className="page-text"
                       dangerouslySetInnerHTML={{
                         __html: entries[rightPageIndex].entry,
                       }}
-                    ></JournalText>
+                    />
                   </Entry>
                 </JournalPageDiv>
                 <PageNumber>Page {rightPageIndex + 1}</PageNumber>
               </RightPage>
-              {rightPageIndex === entries.length - 1 ? (
-                <RightPageFlip></RightPageFlip>
-              ) : (
-                <RightPageFlip>
-                  <FontAwesomeIcon
-                    onClick={() => handleNextPageClick()}
-                    icon={faArrowRight}
-                    className="icon bars fa-1x"
-                  />
-                </RightPageFlip>
-              )}
             </PageDiv>
           )}
         </JournalBookDiv>
 
         <div>
           <Button type="button" onClick={() => handleFirstPageClick()}>
+            <FontAwesomeIcon
+              icon={faAngleDoubleLeft}
+              className="icon bars fa-1xx"
+              style={{ paddingRight: "5px" }}
+            />
             First
           </Button>
           <Button type="button" onClick={() => handlePreviousPageClick()}>
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="icon bars fa-1xx"
+              style={{ paddingRight: "5px" }}
+            />
             Previous
           </Button>
           <Button type="button" onClick={() => handleNextPageClick()}>
             Next
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              className="icon bars fa-1xx"
+              style={{ paddingLeft: "5px" }}
+            />
           </Button>
           <Button type="button" onClick={() => handleLastPageClick()}>
             Last
+            <FontAwesomeIcon
+              icon={faAngleDoubleRight}
+              className="icon bars fa-1xx"
+              style={{ paddingLeft: "5px" }}
+            />
           </Button>
         </div>
       </JournalDiv>
@@ -297,7 +324,9 @@ const DeleteButton = styled(FontAwesomeIcon)`
   }
 `;
 
-const JournalPageDiv = styled.div``;
+const JournalPageDiv = styled.div`
+  height: 100%;
+`;
 
 const JournalDiv = styled.div`
   display: flex;
@@ -310,6 +339,7 @@ const JournalDiv = styled.div`
 const Entry = styled.div`
   display: flex;
   flex-flow: column;
+  height: 100%;
 `;
 
 const EntryHeader = styled.div`
@@ -341,8 +371,9 @@ const JournalBookDiv = styled.div`
 `;
 
 const JournalText = styled.div`
-  flex: 1;
+  flex-grow: 1;
   height: 100%;
+  cursor: pointer;
 `;
 
 const PageDiv = styled.div`
@@ -367,7 +398,7 @@ const RightPage = styled.div`
   padding: 5px;
   display: flex;
   flex-flow: column;
-  max-height: 100%;
+  height: 100%;
   overflow-y: scroll;
   justify-content: space-between;
 `;
@@ -406,27 +437,4 @@ const EntryTitle = styled.h1`
 const JournalDate = styled.h3`
   font-family: "Patrick Hand SC";
   font-size: 18px;
-`;
-
-const RightPageFlip = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 3px;
-  padding-right: 3px;
-  :hover {
-    cursor: pointer;
-  }
-  width: 20px;
-`;
-
-const PageFlip = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 3px;
-  padding-right: 3px;
-  :hover {
-    cursor: pointer;
-  }
 `;
