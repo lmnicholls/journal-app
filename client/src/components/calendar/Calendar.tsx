@@ -5,17 +5,26 @@ import styled from "styled-components";
 import Nav from "../nav/Nav";
 import Calendar from "react-calendar";
 import CalendarDayListView from "./CalendarDayListView";
-import { fetchEntries } from "../../actions";
+import { fetchFeelings, fetchEntries } from "../../actions";
 import moment from "moment";
 import "./calendar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+
+interface Feelings {
+  _id: string;
+  date: string;
+  text: string;
+}
 
 const MyCalendar = () => {
   const [date, setDate] = useState(new Date());
   const { authenticated } = useSelector<any, any>((state) => state.auth);
   const entries = useSelector<any, any>((state) => {
     return state.journalEntries.entries;
+  });
+  const feelings = useSelector<any, any>((state) => {
+    return state.feelings.feelings;
   });
 
   const [show, setShow] = useState(false);
@@ -35,6 +44,7 @@ const MyCalendar = () => {
   useEffect(() => {
     if (authenticated) {
       dispatch(fetchEntries());
+      dispatch(fetchFeelings());
     }
   }, [dispatch, authenticated]);
 
@@ -53,6 +63,31 @@ const MyCalendar = () => {
 
   const handleAddFeelingClick = () => {
     history.push("/feelings");
+  };
+
+  const tileContent = ({ activeStartDate, date, view }: any) => {
+    let feelingsKey: {
+      [key: string]: any;
+    } = {
+      amazing: "😁",
+      happy: "🙂",
+      meh: "😐",
+      sad: "😭",
+      nervous: "😬",
+      angry: "😡",
+    };
+    let feelingEmoji: string = "";
+    if (
+      feelings.find(
+        (feeling: any) => feeling.date === moment(date).format("MM/DD/YYYY")
+      )
+    ) {
+      const feelingdate: Array<Feelings> = feelings.find(
+        (feeling: any) => feeling.date === moment(date).format("MM/DD/YYYY")
+      );
+      feelingEmoji = feelingsKey[feelingdate.text];
+      return <p style={{ fontSize: "16px" }}> {feelingEmoji} </p>;
+    } else return <p style={{ fontSize: "16px", color: "transparent" }}>:)</p>;
   };
 
   if (entries) {
@@ -104,6 +139,7 @@ const MyCalendar = () => {
                 return "highlight";
               } else return "";
             }}
+            tileContent={tileContent}
           />
         </CalendarDiv>
         <CalendarDayListView
