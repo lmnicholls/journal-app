@@ -1,13 +1,11 @@
 import { Modal, Container, Row } from "react-bootstrap";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./calendar.css";
 import styled from "styled-components";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { deleteEntry, fetchEntries } from "../../actions";
 import EditEntry from "../journal/EditEntry";
 import DeleteModal from "../journal/DeleteModal";
 

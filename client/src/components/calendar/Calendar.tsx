@@ -8,6 +8,8 @@ import CalendarDayListView from "./CalendarDayListView";
 import { fetchEntries } from "../../actions";
 import moment from "moment";
 import "./calendar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const MyCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -45,6 +47,14 @@ const MyCalendar = () => {
     handleShow();
   };
 
+  const handleAddEntryClick = () => {
+    history.push("/new-entry");
+  };
+
+  const handleAddFeelingClick = () => {
+    history.push("/feelings");
+  };
+
   if (entries) {
     let dailyEntriesDates = entries.map((entry: any) => {
       let date = moment(new Date(entry.date)).format("MM/DD/YYYY");
@@ -55,6 +65,30 @@ const MyCalendar = () => {
       <>
         <Nav />
         <CalendarBackground />
+        <CalendarHeading>
+          <CalendarTitle>My Calendar</CalendarTitle>
+          <ButtonDiv>
+            <Button
+              onClick={handleAddEntryClick}
+              style={{ marginRight: "8px" }}
+            >
+              <FontAwesomeIcon
+                icon={faPlusCircle}
+                className="icon bars fa-1xx"
+                style={{ paddingRight: "5px" }}
+              />
+              Add Entry
+            </Button>
+            <Button onClick={handleAddFeelingClick}>
+              <FontAwesomeIcon
+                icon={faPlusCircle}
+                className="icon bars fa-1xx"
+                style={{ paddingRight: "5px" }}
+              />
+              Add Feeling
+            </Button>
+          </ButtonDiv>
+        </CalendarHeading>
         <CalendarDiv>
           <Calendar
             onChange={onChange}
@@ -97,7 +131,7 @@ const MyCalendar = () => {
 export default MyCalendar;
 
 const CalendarDiv = styled.div`
-  padding-top: 100px;
+  padding-top: 10px;
   width: 50%;
   margin: auto;
   padding-bottom: 100px;
@@ -126,4 +160,43 @@ const Background = styled.div`
     #6cdcbf 52%,
     #49a7da 90%
   );
+`;
+
+const CalendarHeading = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 75px;
+`;
+
+const CalendarTitle = styled.h3`
+  margin: 0;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+  font-family: "Patrick Hand SC";
+  font-size: 64px;
+  color: white;
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  flex-flow: row;
+`;
+
+const Button = styled.button`
+  margin-top: 10px;
+  margin-right: 2px;
+  margin-bottom: 10px;
+  background-color: #49a7da;
+  font-family: "Patrick Hand SC";
+  font-size: 24px;
+  border: none;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  :hover {
+    background-color: white;
+    color: #6cdcbf;
+  }
 `;
