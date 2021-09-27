@@ -88,7 +88,7 @@ const CloseButton = styled.button`
   border: none;
   background-color: transparent;
   :hover {
-    color: rgb(139, 37, 207);
+    color: red;
   }
 `;
 

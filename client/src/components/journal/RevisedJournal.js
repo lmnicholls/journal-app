@@ -374,17 +374,17 @@ const Button = styled.button`
   margin-top: 10px;
   margin-right: 2px;
   margin-bottom: 10px;
-  background-color: rgb(217, 219, 219);
+  background-color: #49a7da;
   font-family: "Patrick Hand SC";
   font-size: 24px;
   border: none;
-  color: rgb(95, 158, 189);
+  color: white;
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
   :hover {
-    background-color: rgb(80, 180, 139);
-    color: rgb(112, 110, 110);
+    background-color: white;
+    color: #6cdcbf;
   }
 `;
 

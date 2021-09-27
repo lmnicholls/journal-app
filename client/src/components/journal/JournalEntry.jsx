@@ -9,6 +9,8 @@ import "./css/journalentry.css";
 import "react-quill/dist/quill.snow.css";
 import "./css/richTextEditor.css";
 import RichTextEditor from "./RichTextEditor";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
 const JournalEntry = () => {
   const [title, setTitle] = useState("");
@@ -41,7 +43,14 @@ const JournalEntry = () => {
       <Nav />
       <JournalEntryBackground />
       <Journal>
-        <Button onClick={handleAddEntryClick}>Back To Journal</Button>
+        <Button onClick={handleAddEntryClick}>
+          <FontAwesomeIcon
+            icon={faChevronCircleLeft}
+            className="icon bars fa-1xx"
+            style={{ paddingRight: "5px" }}
+          />
+          Back To Journal
+        </Button>
         <JournalEntryForm onSubmit={(e) => handleFormSubmit(e)}>
           <h3>New Journal Entry</h3>
           <JournalEntryTitleDate>
@@ -141,34 +150,34 @@ const Button = styled.button`
   margin-top: 10px;
   margin-right: 2px;
   margin-bottom: 10px;
-  background-color: rgb(217, 219, 219);
+  background-color: #49a7da;
   font-family: "Patrick Hand SC";
   font-size: 24px;
   border: none;
-  color: rgb(95, 158, 189);
+  color: white;
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
   :hover {
-    background-color: rgb(80, 180, 139);
-    color: rgb(112, 110, 110);
+    background-color: white;
+    color: #6cdcbf;
   }
 `;
 
 const SubmitButton = styled.button`
-  background-color: rgb(217, 219, 219);
+  background-color: #49a7da;
   font-family: "Patrick Hand SC";
   font-size: 24px;
-  border: none;
-  color: rgb(95, 158, 189);
+  border: 2px solid white;
+  color: white;
   margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 8px 16px;
+  padding: 4px 8px;
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
   :hover {
-    background-color: rgb(80, 180, 139);
-    color: rgb(112, 110, 110);
+    background-color: #6cdcbf;
+    color: white;
+    border: 2px solid white;
   }
 `;

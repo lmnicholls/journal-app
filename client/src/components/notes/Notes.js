@@ -219,8 +219,10 @@ const AddButton = styled(Button)`
   vertical-align: middle;
   border: none;
   border-radius: 40px;
-  background-color: rgb(113, 224, 210);
+  background-color: #49a7da;
+  color: white;
   :hover {
-    background-color: rgb(84, 168, 157);
+    background-color: #6cdcbf;
+    color: white;
   }
 `;
