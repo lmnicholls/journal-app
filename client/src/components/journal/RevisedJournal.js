@@ -116,7 +116,9 @@ const Journal = () => {
         handleClose={handleClose}
         handleShow={handleShow}
         entryID={entryID}
-        entry={entry}
+        entry={entry.entry}
+        title={entry.title}
+        date={entry.date}
       />
       <Nav />
       <JournalHeading>

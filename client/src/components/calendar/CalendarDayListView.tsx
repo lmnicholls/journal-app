@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./calendar.css";
 import styled from "styled-components";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export default function CalendarDayListView(props: any) {
   const [show, setShow] = useState(false);
@@ -41,7 +43,11 @@ export default function CalendarDayListView(props: any) {
               props.handleClose();
             }}
           >
-            ✕
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="icon bars"
+              style={{ fontSize: "20px" }}
+            />
           </CloseButton>
         </ModalHeader>
         <ModalBody>

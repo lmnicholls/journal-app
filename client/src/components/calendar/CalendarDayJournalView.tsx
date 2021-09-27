@@ -1,18 +1,58 @@
 import { Modal, Container, Row } from "react-bootstrap";
-import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./calendar.css";
 import styled from "styled-components";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { deleteEntry, fetchEntries } from "../../actions";
+import EditEntry from "../journal/EditEntry";
 
 export default function CalendarDayJournalView(props: any) {
   const journalEntry = props.entries.filter(
     (entry: any) => entry._id === props.entryID
   );
+  console.log("entry", journalEntry);
+
+  const [entryID, setEntryID] = useState(props.entryID);
+  const [entry, setEntry] = useState(journalEntry);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const dispatch = useDispatch();
+
+  const handleDeleteEntry = (id: string) => {
+    console.log("id", id);
+    dispatch(
+      deleteEntry(id, () => {
+        dispatch(fetchEntries());
+      })
+    );
+  };
+
+  const handleEditEntry = (id: string) => {
+    setEntryID(id);
+    setEntry(props.entryID);
+    handleShow();
+  };
 
   if (journalEntry.length !== 0) {
     return (
       <>
+        <EditEntry
+          setShow={setShow}
+          show={show}
+          handleClose={handleClose}
+          handleShow={handleShow}
+          entryID={journalEntry[0]._id}
+          entry={journalEntry[0].entry}
+          title={journalEntry[0].title}
+          date={journalEntry[0].date}
+        />
         <Modal
           show={props.show}
           onHide={() => {
@@ -25,24 +65,42 @@ export default function CalendarDayJournalView(props: any) {
             <Modal.Title style={{ flex: "1 90%" }}>
               {journalEntry[0].title}
             </Modal.Title>
-            <CloseButton
+            <CloseDiv
               onClick={() => {
                 props.handleClose();
               }}
             >
-              ✕
-            </CloseButton>
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="icon bars"
+                style={{ fontSize: "20px" }}
+              />
+            </CloseDiv>
           </ModalHeader>
           <ModalBody>
             <Container>
-              <Row
+              <TopRow
                 style={{
                   color: "rgba(55, 121, 156, 0.8)",
-                  paddingLeft: "10px",
+                  paddingLeft: "3px",
                 }}
               >
-                {moment(journalEntry[0].date).format("dddd, MMMM D, YYYY")}
-              </Row>
+                <div>
+                  {moment(journalEntry[0].date).format("dddd, MMMM D, YYYY")}
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <EditButton
+                    onClick={() => handleEditEntry(props.entryID)}
+                    icon={faEdit}
+                    className="icon bars fa-1xx"
+                  />
+                  <DeleteButton
+                    onClick={() => handleDeleteEntry(props.entryID)}
+                    icon={faTrash}
+                    className="icon bars fa-1xx"
+                  />
+                </div>
+              </TopRow>
               <Row>
                 <JournalText
                   className="page-text"
@@ -61,21 +119,17 @@ export default function CalendarDayJournalView(props: any) {
   return <div></div>;
 }
 
-const CloseButton = styled.button`
-  font-size: 20px;
-  color: white;
-  border: none;
-  background-color: transparent;
-  :hover {
-    color: red;
-  }
-`;
-
 const JournalText = styled.div`
   img {
     max-width: 40%;
     max-height: auto;
   }
+`;
+
+const TopRow = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
 `;
 
 const ModalHeader = styled(Modal.Header)`
@@ -89,4 +143,30 @@ const ModalBody = styled(Modal.Body)`
   color: rgb(84, 82, 85);
   font-family: "Patrick Hand SC";
   font-size: 24px;
+`;
+
+const EditButton = styled(FontAwesomeIcon)`
+  color: #91bd9f;
+  font-size: 18px;
+  margin-right: 5px;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const DeleteButton = styled(FontAwesomeIcon)`
+  color: #ed8f8c;
+  font-size: 18px;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const CloseDiv = styled.div`
+  font-size: "24px";
+  background-color: "#193753";
+  :hover {
+    color: red;
+    cursor: pointer;
+  }
 `;

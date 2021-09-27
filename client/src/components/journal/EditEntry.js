@@ -18,14 +18,14 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const EditEntry = (props) => {
   const dispatch = useDispatch();
+  const [title, setTitle] = useState(props.title);
+  const [entry, setEntry] = useState(props.entry);
 
-  const [title, setTitle] = useState(props.entry.title);
-  const [entry, setEntry] = useState(props.entry.entry);
-
+  console.log("props", props);
   useEffect(() => {
-    setTitle(props.entry.title);
-    setEntry(props.entry.entry);
-  }, [props.entry.entry, props.entry.title]);
+    setTitle(props.title);
+    setEntry(props.entry);
+  }, [props.entry, props.title]);
 
   const handleEditorChange = (state) => {
     setEntry(state);
@@ -51,7 +51,13 @@ const EditEntry = (props) => {
           onHide={props.handleClose}
           animation={false}
         >
-          <Modal.Header>
+          <Modal.Header
+            style={{
+              backgroundColor: "#49a7da",
+              border: "none",
+              color: "white",
+            }}
+          >
             <ModalTitle>Edit Journal Entry</ModalTitle>
             <CloseDiv onClick={() => props.handleClose()}>
               <FontAwesomeIcon
@@ -61,7 +67,7 @@ const EditEntry = (props) => {
               />
             </CloseDiv>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body style={{ backgroundColor: "#49a7da", color: "white" }}>
             <JournalEntryForm onSubmit={(e) => handleEditEntry(e)}>
               <JournalEntryTitleDate>
                 <label>Title</label>
@@ -95,7 +101,7 @@ const EditEntry = (props) => {
               </div>
             </JournalEntryForm>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer style={{ backgroundColor: "#49a7da", border: "none" }}>
             <div>
               <SaveButton
                 variant="primary"
@@ -121,7 +127,7 @@ export default EditEntry;
 
 const ModalTitle = styled(Modal.Title)`
   font-family: "Patrick Hand SC";
-  font-size: 28px;
+  font-size: 32px;
 `;
 
 const JournalEntryForm = styled.form`
@@ -160,23 +166,28 @@ const JournalEntryTitleDate = styled.div`
 
 const SaveButton = styled.button`
   margin-top: 10px;
-  margin-right: 2px;
+  margin-right: 5px;
   margin-bottom: 10px;
-  background-color: rgb(217, 219, 219);
+  background-color: white;
   font-family: "Patrick Hand SC";
   font-size: 24px;
   border: none;
-  color: rgb(95, 158, 189);
+  color: #49a7da;
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
   :hover {
-    background-color: rgb(80, 180, 139);
-    color: rgb(112, 110, 110);
+    background-color: #6cdcbf;
+    color: white;
   }
 `;
 
-const CancelButton = styled(SaveButton)``;
+const CancelButton = styled(SaveButton)`
+  :hover {
+    background-color: #f08185;
+    color: white;
+  }
+`;
 
 const CloseDiv = styled.div`
   font-size: "24px";
