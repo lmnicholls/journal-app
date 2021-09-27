@@ -94,7 +94,6 @@ const Journal = () => {
       })
     );
     handleDeleteShow();
-    console.log("delete");
   };
 
   const handleEditEntry = (id) => {

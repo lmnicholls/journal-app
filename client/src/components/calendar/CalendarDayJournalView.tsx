@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { deleteEntry, fetchEntries } from "../../actions";
 import EditEntry from "../journal/EditEntry";
+import DeleteModal from "../journal/DeleteModal";
 
 export default function CalendarDayJournalView(props: any) {
   const journalEntry = props.entries.filter(
@@ -19,15 +20,12 @@ export default function CalendarDayJournalView(props: any) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const dispatch = useDispatch();
+  const [deleteShow, setDeleteShow] = useState(false);
+  const handleDeleteClose = () => setDeleteShow(false);
+  const handleDeleteShow = () => setDeleteShow(true);
 
   const handleDeleteEntry = (id: string) => {
-    console.log("id", id);
-    dispatch(
-      deleteEntry(id, () => {
-        dispatch(fetchEntries());
-      })
-    );
+    handleDeleteShow();
   };
 
   const handleEditEntry = (id: string) => {
@@ -46,6 +44,13 @@ export default function CalendarDayJournalView(props: any) {
           entry={journalEntry[0].entry}
           title={journalEntry[0].title}
           date={journalEntry[0].date}
+        />
+        <DeleteModal
+          setShow={setDeleteShow}
+          show={deleteShow}
+          handleClose={handleDeleteClose}
+          handleShow={handleDeleteShow}
+          entryID={props.entryID}
         />
         <Modal
           show={props.show}
