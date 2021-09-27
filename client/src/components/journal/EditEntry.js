@@ -97,6 +97,7 @@ const EditEntry = (props) => {
                   placeholder={"Write something awesome..."}
                   modules={modules}
                   formats={formats}
+                  required
                 />
               </div>
             </JournalEntryForm>

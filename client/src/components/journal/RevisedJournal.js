@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -68,7 +68,7 @@ const Journal = () => {
     }
   };
 
-  const handleLastPageClick = () => {
+  const handleLastPageClick = useCallback(() => {
     if (entries.length % 2 === 0) {
       setLeftPageIndex(entries.length - 1);
       setRightPageIndex(entries.length);
@@ -76,7 +76,11 @@ const Journal = () => {
       setLeftPageIndex(entries.length - 2);
       setRightPageIndex(entries.length - 1);
     }
-  };
+  }, [entries.length]);
+
+  useEffect(() => {
+    handleLastPageClick();
+  }, [handleLastPageClick]);
 
   const handleDeleteEntry = (id) => {
     dispatch(
