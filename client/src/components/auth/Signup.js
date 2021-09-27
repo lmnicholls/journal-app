@@ -12,7 +12,6 @@ import Background from "../Background";
 const userSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is a required field"),
   lastName: Yup.string().required("Last Name is a required field"),
-  therapist: Yup.string().required("Therapist is a required field"),
   email: Yup.string().email().required(),
   password: Yup.string().required(),
 });
@@ -77,25 +76,6 @@ const Signup = () => {
                   }}
                 >
                   {errors.lastName?.message}
-                </span>
-              </div>
-            </FormGroup>
-
-            <FormGroup>
-              <input
-                className="form-control"
-                name="therapist"
-                {...register("therapist", { required: "Required" })}
-              ></input>
-              <div className="form-labels">
-                <label>Therapist Name</label>
-                <span
-                  style={{
-                    color: "white",
-                    textShadow: "1px 1px red",
-                  }}
-                >
-                  {errors.therapist?.message}
                 </span>
               </div>
             </FormGroup>

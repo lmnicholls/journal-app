@@ -42,7 +42,6 @@ const Container = ({ postits }: any) => {
         moveBox(item._id, x, y);
         setBoxes((prevState: any) => {
           let index = prevState.findIndex((box: any) => (box._id = item.id));
-          console.log("index", index);
           prevState[index][x] = x;
           prevState[index][y] = y;
           return prevState;

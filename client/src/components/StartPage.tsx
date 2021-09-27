@@ -27,7 +27,7 @@ const Start = styled.div`
 
 const Title = styled.h1`
   font-family: "Rochester";
-  font-size: 72px;
+  font-size: 80px;
   margin: 0px;
   color: white;
   text-shadow: 3px 3px rgb(51, 167, 151);
@@ -35,8 +35,8 @@ const Title = styled.h1`
 
 const Description = styled.h4`
   font-family: "Patrick Hand SC";
-  font-size: 32px;
+  font-size: 40px;
   margin-top: 0px;
   color: white;
-  text-shadow: 0.5px 0.5px rgb(51, 167, 151);
+  text-shadow: 2px 2px rgb(51, 167, 151);
 `;
