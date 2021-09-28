@@ -11,12 +11,6 @@ import "./calendar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
-interface Feelings {
-  _id: string;
-  date: string;
-  text: string;
-}
-
 const MyCalendar = () => {
   const [date, setDate] = useState(new Date());
   const { authenticated } = useSelector<any, any>((state) => state.auth);
@@ -82,7 +76,7 @@ const MyCalendar = () => {
         (feeling: any) => feeling.date === moment(date).format("MM/DD/YYYY")
       )
     ) {
-      const feelingdate: Array<Feelings> = feelings.find(
+      const feelingdate = feelings.find(
         (feeling: any) => feeling.date === moment(date).format("MM/DD/YYYY")
       );
       feelingEmoji = feelingsKey[feelingdate.text];

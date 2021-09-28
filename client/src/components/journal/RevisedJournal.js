@@ -109,20 +109,22 @@ const Journal = () => {
   if (!entries) {
     return (
       <div>
+        <JournalBackground />
         <Nav />
-        <JournalDiv>
+        <JournalHeading>
           <JournalTitle>My Journal</JournalTitle>
           <h5>
             Get journaling. Add an entry to your journal and start recording
             memories!
           </h5>
-        </JournalDiv>
+        </JournalHeading>
       </div>
     );
   }
 
   return (
-    <JournalBackground>
+    <>
+      <JournalBackground />
       <EditEntry
         setShow={setShow}
         show={show}
@@ -302,7 +304,7 @@ const Journal = () => {
           </Button>
         </div>
       </JournalDiv>
-    </JournalBackground>
+    </>
   );
 };
 
@@ -316,6 +318,11 @@ const JournalBackground = styled.div`
     #6cdcbf 52%,
     #49a7da 90%
   );
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: -10;
 `;
 
 const JournalHeading = styled.div`
@@ -324,6 +331,11 @@ const JournalHeading = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 75px;
+  h5 {
+    color: white;
+    font-family: Patrick Hand SC;
+    font-size: 32px;
+  }
 `;
 
 const EditButton = styled(FontAwesomeIcon)`
