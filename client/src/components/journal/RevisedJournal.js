@@ -106,7 +106,7 @@ const Journal = () => {
     handleShow();
   };
 
-  if (!entries) {
+  if (entries) {
     return (
       <div>
         <JournalBackground />
@@ -117,7 +117,43 @@ const Journal = () => {
             Get journaling. Add an entry to your journal and start recording
             memories!
           </h5>
+          <Button onClick={handleAddEntryClick}>
+            <FontAwesomeIcon
+              icon={faPlusCircle}
+              className="icon bars fa-1xx"
+              style={{ paddingRight: "5px" }}
+            />
+            Add Entry
+          </Button>
         </JournalHeading>
+        <JournalDiv>
+          <JournalBookDiv>
+            <PageDiv>
+              <LeftPage
+                style={{
+                  fontFamily: "Patrick Hand SC",
+                  fontSize: "24px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                Beginning of Journal
+              </LeftPage>
+            </PageDiv>
+            <PageDiv>
+              <RightPage
+                style={{
+                  fontFamily: "Patrick Hand SC",
+                  fontSize: "24px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                End of Journal
+              </RightPage>
+            </PageDiv>
+          </JournalBookDiv>
+        </JournalDiv>
       </div>
     );
   }
