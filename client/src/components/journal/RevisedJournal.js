@@ -106,7 +106,7 @@ const Journal = () => {
     handleShow();
   };
 
-  if (entries) {
+  if (!entries) {
     return (
       <div>
         <JournalBackground />
