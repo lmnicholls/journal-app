@@ -5,14 +5,14 @@ import moment from "moment";
 
 interface FeelingsState {
   _id: string;
-  date: string;
+  date: any;
   text: string;
 }
 interface Props {
-  feelings: { feeling: FeelingsState[], feelings: FeelingsState[] };
+  feelings: FeelingsState[];
 }
 
-export default function MonthlyFeelings({ feelings }: Props.feelings) {
+export default function MonthlyFeelings({ feelings }: Props) {
   const feelingsPast30Days = feelings
     ?.slice(0, 29)
     .sort((a, b) => a.date - b.date);
@@ -47,11 +47,6 @@ export default function MonthlyFeelings({ feelings }: Props.feelings) {
       style: {
         fontFamily: "Patrick Hand SC",
         fontWeight: "bold",
-      },
-      events: {
-        load() {
-          setTimeout(this.reflow.bind(this), 0);
-        },
       },
     },
     title: {

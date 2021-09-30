@@ -2,26 +2,26 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
+
 interface FeelingsState {
   _id: string;
   date: string;
   text: string;
 }
+
 interface Props {
-  feelings: { feeling: FeelingsState[], feelings: FeelingsState[] };
+  feelings: FeelingsState[];
 }
 
-export default function FeelingsPieChart({ feelings }: Props.feelings) {
+export default function FeelingsPieChart({ feelings }: Props) {
   const currentYear = moment(new Date()).format("YYYY");
 
   const sortedFeelings = feelings
     .filter((feeling) => moment(feeling.date).format("YYYY") === currentYear)
-    .reduce((obj: {}, item: FeelingsState) => {
+    .reduce((obj, item: FeelingsState) => {
       obj[item.text] = (obj[item.text] || 0) + 1;
       return obj;
-    }, {});
-
-  console.log(sortedFeelings);
+    }, {} as any);
 
   if (!sortedFeelings) {
     return <div></div>;
@@ -51,11 +51,6 @@ export default function FeelingsPieChart({ feelings }: Props.feelings) {
       style: {
         fontFamily: "Patrick Hand SC",
         fontWeight: "bold",
-      },
-      events: {
-        load() {
-          setTimeout(this.reflow.bind(this), 0);
-        },
       },
     },
     title: {
