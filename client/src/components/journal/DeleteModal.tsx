@@ -10,10 +10,18 @@ import "./css/journalentry.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const DeleteModal = (props) => {
+interface Props {
+  setShow: Function;
+  show: boolean;
+  handleClose: () => void;
+  handleShow: () => void;
+  entryID: string;
+}
+
+const DeleteModal = (props: Props) => {
   const dispatch = useDispatch();
 
-  const handleDeleteEntry = (e) => {
+  const handleDeleteEntry = (e: any) => {
     e.preventDefault();
     dispatch(
       deleteEntry(props.entryID, () => {
@@ -27,7 +35,7 @@ const DeleteModal = (props) => {
     <>
       <Modal
         size="lg"
-        scrollable="true"
+        scrollable={true}
         show={props.show}
         onHide={props.handleClose}
         animation={false}
@@ -53,16 +61,10 @@ const DeleteModal = (props) => {
         </ModalBody>
         <Modal.Footer style={{ backgroundColor: "#49a7da", border: "none" }}>
           <div>
-            <SaveButton
-              variant="primary"
-              type="submit"
-              onClick={(e) => handleDeleteEntry(e)}
-            >
+            <SaveButton type="submit" onClick={(e) => handleDeleteEntry(e)}>
               Delete
             </SaveButton>
-            <CancelButton variant="secondary" onClick={props.handleClose}>
-              Cancel
-            </CancelButton>
+            <CancelButton onClick={props.handleClose}>Cancel</CancelButton>
           </div>
         </Modal.Footer>
       </Modal>

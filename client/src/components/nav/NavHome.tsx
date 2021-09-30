@@ -60,6 +60,6 @@ const NavUl = styled.ul`
   }
   padding-right: 10px;
   li a:hover {
-    color: black;
+    color: #103373;
   }
 `;

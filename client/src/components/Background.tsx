@@ -18,4 +18,5 @@ const AnimatedBackground = styled.div`
   position: fixed;
   top: 0;
   z-index: -10;
+  background-color: #103373;
 `;

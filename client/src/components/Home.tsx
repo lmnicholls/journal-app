@@ -34,7 +34,6 @@ const Home = () => {
       <Background />
       <Heading>
         <Background />
-        <Title>{userName ? `${userName}'s Homepage` : `Homepage`} </Title>
         <Description>
           Small acts of self-care in your daily life can have a big impact on
           your mental health. Click on a link to get started.
@@ -121,15 +120,6 @@ export default Home;
 const Heading = styled.div`
   text-align: center;
   padding-top: 75px;
-`;
-
-const Title = styled.h1`
-  font-family: "Patrick Hand SC";
-  font-size: 64px;
-  margin: 0px;
-  margin-bottom: 20px;
-  color: white;
-  text-shadow: 3px 3px rgb(51, 167, 151);
 `;
 
 const Description = styled.h4`
