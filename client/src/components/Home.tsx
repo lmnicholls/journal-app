@@ -19,6 +19,9 @@ const Home = () => {
   const { authenticated } = useSelector<any, any>((state) => state.auth);
   const history = useHistory();
 
+  const userName = useSelector<any, any>((state) => state.auth.firstName);
+  console.log(userName)
+
   useEffect(() => {
     if (!authenticated) {
       history.push("/");
@@ -29,6 +32,13 @@ const Home = () => {
     <Fragment>
       <Nav />
       <Background />
+      <Heading>
+        <Background />
+        <Title>{userName ? `${userName}'s Homepage` : `Homepage`} </Title>
+        <Description>
+        Small acts of self-care in your daily life can have a big impact on your mental health. Click on a link to get started.
+        </Description>
+      </Heading>
       <LinkDiv>
         <Start>
           <HomeLink
@@ -107,6 +117,31 @@ const Home = () => {
 
 export default Home;
 
+const Heading = styled.div`
+  text-align: center;
+  padding-top: 75px;
+`;
+
+const Title = styled.h1`
+  font-family: "Rochester";
+  font-size: 64px;
+  margin: 0px;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+`;
+
+const Description = styled.h4`
+  font-family: "Patrick Hand SC";
+  width: 50vw;
+  margin: 0 auto;
+  font-size: 36px;
+  margin-top: 0px;
+  color: white;
+  text-shadow: 2px 2px rgb(51, 167, 151);
+`;
+
+
 const Start = styled.div`
   text-align: center;
   display: flex;
@@ -118,7 +153,7 @@ const Start = styled.div`
 `;
 
 const LinkDiv = styled.div`
-  padding-top: 100px;
+  padding-top: 25px;
   padding-bottom: 100px;
 `;
 
