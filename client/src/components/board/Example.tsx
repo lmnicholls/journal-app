@@ -1,5 +1,19 @@
 import Container from "./Container";
-export const Example = ({ postits }: any) => {
+
+interface PostIt {
+  _id: string;
+  postit: string;
+  rotate: number;
+  x: number;
+  y: number;
+  color: string;
+}
+
+interface Props {
+  postits: PostIt[];
+}
+
+export const Example = ({ postits }: Props) => {
   return (
     <div>
       <Container postits={postits} />

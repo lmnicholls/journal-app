@@ -9,7 +9,26 @@ import { editPostitPosition, fetchPostits, deletePostit } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const Container = ({ postits }: any) => {
+interface Item {
+  id: string;
+  left: number;
+  top: number;
+}
+
+interface PostIt {
+  _id: string;
+  postit: string;
+  rotate: number;
+  x: number;
+  y: number;
+  color: string;
+}
+
+interface Props {
+  postits: PostIt[];
+}
+
+const Container = ({ postits }: Props) => {
   const [boxes, setBoxes] = useState(postits);
 
   const dispatch = useDispatch();
@@ -25,7 +44,7 @@ const Container = ({ postits }: any) => {
           [id]: {
             $set: { x: x, y: y },
           },
-        })
+        } as any)
       );
     },
     [boxes, setBoxes]
@@ -34,20 +53,22 @@ const Container = ({ postits }: any) => {
   const [, drop] = useDrop(
     () => ({
       accept: ItemTypes.BOX,
-      drop(item: any, monitor) {
+      drop(item: Item, monitor) {
         const delta = monitor.getDifferenceFromInitialOffset();
         if (!delta) return;
+        const postitID = item.id;
         const x = Math.round(item.left + delta.x);
         const y = Math.round(item.top + delta.y);
-        moveBox(item._id, x, y);
+        moveBox(item.id, x, y);
         setBoxes((prevState: any) => {
           let index = prevState.findIndex((box: any) => (box._id = item.id));
+          console.log("prevState", prevState);
           prevState[index][x] = x;
           prevState[index][y] = y;
           return prevState;
         });
         dispatch(
-          editPostitPosition(item.id, x, y, () => {
+          editPostitPosition({ postitID, x, y }, () => {
             dispatch(fetchPostits());
           })
         );

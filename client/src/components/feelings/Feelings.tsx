@@ -52,6 +52,9 @@ const Feelings = () => {
       <FeelingsBackground />
       <FeelingsDiv>
         <FeelingsTitle>How are you feeling today?</FeelingsTitle>
+        <FeelingsHeading>
+          Click on a feeling below to log how you are feeling today.
+        </FeelingsHeading>
         <Form>
           <FeelingsContainer>
             <Emoji>
@@ -135,6 +138,12 @@ const FeelingsTitle = styled.h3`
   text-shadow: 3px 3px rgb(51, 167, 151);
   font-family: "Patrick Hand SC";
   font-size: 64px;
+  color: white;
+`;
+
+const FeelingsHeading = styled.div`
+  font-family: "Patrick Hand SC";
+  font-size: 32px;
   color: white;
 `;
 

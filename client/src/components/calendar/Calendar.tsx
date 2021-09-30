@@ -11,16 +11,43 @@ import "./calendar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
+interface AuthState {
+  auth: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  authenticated: string;
+}
+
+interface EntryState {
+  _id: string;
+  title: string;
+  date: string;
+  entry: string;
+}
+
+interface FeelingsState {
+  _id: string;
+  date: string;
+  text: string;
+}
+
+interface RootState {
+  auth: AuthState;
+  journalEntries: { entry: EntryState[]; entries: EntryState[] };
+  feelings: { feeling: FeelingsState[]; feelings: FeelingsState[] };
+}
+
 const MyCalendar = () => {
   const [date, setDate] = useState(new Date());
-  const { authenticated } = useSelector<any, any>((state) => state.auth);
-  const entries = useSelector<any, any>((state) => {
-    return state.journalEntries.entries;
+  const { authenticated } = useSelector((state: RootState) => state.auth);
+  const { entries } = useSelector((state: RootState) => {
+    return state.journalEntries;
   });
-  const feelings = useSelector<any, any>((state) => {
-    return state.feelings.feelings;
+  const { feelings } = useSelector((state: RootState) => {
+    return state.feelings;
   });
-
+  console.log(feelings);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -61,7 +88,7 @@ const MyCalendar = () => {
 
   const tileContent = ({ activeStartDate, date, view }: any) => {
     let feelingsKey: {
-      [key: string]: any;
+      [key: string]: string;
     } = {
       amazing: "😁",
       happy: "🙂",
@@ -73,19 +100,22 @@ const MyCalendar = () => {
     let feelingEmoji: string = "";
     if (
       feelings.find(
-        (feeling: any) => feeling.date === moment(date).format("MM/DD/YYYY")
+        (feeling: FeelingsState) =>
+          feeling.date === moment(date).format("MM/DD/YYYY")
       )
     ) {
       const feelingdate = feelings.find(
-        (feeling: any) => feeling.date === moment(date).format("MM/DD/YYYY")
+        (feeling: FeelingsState) =>
+          feeling.date === moment(date).format("MM/DD/YYYY")
       );
+      if (!feelingdate) return null;
       feelingEmoji = feelingsKey[feelingdate.text];
       return <p style={{ fontSize: "16px" }}> {feelingEmoji} </p>;
     } else return <p style={{ fontSize: "16px", color: "transparent" }}>:)</p>;
   };
 
   if (entries) {
-    let dailyEntriesDates = entries.map((entry: any) => {
+    let dailyEntriesDates = entries.map((entry: EntryState) => {
       let date = moment(new Date(entry.date)).format("MM/DD/YYYY");
       return date;
     });
@@ -96,6 +126,10 @@ const MyCalendar = () => {
         <CalendarBackground />
         <CalendarHeading>
           <CalendarTitle>My Calendar</CalendarTitle>
+          <Heading>
+            Click on the highlighted dates to view your journal entries for that
+            day.
+          </Heading>
           <ButtonDiv>
             <Button
               onClick={handleAddEntryClick}
@@ -205,6 +239,12 @@ const CalendarTitle = styled.h3`
   text-shadow: 3px 3px rgb(51, 167, 151);
   font-family: "Patrick Hand SC";
   font-size: 64px;
+  color: white;
+`;
+
+const Heading = styled.div`
+  font-family: "Patrick Hand SC";
+  font-size: 32px;
   color: white;
 `;
 

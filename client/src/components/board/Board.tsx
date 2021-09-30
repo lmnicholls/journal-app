@@ -9,10 +9,31 @@ import "./board.css";
 import Nav from "../nav/Nav";
 import { addPostit, fetchPostits } from "../../actions";
 
+interface AuthState {
+  auth: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  authenticated: string;
+}
+
+interface PostIt {
+  _id: string;
+  postit: string;
+  rotate: number;
+  x: number;
+  y: number;
+  color: string;
+}
+interface RootState {
+  auth: AuthState;
+  postits: { postit: PostIt[]; postits: PostIt[] };
+}
+
 function Board() {
-  const { authenticated } = useSelector<any, any>((state) => state.auth);
-  const postits = useSelector<any, any>((state) => {
-    return state.postits.postits;
+  const { authenticated } = useSelector((state: RootState) => state.auth);
+  const { postits } = useSelector((state: RootState) => {
+    return state.postits;
   });
   const [postitInput, setPostitInput] = useState("");
   const colors = ["lightyellow", "lightblue", "lightpink", "lightgreen"];

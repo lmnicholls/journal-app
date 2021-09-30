@@ -20,7 +20,7 @@ const Home = () => {
   const history = useHistory();
 
   const userName = useSelector<any, any>((state) => state.auth.firstName);
-  console.log(userName)
+  console.log(userName);
 
   useEffect(() => {
     if (!authenticated) {
@@ -36,7 +36,8 @@ const Home = () => {
         <Background />
         <Title>{userName ? `${userName}'s Homepage` : `Homepage`} </Title>
         <Description>
-        Small acts of self-care in your daily life can have a big impact on your mental health. Click on a link to get started.
+          Small acts of self-care in your daily life can have a big impact on
+          your mental health. Click on a link to get started.
         </Description>
       </Heading>
       <LinkDiv>
@@ -123,7 +124,7 @@ const Heading = styled.div`
 `;
 
 const Title = styled.h1`
-  font-family: "Rochester";
+  font-family: "Patrick Hand SC";
   font-size: 64px;
   margin: 0px;
   margin-bottom: 20px;
@@ -140,7 +141,6 @@ const Description = styled.h4`
   color: white;
   text-shadow: 2px 2px rgb(51, 167, 151);
 `;
-
 
 const Start = styled.div`
   text-align: center;
