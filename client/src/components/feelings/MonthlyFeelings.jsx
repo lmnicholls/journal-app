@@ -3,7 +3,16 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 
-export default function MonthlyFeelings({ feelings }) {
+interface FeelingsState {
+  _id: string;
+  date: string;
+  text: string;
+}
+interface Props {
+  feelings: { feeling: FeelingsState[], feelings: FeelingsState[] };
+}
+
+export default function MonthlyFeelings({ feelings }: Props.feelings) {
   const feelingsPast30Days = feelings
     ?.slice(0, 29)
     .sort((a, b) => a.date - b.date);

@@ -10,10 +10,27 @@ import { Container, Row, Col } from "react-bootstrap";
 import FeelingsPieChart from "./FeelingsPieChart";
 import MonthlyFeelings from "./MonthlyFeelings";
 
+interface AuthState {
+  auth: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  authenticated: string;
+}
+interface FeelingsState {
+  _id: string;
+  date: string;
+  text: string;
+}
+interface RootState {
+  auth: AuthState;
+  feelings: { feeling: FeelingsState[]; feelings: FeelingsState[] };
+}
+
 const Feelings = () => {
-  const { authenticated } = useSelector<any, any>((state) => state.auth);
-  const feelings = useSelector<any, any>((state) => {
-    return state.feelings.feelings;
+  const { authenticated } = useSelector((state: RootState) => state.auth);
+  const { feelings } = useSelector((state: RootState) => {
+    return state.feelings;
   });
 
   const history = useHistory();
@@ -40,7 +57,7 @@ const Feelings = () => {
     } else {
       const target = e.target as HTMLTextAreaElement;
       let feeling = target.value;
-      let date = moment().format("MM/DD/YYYY");
+      let date = moment(new Date()).format("MM/DD/YYYY");
       dispatch(addFeeling(feeling, date));
       dispatch(fetchFeelings());
     }

@@ -1,12 +1,27 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import moment from "moment";
+interface FeelingsState {
+  _id: string;
+  date: string;
+  text: string;
+}
+interface Props {
+  feelings: { feeling: FeelingsState[], feelings: FeelingsState[] };
+}
 
-export default function FeelingsPieChart({ feelings }: any) {
-  const sortedFeelings = feelings?.reduce((obj: any, item: any) => {
-    obj[item.text] = (obj[item.text] || 0) + 1;
-    return obj;
-  }, {});
+export default function FeelingsPieChart({ feelings }: Props.feelings) {
+  const currentYear = moment(new Date()).format("YYYY");
+
+  const sortedFeelings = feelings
+    .filter((feeling) => moment(feeling.date).format("YYYY") === currentYear)
+    .reduce((obj: {}, item: FeelingsState) => {
+      obj[item.text] = (obj[item.text] || 0) + 1;
+      return obj;
+    }, {});
+
+  console.log(sortedFeelings);
 
   if (!sortedFeelings) {
     return <div></div>;
@@ -45,14 +60,14 @@ export default function FeelingsPieChart({ feelings }: any) {
     },
     title: {
       verticalAlign: "top",
-      text: "This Year's Feelings Breakdown",
+      text: `${moment(new Date()).format("YYYY")} Feelings Breakdown`,
       style: {
         fontSize: 28,
         color: "white",
       },
     },
     tooltip: {
-      pointFormat: "{point.name}: <b>{point.percentage:.0f}%</b>",
+      pointFormat: "{point.name}: <b>{point.y}</b>",
       style: {
         fontSize: 16,
       },
