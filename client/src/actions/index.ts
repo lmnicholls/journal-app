@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Dispatch } from "redux";
 import {
   AUTH_USER,
   AUTH_ERROR,
@@ -18,8 +19,41 @@ import {
   EDIT_POSTIT_POSITION,
 } from "./types";
 
+interface FormProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+interface AddEntry {
+  entry: string;
+  date: string;
+  title: string;
+}
+
+interface EditEntry {
+  entry: string;
+  entryID: string;
+  title: string;
+}
+
+interface AddPostit {
+  postit: string;
+  rotate: number;
+  x: number;
+  y: number;
+  color: string;
+}
+
+interface EditPostit {
+  postitID: string;
+  x: number;
+  y: number;
+}
+
 export const signup =
-  (formProps: any, callback: () => void) => (dispatch: any) => {
+  (formProps: FormProps, callback: () => void) => (dispatch: Dispatch) => {
     axios
       .post("http://localhost:5000/signup", formProps)
       .then(function (response) {
@@ -33,7 +67,7 @@ export const signup =
   };
 
 export const signin =
-  (formProps: any, callback: () => void) => (dispatch: any) => {
+  (formProps: FormProps, callback: () => void) => (dispatch: Dispatch) => {
     axios
       .post("http://localhost:5000/signin", formProps)
       .then(function (response) {
@@ -46,7 +80,7 @@ export const signin =
       });
   };
 
-export const fetchUser = () => (dispatch: any) => {
+export const fetchUser = () => (dispatch: Dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -64,7 +98,7 @@ export const fetchUser = () => (dispatch: any) => {
     });
 };
 
-export const signout = (callback: () => void) => (dispatch: any) => {
+export const signout = (callback: () => void) => (dispatch: Dispatch) => {
   localStorage.removeItem("token");
 
   dispatch({ type: AUTH_USER, payload: "" });
@@ -72,7 +106,8 @@ export const signout = (callback: () => void) => (dispatch: any) => {
 };
 
 export const addEntry =
-  (title: string, date: string, entry: string) => (dispatch: any) => {
+  ({ title, date, entry }: AddEntry) =>
+  (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -90,7 +125,7 @@ export const addEntry =
   };
 
 export const deleteEntry =
-  (entryID: string, callback: () => void) => (dispatch: any) => {
+  (entryID: string, callback: () => void) => (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -109,8 +144,8 @@ export const deleteEntry =
   };
 
 export const editEntry =
-  (entryID: string, title: string, entry: string, callback: () => void) =>
-  (dispatch: any) => {
+  ({ entryID, title, entry }: EditEntry, callback: () => void) =>
+  (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -132,7 +167,7 @@ export const editEntry =
       });
   };
 
-export const fetchEntries = () => (dispatch: any) => {
+export const fetchEntries = () => (dispatch: Dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -150,7 +185,7 @@ export const fetchEntries = () => (dispatch: any) => {
 };
 
 export const addFeeling =
-  (feeling: string, date: string) => (dispatch: any) => {
+  (feeling: string, date: string) => (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -167,7 +202,7 @@ export const addFeeling =
       });
   };
 
-export const fetchFeelings = () => (dispatch: any) => {
+export const fetchFeelings = () => (dispatch: Dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -184,24 +219,25 @@ export const fetchFeelings = () => (dispatch: any) => {
     });
 };
 
-export const addNote = (note: string, checked: boolean) => (dispatch: any) => {
-  const config = {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    },
+export const addNote =
+  (note: string, checked: boolean) => (dispatch: Dispatch) => {
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+
+    axios
+      .post("http://localhost:5000/notes", { note, checked }, config)
+      .then(function (response) {
+        dispatch({ type: ADD_NOTE, payload: response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
-  axios
-    .post("http://localhost:5000/notes", { note, checked }, config)
-    .then(function (response) {
-      dispatch({ type: ADD_NOTE, payload: response.data });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
-export const fetchNotes = () => (dispatch: any) => {
+export const fetchNotes = () => (dispatch: Dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -219,7 +255,7 @@ export const fetchNotes = () => (dispatch: any) => {
 };
 
 export const deleteNote =
-  (noteID: string, callback: () => void) => (dispatch: any) => {
+  (noteID: string, callback: () => void) => (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -239,7 +275,7 @@ export const deleteNote =
 
 export const editNoteCheck =
   (noteID: string, checkStatus: boolean, callback: () => void) =>
-  (dispatch: any) => {
+  (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -261,7 +297,7 @@ export const editNoteCheck =
       });
   };
 
-export const fetchPostits = () => (dispatch: any) => {
+export const fetchPostits = () => (dispatch: Dispatch) => {
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -279,8 +315,8 @@ export const fetchPostits = () => (dispatch: any) => {
 };
 
 export const addPostit =
-  (postit: string, rotate: number, x: number, y: number, color: string) =>
-  (dispatch: any) => {
+  ({ postit, rotate, x, y, color }: AddPostit) =>
+  (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -302,7 +338,7 @@ export const addPostit =
   };
 
 export const deletePostit =
-  (postitID: string, callback: () => void) => (dispatch: any) => {
+  (postitID: string, callback: () => void) => (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -321,8 +357,8 @@ export const deletePostit =
   };
 
 export const editPostitPosition =
-  (postitID: string, x: number, y: number, callback: () => void) =>
-  (dispatch: any) => {
+  ({ postitID, x, y }: EditPostit, callback: () => void) =>
+  (dispatch: Dispatch) => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
