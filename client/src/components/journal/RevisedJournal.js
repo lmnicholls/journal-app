@@ -181,6 +181,9 @@ const Journal = () => {
       <Nav />
       <JournalHeading>
         <JournalTitle>My Journal</JournalTitle>
+        <Heading>
+          Flip through your journal to look at all your entries.
+        </Heading>
         <Button onClick={handleAddEntryClick}>
           <FontAwesomeIcon
             icon={faPlusCircle}
@@ -372,6 +375,16 @@ const JournalHeading = styled.div`
     font-family: Patrick Hand SC;
     font-size: 32px;
   }
+`;
+
+const Heading = styled.div`
+  font-family: "Patrick Hand SC";
+  width: 70vw;
+  margin: 0 auto;
+  font-size: 36px;
+  margin-top: 0px;
+  color: white;
+  text-align: center;
 `;
 
 const EditButton = styled(FontAwesomeIcon)`

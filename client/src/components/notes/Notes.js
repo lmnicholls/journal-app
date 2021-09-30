@@ -101,6 +101,7 @@ const Notes = (props) => {
       <NotesBackground />
       <NotesContainer>
         <NotesTitle>Notes</NotesTitle>
+        <Header>Add topics for discussion at your next therapy session.</Header>
         <NotesDiv>
           <NotePad>
             <div>
@@ -160,7 +161,6 @@ const NotesDiv = styled.div`
 `;
 
 const NotesTitle = styled.h3`
-  padding-bottom: 15px;
   margin: 0;
   text-shadow: 3px 3px rgb(51, 167, 151);
   font-family: "Patrick Hand SC";
@@ -201,6 +201,17 @@ const NotesBackground = styled.div`
   position: fixed;
   top: 0;
   z-index: -10;
+`;
+
+const Header = styled.h4`
+  font-family: "Patrick Hand SC";
+  width: 70vw;
+  margin: 0 auto;
+  font-size: 32px;
+  margin-top: 0px;
+  color: white;
+  text-align: center;
+  padding-bottom: 20px;
 `;
 
 const NoteFormInput = styled(Form.Control)`

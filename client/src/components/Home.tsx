@@ -139,7 +139,6 @@ const Description = styled.h4`
   font-size: 36px;
   margin-top: 0px;
   color: white;
-  text-shadow: 2px 2px rgb(51, 167, 151);
 `;
 
 const Start = styled.div`

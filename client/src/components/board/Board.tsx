@@ -83,6 +83,10 @@ function Board() {
       <Nav />
       <BoardBackground />
       <BoardTitle>Quotes • Betterment • Positivity</BoardTitle>
+      <Header>
+        Use this board to add strategies, tools, quotes and anything you feel
+        that will help you manage your mental health.
+      </Header>
       <BoardDiv>
         <Form>
           <textarea
@@ -133,6 +137,16 @@ const BoardTitle = styled.h3`
   color: white;
   text-align: center;
   padding-top: 50px;
+`;
+
+const Header = styled.h4`
+  font-family: "Patrick Hand SC";
+  width: 70vw;
+  margin: 0 auto;
+  font-size: 36px;
+  margin-top: 0px;
+  color: white;
+  text-align: center;
 `;
 
 const Form = styled.form`

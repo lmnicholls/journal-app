@@ -43,6 +43,7 @@ const JournalEntry = () => {
       <Nav />
       <JournalEntryBackground />
       <Journal>
+        <JournalTitle>New Journal Entry</JournalTitle>
         <Button onClick={handleAddEntryClick}>
           <FontAwesomeIcon
             icon={faChevronCircleLeft}
@@ -52,7 +53,6 @@ const JournalEntry = () => {
           Back To Journal
         </Button>
         <JournalEntryForm onSubmit={(e) => handleFormSubmit(e)}>
-          <h3>New Journal Entry</h3>
           <JournalEntryTitleDate>
             <label>Title</label>
             <input
@@ -109,6 +109,14 @@ const JournalEntryBackground = styled.div`
   z-index: -10;
 `;
 
+const JournalTitle = styled.h3`
+  margin: 0;
+  text-shadow: 3px 3px rgb(51, 167, 151);
+  font-family: "Patrick Hand SC";
+  font-size: 64px;
+  color: white;
+`;
+
 const JournalEntryForm = styled.form`
   font-family: "Patrick Hand SC";
   color: white;
@@ -138,7 +146,7 @@ const JournalEntryTitleDate = styled.div`
   }
   h4 {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 24px;
   }
   label {
     width: 60px;
