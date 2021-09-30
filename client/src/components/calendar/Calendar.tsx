@@ -22,7 +22,7 @@ interface AuthState {
 interface EntryState {
   _id: string;
   title: string;
-  date: string;
+  date: Date;
   entry: string;
 }
 
@@ -47,7 +47,7 @@ const MyCalendar = () => {
   const { feelings } = useSelector((state: RootState) => {
     return state.feelings;
   });
-  console.log(feelings);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

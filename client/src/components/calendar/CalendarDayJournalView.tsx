@@ -9,9 +9,24 @@ import { faTimes, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import EditEntry from "../journal/EditEntry";
 import DeleteModal from "../journal/DeleteModal";
 
-export default function CalendarDayJournalView(props: any) {
+interface Entry {
+  _id: string;
+  title: string;
+  date: Date;
+  entry: string;
+}
+interface Props {
+  setShow: Function;
+  show: boolean;
+  entryID: string;
+  entries: Entry[];
+  handleClose: Function;
+  handleShow: Function;
+}
+
+export default function CalendarDayJournalView(props: Props) {
   const journalEntry = props.entries.filter(
-    (entry: any) => entry._id === props.entryID
+    (entry: Entry) => entry._id === props.entryID
   );
 
   const [show, setShow] = useState(false);

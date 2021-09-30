@@ -8,7 +8,22 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-export default function CalendarDayListView(props: any) {
+interface Entry {
+  _id: string;
+  title: string;
+  date: Date;
+  entry: string;
+}
+interface Props {
+  setShow: Function;
+  show: boolean;
+  date: Date;
+  entries: Entry[];
+  handleClose: Function;
+  handleShow: Function;
+}
+
+export default function CalendarDayListView(props: Props) {
   const [show, setShow] = useState(false);
   const [entryID, setEntryID] = useState("");
 
@@ -16,12 +31,15 @@ export default function CalendarDayListView(props: any) {
   const handleShow = () => setShow(true);
 
   const entries = props.entries.filter(
-    (entry: any) =>
+    (entry: Entry) =>
       moment(entry.date).format("MM/DD/YYYY") ===
       moment(props.date).format("MM/DD/YYYY")
   );
 
-  const handleJournalEntryClick = (e: any, entryID: string) => {
+  const handleJournalEntryClick = (
+    e: React.SyntheticEvent<EventTarget>,
+    entryID: string
+  ) => {
     e.preventDefault();
     setEntryID(entryID);
     handleShow();
@@ -59,7 +77,7 @@ export default function CalendarDayListView(props: any) {
               {entries.length === 0 ? (
                 <Col>No journal entries for this date.</Col>
               ) : (
-                entries.map((entry: any) => {
+                entries.map((entry: Entry) => {
                   return (
                     <Col key={entry._id}>
                       <JournalEntryButton
