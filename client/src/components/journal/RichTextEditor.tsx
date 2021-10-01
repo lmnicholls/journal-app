@@ -33,6 +33,10 @@ export default RichTextEditor;
 
 const TextEditor = styled(ReactQuill)`
   img {
-    width: 250px;
+    width: 40%;
+    max-height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;

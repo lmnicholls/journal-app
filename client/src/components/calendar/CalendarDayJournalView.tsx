@@ -135,6 +135,9 @@ const JournalText = styled.div`
   img {
     max-width: 40%;
     max-height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
 
