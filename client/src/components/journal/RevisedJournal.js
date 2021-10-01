@@ -448,6 +448,11 @@ const JournalText = styled.div`
   flex-grow: 1;
   height: 100%;
   cursor: pointer;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 const PageDiv = styled.div`
