@@ -411,7 +411,6 @@ const JournalDiv = styled.div`
 const Entry = styled.div`
   display: flex;
   flex-flow: column;
-  height: 100%;
 `;
 
 const EntryHeader = styled.div`
