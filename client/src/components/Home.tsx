@@ -20,7 +20,6 @@ const Home = () => {
   const history = useHistory();
 
   const userName = useSelector<any, any>((state) => state.auth.firstName);
-  console.log(userName);
 
   useEffect(() => {
     if (!authenticated) {

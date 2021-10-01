@@ -16,7 +16,18 @@ import "./css/journalentry.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const EditEntry = (props) => {
+interface Props {
+  setShow: Function;
+  show: boolean;
+  handleClose: () => void;
+  handleShow: () => void;
+  entryID: string;
+  entry: string;
+  title: string;
+  date: Date;
+}
+
+const EditEntry = (props: Props) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState(props.title);
   const [entry, setEntry] = useState(props.entry);
@@ -26,14 +37,15 @@ const EditEntry = (props) => {
     setEntry(props.entry);
   }, [props.entry, props.title]);
 
-  const handleEditorChange = (state) => {
+  const handleEditorChange = (state: string) => {
     setEntry(state);
   };
 
-  const handleEditEntry = (e) => {
+  const handleEditEntry = (e: any) => {
     e.preventDefault();
+    const entryID = props.entryID;
     dispatch(
-      editEntry(props.entryID, title, entry, () => {
+      editEntry(entryID, title, entry, () => {
         dispatch(fetchEntries());
       })
     );
@@ -45,7 +57,7 @@ const EditEntry = (props) => {
       <>
         <Modal
           size="lg"
-          scrollable="true"
+          scrollable={true}
           show={props.show}
           onHide={props.handleClose}
           animation={false}
@@ -74,9 +86,7 @@ const EditEntry = (props) => {
                   type="text"
                   className="form-control"
                   name="title"
-                  value={title}
                   placeholder={title}
-                  required
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
@@ -96,23 +106,16 @@ const EditEntry = (props) => {
                   placeholder={"Write something awesome..."}
                   modules={modules}
                   formats={formats}
-                  required
                 />
               </div>
             </JournalEntryForm>
           </Modal.Body>
           <Modal.Footer style={{ backgroundColor: "#49a7da", border: "none" }}>
             <div>
-              <SaveButton
-                variant="primary"
-                type="submit"
-                onClick={(e) => handleEditEntry(e)}
-              >
+              <SaveButton type="submit" onClick={(e) => handleEditEntry(e)}>
                 Save
               </SaveButton>
-              <CancelButton variant="secondary" onClick={props.handleClose}>
-                Cancel
-              </CancelButton>
+              <CancelButton onClick={props.handleClose}>Cancel</CancelButton>
             </div>
           </Modal.Footer>
         </Modal>

@@ -25,13 +25,6 @@ interface FormProps {
   email: string;
   password: string;
 }
-
-interface AddEntry {
-  entry: string;
-  date: string;
-  title: string;
-}
-
 interface EditEntry {
   entry: string;
   entryID: string;
@@ -106,8 +99,8 @@ export const signout = (callback: () => void) => (dispatch: Dispatch) => {
 };
 
 export const addEntry =
-  ({ title, date, entry }: AddEntry) =>
-  (dispatch: Dispatch) => {
+  (title: string, date: Date, entry: any) => (dispatch: Dispatch) => {
+    console.log(title, date, entry);
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -144,7 +137,7 @@ export const deleteEntry =
   };
 
 export const editEntry =
-  ({ entryID, title, entry }: EditEntry, callback: () => void) =>
+  (entryID: string, title: string, entry: any, callback: () => void) =>
   (dispatch: Dispatch) => {
     const config = {
       headers: {
@@ -315,7 +308,7 @@ export const fetchPostits = () => (dispatch: Dispatch) => {
 };
 
 export const addPostit =
-  ({ postit, rotate, x, y, color }: AddPostit) =>
+  (postit: string, rotate: number, x: number, y: number, color: string) =>
   (dispatch: Dispatch) => {
     const config = {
       headers: {
@@ -357,7 +350,7 @@ export const deletePostit =
   };
 
 export const editPostitPosition =
-  ({ postitID, x, y }: EditPostit, callback: () => void) =>
+  (postitID: string, x: number, y: number, callback: () => void) =>
   (dispatch: Dispatch) => {
     const config = {
       headers: {

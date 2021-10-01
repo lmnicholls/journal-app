@@ -62,13 +62,12 @@ const Container = ({ postits }: Props) => {
         moveBox(item.id, x, y);
         setBoxes((prevState: any) => {
           let index = prevState.findIndex((box: any) => (box._id = item.id));
-          console.log("prevState", prevState);
           prevState[index][x] = x;
           prevState[index][y] = y;
           return prevState;
         });
         dispatch(
-          editPostitPosition({ postitID, x, y }, () => {
+          editPostitPosition(postitID, x, y, () => {
             dispatch(fetchPostits());
           })
         );

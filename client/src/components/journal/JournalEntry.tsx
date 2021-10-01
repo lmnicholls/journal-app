@@ -12,11 +12,23 @@ import RichTextEditor from "./RichTextEditor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
+interface AuthState {
+  auth: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  authenticated: string;
+}
+
+interface RootState {
+  auth: AuthState;
+}
+
 const JournalEntry = () => {
   const [title, setTitle] = useState("");
-  const [entry, setEntry] = useState(EditorState.createEmpty());
+  const [entry, setEntry] = useState<EditorState>(EditorState.createEmpty());
   const date = new Date();
-  const { authenticated } = useSelector((state) => state.auth);
+  const { authenticated } = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -31,7 +43,7 @@ const JournalEntry = () => {
     history.push("/journal");
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: any) => {
     e.preventDefault();
     dispatch(addEntry(title, date, entry));
     dispatch(fetchEntries());

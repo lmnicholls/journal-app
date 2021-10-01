@@ -28,7 +28,7 @@ interface EntryState {
 
 interface FeelingsState {
   _id: string;
-  date: string;
+  date: Date;
   text: string;
 }
 
@@ -101,12 +101,14 @@ const MyCalendar = () => {
     if (
       feelings.find(
         (feeling: FeelingsState) =>
-          feeling.date === moment(date).format("MM/DD/YYYY")
+          moment(feeling.date).format("MM/DD/YYYY") ===
+          moment(date).format("MM/DD/YYYY")
       )
     ) {
       const feelingdate = feelings.find(
         (feeling: FeelingsState) =>
-          feeling.date === moment(date).format("MM/DD/YYYY")
+          moment(feeling.date).format("MM/DD/YYYY") ===
+          moment(date).format("MM/DD/YYYY")
       );
       if (!feelingdate) return null;
       feelingEmoji = feelingsKey[feelingdate.text];

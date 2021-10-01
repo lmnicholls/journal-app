@@ -69,7 +69,7 @@ function Board() {
     let color = colors[Math.floor(Math.random() * 4)];
     let x = Math.floor(Math.random() * width) - 50;
     let y = Math.floor(Math.random() * height) - 50;
-    dispatch(addPostit({ postit, rotate, x, y, color }));
+    dispatch(addPostit(postit, rotate, x, y, color));
     dispatch(fetchPostits());
     setPostitInput("");
   };
