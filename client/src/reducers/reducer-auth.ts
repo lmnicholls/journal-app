@@ -9,7 +9,6 @@ const INITIAL_STATE = {
 const AuthReducer = function (state = INITIAL_STATE, action: AnyAction) {
   switch (action.type) {
     case AUTH_USER:
-      console.log("action payload", action.payload);
       return {
         ...state,
         authenticated: action.payload.token,

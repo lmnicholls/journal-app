@@ -211,43 +211,42 @@ const Journal = () => {
           ) : (
             <PageDiv>
               <LeftPage>
-                <JournalPageDiv>
-                  <Entry>
-                    <EntryHeader>
-                      <EntryTitle>{entries[leftPageIndex].title}</EntryTitle>
-                      <div style={{ textAlign: "right" }}>
-                        <EditButton
-                          onClick={() =>
-                            handleEditEntry(
-                              entries[leftPageIndex]._id,
-                              entries[leftPageIndex].title
-                            )
-                          }
-                          icon={faEdit}
-                          className="icon bars fa-1x"
-                        />
-                        <DeleteButton
-                          onClick={() =>
-                            handleDeleteEntry(entries[leftPageIndex]._id)
-                          }
-                          icon={faTrash}
-                          className="icon bars fa-1x"
-                        />
-                      </div>
-                    </EntryHeader>
-                    <JournalDate>
-                      {new Date(entries[leftPageIndex].date).toDateString()}
-                    </JournalDate>
+                <Entry>
+                  <EntryHeader>
+                    <EntryTitle>{entries[leftPageIndex].title}</EntryTitle>
+                    <div style={{ textAlign: "right" }}>
+                      <EditButton
+                        onClick={() =>
+                          handleEditEntry(
+                            entries[leftPageIndex]._id,
+                            entries[leftPageIndex].title
+                          )
+                        }
+                        icon={faEdit}
+                        className="icon bars fa-1x"
+                      />
+                      <DeleteButton
+                        onClick={() =>
+                          handleDeleteEntry(entries[leftPageIndex]._id)
+                        }
+                        icon={faTrash}
+                        className="icon bars fa-1x"
+                      />
+                    </div>
+                  </EntryHeader>
+                  <JournalDate>
+                    {new Date(entries[leftPageIndex].date).toDateString()}
+                  </JournalDate>
 
-                    <JournalText
-                      onClick={() => handlePreviousPageClick()}
-                      className="page-text"
-                      dangerouslySetInnerHTML={{
-                        __html: entries[leftPageIndex].entry,
-                      }}
-                    ></JournalText>
-                  </Entry>
-                </JournalPageDiv>
+                  <JournalText
+                    onClick={() => handlePreviousPageClick()}
+                    className="page-text"
+                    dangerouslySetInnerHTML={{
+                      __html: entries[leftPageIndex].entry,
+                    }}
+                  ></JournalText>
+                </Entry>
+
                 <PageNumber>Page {leftPageIndex + 1}</PageNumber>
               </LeftPage>
             </PageDiv>
@@ -268,40 +267,39 @@ const Journal = () => {
           ) : (
             <PageDiv>
               <RightPage>
-                <JournalPageDiv>
-                  <Entry>
-                    <EntryHeader>
-                      <EntryTitle>{entries[rightPageIndex].title}</EntryTitle>
-                      <div style={{ textAlign: "right" }}>
-                        <EditButton
-                          onClick={() =>
-                            handleEditEntry(entries[rightPageIndex]._id)
-                          }
-                          icon={faEdit}
-                          className="icon bars fa-1x"
-                        />
-                        <DeleteButton
-                          onClick={() =>
-                            handleDeleteEntry(entries[rightPageIndex]._id)
-                          }
-                          icon={faTrash}
-                          className="icon bars fa-1x"
-                        />
-                      </div>
-                    </EntryHeader>
-                    <JournalDate>
-                      {new Date(entries[rightPageIndex].date).toDateString()}
-                    </JournalDate>
+                <Entry>
+                  <EntryHeader>
+                    <EntryTitle>{entries[rightPageIndex].title}</EntryTitle>
+                    <div style={{ textAlign: "right" }}>
+                      <EditButton
+                        onClick={() =>
+                          handleEditEntry(entries[rightPageIndex]._id)
+                        }
+                        icon={faEdit}
+                        className="icon bars fa-1x"
+                      />
+                      <DeleteButton
+                        onClick={() =>
+                          handleDeleteEntry(entries[rightPageIndex]._id)
+                        }
+                        icon={faTrash}
+                        className="icon bars fa-1x"
+                      />
+                    </div>
+                  </EntryHeader>
+                  <JournalDate>
+                    {new Date(entries[rightPageIndex].date).toDateString()}
+                  </JournalDate>
 
-                    <JournalText
-                      onClick={() => handleNextPageClick()}
-                      className="page-text"
-                      dangerouslySetInnerHTML={{
-                        __html: entries[rightPageIndex].entry,
-                      }}
-                    />
-                  </Entry>
-                </JournalPageDiv>
+                  <JournalText
+                    onClick={() => handleNextPageClick()}
+                    className="page-text"
+                    dangerouslySetInnerHTML={{
+                      __html: entries[rightPageIndex].entry,
+                    }}
+                  />
+                </Entry>
+
                 <PageNumber>Page {rightPageIndex + 1}</PageNumber>
               </RightPage>
             </PageDiv>
@@ -402,8 +400,6 @@ const DeleteButton = styled(FontAwesomeIcon)`
   }
 `;
 
-const JournalPageDiv = styled.div``;
-
 const JournalDiv = styled.div`
   display: flex;
   flex-flow: column;
@@ -423,6 +419,7 @@ const EntryHeader = styled.div`
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
+  height: 37px;
 `;
 
 const JournalTitle = styled.h3`
@@ -511,4 +508,5 @@ const EntryTitle = styled.h1`
 const JournalDate = styled.h3`
   font-family: "Patrick Hand SC";
   font-size: 18px;
+  height: 22px;
 `;

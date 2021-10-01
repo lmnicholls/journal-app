@@ -29,7 +29,6 @@ const Signup = () => {
   const history = useHistory();
 
   const handleFormSubmit = (data) => {
-    console.log("data", data);
     dispatch(
       signup(data, () => {
         history.push("/home");
