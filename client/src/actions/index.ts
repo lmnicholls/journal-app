@@ -28,6 +28,7 @@ interface FormProps {
 
 export const signup =
   (formProps: FormProps, callback: () => void) => (dispatch: Dispatch) => {
+    console.log("formProps", formProps);
     axios
       .post("http://localhost:5000/signup", formProps)
       .then(function (response) {

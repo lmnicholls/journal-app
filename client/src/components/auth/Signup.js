@@ -29,6 +29,7 @@ const Signup = () => {
   const history = useHistory();
 
   const handleFormSubmit = (data) => {
+    console.log("data", data);
     dispatch(
       signup(data, () => {
         history.push("/home");
@@ -49,7 +50,7 @@ const Signup = () => {
               <input
                 className="form-control"
                 name="firstName"
-                {...register("first name", { required: "Required" })}
+                {...register("firstName")}
               ></input>
               <div className="form-labels">
                 <label>First Name</label>
@@ -57,6 +58,7 @@ const Signup = () => {
                   style={{
                     color: "white",
                     textShadow: "1px 1px red",
+                    paddingLeft: "5px",
                   }}
                 >
                   {errors.firstName?.message}
@@ -65,7 +67,7 @@ const Signup = () => {
               <input
                 className="form-control"
                 name="lastName"
-                {...register("last name", { required: "Required" })}
+                {...register("lastName")}
               ></input>
               <div className="form-labels">
                 <label>Last Name</label>
@@ -73,6 +75,7 @@ const Signup = () => {
                   style={{
                     color: "white",
                     textShadow: "1px 1px red",
+                    paddingLeft: "5px",
                   }}
                 >
                   {errors.lastName?.message}
@@ -84,7 +87,7 @@ const Signup = () => {
               <input
                 className="form-control"
                 name="email"
-                {...register("email", { required: "Required" })}
+                {...register("email")}
               ></input>
               <div className="form-labels">
                 <label>Email</label>
@@ -92,6 +95,7 @@ const Signup = () => {
                   style={{
                     color: "white",
                     textShadow: "1px 1px red",
+                    paddingLeft: "5px",
                   }}
                 >
                   {errors.email?.message}
@@ -104,7 +108,7 @@ const Signup = () => {
                 className="form-control"
                 name="password"
                 type="password"
-                {...register("password", { required: "Required" })}
+                {...register("password")}
               ></input>
               <div className="form-labels">
                 <label>Password</label>
@@ -112,6 +116,7 @@ const Signup = () => {
                   style={{
                     color: "white",
                     textShadow: "1px 1px red",
+                    paddingLeft: "5px",
                   }}
                 >
                   {errors.password?.message}

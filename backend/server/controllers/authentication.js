@@ -18,7 +18,7 @@ exports.signin = function (req, res, next) {
   // We just need to give them a token
   res.send({
     token: tokenForUser(req.user),
-    firstName: req.user.firstName
+    firstName: req.user.firstName,
   });
 };
 
@@ -35,14 +35,12 @@ exports.currentUser = function (req, res) {
 exports.signup = function (req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
-  const therapistId = req.body.therapistId;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
 
-  if (!email || !password || !therapistId || !lastName || !firstName) {
+  if (!email || !password || !lastName || !firstName) {
     return res.status(422).send({
-      error:
-        "You must provide email, password, therapist, first and last name.",
+      error: "You must provide email, password, first and last name.",
     });
   }
 
