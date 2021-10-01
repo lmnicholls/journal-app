@@ -411,6 +411,8 @@ const JournalDiv = styled.div`
 const Entry = styled.div`
   display: flex;
   flex-flow: column;
+  height: 100%;
+  overflow-y: scroll;
 `;
 
 const EntryHeader = styled.div`
@@ -460,7 +462,6 @@ const LeftPage = styled.div`
   padding: 5px;
   display: flex;
   flex-flow: column;
-  overflow-y: scroll;
   justify-content: space-between;
 `;
 
@@ -469,7 +470,6 @@ const RightPage = styled.div`
   padding: 5px;
   display: flex;
   flex-flow: column;
-  overflow-y: scroll;
   justify-content: space-between;
 `;
 
