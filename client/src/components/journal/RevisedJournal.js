@@ -402,9 +402,7 @@ const DeleteButton = styled(FontAwesomeIcon)`
   }
 `;
 
-const JournalPageDiv = styled.div`
-  height: 100%;
-`;
+const JournalPageDiv = styled.div``;
 
 const JournalDiv = styled.div`
   display: flex;
@@ -466,7 +464,6 @@ const LeftPage = styled.div`
   padding: 5px;
   display: flex;
   flex-flow: column;
-  max-height: 100%;
   overflow-y: scroll;
   justify-content: space-between;
 `;
@@ -476,7 +473,6 @@ const RightPage = styled.div`
   padding: 5px;
   display: flex;
   flex-flow: column;
-  height: 100%;
   overflow-y: scroll;
   justify-content: space-between;
 `;

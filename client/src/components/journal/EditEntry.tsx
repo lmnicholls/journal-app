@@ -84,6 +84,7 @@ const EditEntry = (props: Props) => {
                 <label>Title:</label>
                 <input
                   type="text"
+                  value={title}
                   className="form-control"
                   name="title"
                   placeholder={title}
