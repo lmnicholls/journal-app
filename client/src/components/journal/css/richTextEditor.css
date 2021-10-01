@@ -34,10 +34,11 @@
   content: attr(data-value) !important;
 }
 
-/* Set droplist names - -item is the currently selected font, -label is the font's appearance in the droplist*/
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=""]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=""]::before {
+/* Set droplist names - -item is the cxsurrently selected font, -label is the font's appearance in the droplist*/
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="helvetica"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="helvetica"]::before {
   content: "Default";
+  font-family: "Helvetica";
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="birthstone"]::before,
@@ -79,6 +80,10 @@
 /****************************************************
 Set the font-family content used for the HTML content.
 *****************************************************/
+.ql-font-helvetica {
+  font-family: "Helvetica";
+}
+
 .ql-font-birthstone {
   font-family: "Birthstone";
 }

@@ -55,7 +55,7 @@ Quill.register(Size, true);
 // Add fonts to whitelist and register them
 const Font = Quill.import("formats/font");
 Font.whitelist = [
-  "",
+  "helvetica",
   "birthstone",
   "quicksand",
   "neucha",
@@ -107,8 +107,8 @@ export const formats = [
 export const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
-      <select className="ql-font" defaultValue="">
-        <option value=""></option>
+      <select className="ql-font" defaultValue="helvetic">
+        <option value="helvetica"></option>
         <option value="birthstone">Birthstone</option>
         <option value="quicksand">Quicksand</option>
         <option value="neucha">Neucha</option>
