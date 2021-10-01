@@ -25,25 +25,6 @@ interface FormProps {
   email: string;
   password: string;
 }
-interface EditEntry {
-  entry: string;
-  entryID: string;
-  title: string;
-}
-
-interface AddPostit {
-  postit: string;
-  rotate: number;
-  x: number;
-  y: number;
-  color: string;
-}
-
-interface EditPostit {
-  postitID: string;
-  x: number;
-  y: number;
-}
 
 export const signup =
   (formProps: FormProps, callback: () => void) => (dispatch: Dispatch) => {

@@ -19,8 +19,6 @@ const Home = () => {
   const { authenticated } = useSelector<any, any>((state) => state.auth);
   const history = useHistory();
 
-  const userName = useSelector<any, any>((state) => state.auth.firstName);
-
   useEffect(() => {
     if (!authenticated) {
       history.push("/");

@@ -27,10 +27,11 @@ const CustomRedo = () => (
 );
 
 // Undo and redo functions for Custom Toolbar
-function undoChange() {
+function undoChange(this: { undo: () => void; redo: () => void; quill: any }) {
   this.quill.history.undo();
 }
-function redoChange() {
+
+function redoChange(this: { undo: () => void; redo: () => void; quill: any }) {
   this.quill.history.redo();
 }
 
