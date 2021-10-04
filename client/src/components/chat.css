@@ -1,0 +1,35 @@
+#you {
+  justify-content: flex-start;
+}
+
+#you .message-content {
+  justify-content: flex-start;
+}
+
+#you .message-meta {
+  justify-content: flex-start;
+  margin-left: 5px;
+}
+
+#other {
+  justify-content: flex-end;
+}
+
+#other .message-content {
+  justify-content: flex-end;
+  background-color: cornflowerblue;
+}
+
+#other .message-meta {
+  justify-content: flex-end;
+  margin-right: 5px;
+}
+
+.message-meta #author {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.hide {
+  opacity: 0 !important;
+}
